@@ -1,0 +1,7 @@
+BaxterLoaderController(
+		input signal testInput;
+		output signal testOutput;
+		)
+->{
+	System.out.println("BaxterLoaderController test");
+}

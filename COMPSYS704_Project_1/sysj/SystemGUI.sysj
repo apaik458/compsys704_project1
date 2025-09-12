@@ -1,0 +1,7 @@
+SystemGUI(
+		input signal testInput;
+		output signal testOutput;
+		)
+->{
+	System.out.println("SystemGUI test");
+}

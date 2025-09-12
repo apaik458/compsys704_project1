@@ -1,0 +1,8 @@
+<System xmlns="http://systemjtechnology.com">
+	<SubSystem Name="Lab2" Local="true">
+		<ClockDomain Name="MyCD" Class="CapperController">
+			<iSignal Name="testInput" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
+			<oSignal Name="testOutput" To="PlantCD.pusherExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />
+		</ClockDomain>
+	</SubSystem>
+</System>

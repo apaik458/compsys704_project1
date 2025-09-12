@@ -1,0 +1,7 @@
+BaxterLoaderPlant(
+		input signal testInput;
+		output signal testOutput;
+		)
+->{
+	System.out.println("BaxterLoaderPlant test");
+}

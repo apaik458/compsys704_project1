@@ -1,0 +1,7 @@
+RotaryController(
+		input signal testInput;
+		output signal testOutput;
+		)
+->{
+	System.out.println("RotaryController test");
+}

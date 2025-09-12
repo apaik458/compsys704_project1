@@ -1,0 +1,7 @@
+LidLoaderPlant(
+		input signal testInput;
+		output signal testOutput;
+		)
+->{
+	System.out.println("LidLoaderPlant test");
+}

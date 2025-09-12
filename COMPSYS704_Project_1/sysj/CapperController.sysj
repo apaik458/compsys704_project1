@@ -1,0 +1,7 @@
+CapperController(
+		input signal testInput;
+		output signal testOutput;
+		)
+->{
+	System.out.println("CapperController test");
+}

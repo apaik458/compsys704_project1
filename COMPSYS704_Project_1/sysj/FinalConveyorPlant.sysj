@@ -1,0 +1,7 @@
+FinalConveyorPlant(
+		input signal testInput;
+		output signal testOutput;
+		)
+->{
+	System.out.println("FinalConveyorPlant test");
+}

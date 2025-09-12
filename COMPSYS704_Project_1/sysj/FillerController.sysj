@@ -1,0 +1,7 @@
+FillerController(
+		input signal testInput;
+		output signal testOutput;
+		)
+->{
+	System.out.println("FillerController test");
+}

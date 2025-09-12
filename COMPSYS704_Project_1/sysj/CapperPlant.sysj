@@ -1,0 +1,7 @@
+CapperPlant(
+		input signal testInput;
+		output signal testOutput;
+		)
+->{
+	System.out.println("CapperPlant test");
+}
