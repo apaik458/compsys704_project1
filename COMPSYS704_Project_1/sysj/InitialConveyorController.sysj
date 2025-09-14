@@ -1,7 +1,0 @@
-InitialConveyorController(
-		input signal testInput;
-		output signal testOutput;
-		)
-->{
-	System.out.println("InitialConveyorController test");
-}
