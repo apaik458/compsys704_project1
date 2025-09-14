@@ -1,7 +1,29 @@
 InitialConveyorPlant(
 		input signal motConveyorOnOff;
-		output signal bottleAtPos1, bottleLeftPos5;
+		output signal bottleAtPos1, bottleLeftPos5;	
 		)
 ->{
-	System.out.println("InitialConveyorPlant test");
+	System.out.println("ConveyorPlant running...");
+
+	// Simple model: whenever the motor runs, move bottles from Pos1 to Pos5, then off.
+	while (true) {
+		await(motConveyorOnOff);    // Wait until motor is ON
+
+	 	// Simulate feeding a bottle into Pos1
+		emit bottleAtPos1;
+		System.out.println("Bottle arrived at Pos1");
+
+		// After a few ticks, move bottle from Pos1 to Pos5
+		pause; pause;                // simulate delay
+		emit bottleAtPos5;
+		System.out.println("Bottle moved to Pos5");
+
+		 // After a few ticks, bottle leaves Pos5
+		 pause; pause;
+		 emit bottleLeftPos5;
+		 System.out.println("Bottle left Pos5");
+	
+		  // Reset sensors (no bottles remain)
+		 pause;
+	}
 }

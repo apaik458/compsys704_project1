@@ -1,6 +1,7 @@
 RotaryPlant(
 		input signal testInput;
 		output signal testOutput;
+		output signal bottleAtPos5;
 		)
 ->{
 	System.out.println("RotaryPlant test");
