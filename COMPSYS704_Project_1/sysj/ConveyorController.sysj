@@ -1,5 +1,5 @@
-InitialConveyorController(
-		input signal bottleAtPos1, bottleLeftPos5, bottleAtPos1, conveyorEnable;
+ConveyorController(
+		input signal bottleAtPos1, bottleLeftPos5, bottleAtPos5, conveyorEnable;
 		output signal motConveyorOnOff;
 		)
 ->{
@@ -9,4 +9,5 @@ InitialConveyorController(
     		sustain motConveyorOnOff;
   		}
   	pause;
+  	}
 }
