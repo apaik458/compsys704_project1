@@ -1,7 +1,36 @@
 CapperController(
-		input signal testInput;
-		output signal testOutput;
+		input signal bottleAtPos4,gripperZAxisLowered,gripperZAxisLifted,gripperTurnHomePos,gripperTurnFinalPos;
+		output signal cylPos5axisExtend,gripperTurnRetract,gripperTurnExtend,capGripperPos5Extend,cylClampBottleExtend;
 		)
 ->{
-	System.out.println("CapperController test");
+	while(1){
+		// Check if a bottle is at position 4, if not, wait until it arrives
+		await(bottleAtPos4);
+		
+		// Clamp
+		{
+			abort(gripperZAxisLifted){
+				sustain cylClampBottleExtend;
+			}
+		}
+		||
+		// Gripper Z-Axis
+		{
+			abort(gripperTurnHomePos){
+				sustain cylPos5ZaxisExtend;
+			}
+		}
+		||
+		// Cap Gripper
+		{
+			await(gripperZAxisLowered);
+			abort(gripperTurnFinalPos){
+				emit capGripperPos5Extend;
+				emit gripperTurnExtend;
+				pause;
+			}
+			emit gripperTurnRetract;
+			pause;
+		}
+	}
 }

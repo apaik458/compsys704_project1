@@ -1,7 +1,29 @@
 FillerController(
-		input signal testInput;
-		output signal testOutput;
+		input signal bottleAtPos2,dosUnitEvac,dosUnitFilled;
+		output signal valveInjectorOnOff,valveInletOnOff,dosUnitValveRetract,dosUnitValveExtend;
 		)
 ->{
-	System.out.println("FillerController test");
+	while(1){
+		// Check if a bottle is at position 2, if not, wait until it arrives
+		await(bottleAtPos2);
+		
+		// Valve Injector
+		{
+			abort(dosUnitEvac){
+				emit valvInjectorOnOff;
+				emit dosUnitValveRetract;
+				pause;
+			}
+		}
+		||
+		// Inlet
+		{
+			await(dosUnitFilled);
+			abort(dosUnitEvac){
+				emit valveInletOnoff;
+				emit dosUnitValveExtend;
+				pause;
+			}
+		}
+	}
 }
