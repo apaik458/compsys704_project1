@@ -1,7 +1,8 @@
 RotaryPlant(
-		input signal testInput;
-		output signal testOutput;
+		input signal rotaryTableTrigger, sizeAdjust;
+		output signal tableAlignedWithSensor;
 		output signal bottleAtPos5;
+		output signal capOnBottleAtPos1;
 		)
 ->{
 	System.out.println("RotaryPlant test");

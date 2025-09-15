@@ -18,12 +18,12 @@ ConveyorPlant(
 		emit bottleAtPos5;
 		System.out.println("Bottle moved to Pos5");
 
-		 // After a few ticks, bottle leaves Pos5
-		 pause; pause;
-		 emit bottleLeftPos5;
-		 System.out.println("Bottle left Pos5");
+		// After a few ticks, bottle leaves Pos5
+		pause; pause;
+		emit bottleLeftPos5;
+		System.out.println("Bottle left Pos5");
 	
-		  // Reset sensors (no bottles remain)
-		 pause;
+		 // Reset sensors (no bottles remain)
+		pause;
 	}
 }

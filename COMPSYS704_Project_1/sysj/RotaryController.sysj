@@ -1,6 +1,6 @@
 RotaryController(
-		input signal tableAlignedWithSensor, bottleAtPos5, capOnBottleAtPos1;
-		output signal rotaryTableTrigger;
+		input signal tableAlignedWithSensor, bottleAtPos5, capOnBottleAtPos1, largeSizeEnable;
+		output signal rotaryTableTrigger, sizeAdjust;
 		)
 ->{
 	System.out.println("RotaryController test");

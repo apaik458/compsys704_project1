@@ -1,8 +1,12 @@
 <System xmlns="http://systemjtechnology.com">
 	<SubSystem Name="Lab2" Local="true">
-		<ClockDomain Name="MyCD" Class="RotaryPlant">
-			<iSignal Name="testInput" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
-			<oSignal Name="testOutput" To="PlantCD.pusherExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />
+		<ClockDomain Name="RotaryPlantCD" Class="RotaryPlant">
+			<iSignal Name="rotaryTableTrigger" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
+			<iSignal Name="sizeAdjust" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
+			
+			<oSignal Name="tableAlignedWithSensor" To="RotaryControllerCD.tableAlignedWithSensor" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />
+			<oSignal Name="bottleAtPos5" To="RotaryControllerCD.bottleAtPos5" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />
+			<oSignal Name="capOnBottleAtPos1" To="RotaryControllerCD.capOnBottleAtPos1" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />
 		</ClockDomain>
 	</SubSystem>
 </System>
