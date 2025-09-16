@@ -13,7 +13,7 @@ public class SystemGUI extends ClockDomain{
   private char [] suspended;
   public Signal testInput = new Signal("testInput", Signal.INPUT);
   public Signal testOutput = new Signal("testOutput", Signal.OUTPUT);
-  private int S46 = 1;
+  private int S408 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -25,18 +25,18 @@ public class SystemGUI extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S46){
+      switch(S408){
         case 0 : 
-          S46=0;
+          S408=0;
           break RUN;
         
         case 1 : 
-          S46=2;
+          S408=2;
           System.out.println("SystemGUI test");//sysj\SystemGUI.sysj line: 6, column: 2
-          S46=0;
+          S408=0;
           active[1]=0;
           ends[1]=0;
-          S46=0;
+          S408=0;
           break RUN;
         
       }

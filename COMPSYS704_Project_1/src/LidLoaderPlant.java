@@ -13,7 +13,7 @@ public class LidLoaderPlant extends ClockDomain{
   private char [] suspended;
   public Signal testInput = new Signal("testInput", Signal.INPUT);
   public Signal testOutput = new Signal("testOutput", Signal.OUTPUT);
-  private int S34 = 1;
+  private int S396 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -25,18 +25,18 @@ public class LidLoaderPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S34){
+      switch(S396){
         case 0 : 
-          S34=0;
+          S396=0;
           break RUN;
         
         case 1 : 
-          S34=2;
+          S396=2;
           System.out.println("LidLoaderPlant test");//sysj\LidLoaderPlant.sysj line: 6, column: 2
-          S34=0;
+          S396=0;
           active[1]=0;
           ends[1]=0;
-          S34=0;
+          S396=0;
           break RUN;
         
       }

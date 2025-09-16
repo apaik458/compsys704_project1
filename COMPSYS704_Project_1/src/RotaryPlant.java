@@ -11,9 +11,12 @@ public class RotaryPlant extends ClockDomain{
   private char [] active;
   private char [] paused;
   private char [] suspended;
-  public Signal testInput = new Signal("testInput", Signal.INPUT);
-  public Signal testOutput = new Signal("testOutput", Signal.OUTPUT);
-  private int S40 = 1;
+  public Signal rotaryTableTrigger = new Signal("rotaryTableTrigger", Signal.INPUT);
+  public Signal sizeAdjust = new Signal("sizeAdjust", Signal.INPUT);
+  public Signal tableAlignedWithSensor = new Signal("tableAlignedWithSensor", Signal.OUTPUT);
+  public Signal bottleAtPos5 = new Signal("bottleAtPos5", Signal.OUTPUT);
+  public Signal capOnBottleAtPos1 = new Signal("capOnBottleAtPos1", Signal.OUTPUT);
+  private int S402 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -25,18 +28,18 @@ public class RotaryPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S40){
+      switch(S402){
         case 0 : 
-          S40=0;
+          S402=0;
           break RUN;
         
         case 1 : 
-          S40=2;
-          System.out.println("RotaryPlant test");//sysj\RotaryPlant.sysj line: 6, column: 2
-          S40=0;
+          S402=2;
+          System.out.println("RotaryPlant test");//sysj\RotaryPlant.sysj line: 8, column: 2
+          S402=0;
           active[1]=0;
           ends[1]=0;
-          S40=0;
+          S402=0;
           break RUN;
         
       }
@@ -65,27 +68,39 @@ public class RotaryPlant extends ClockDomain{
       if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
         if(!df){
-          testInput.gethook();
+          rotaryTableTrigger.gethook();
+          sizeAdjust.gethook();
           df = true;
         }
         runClockDomain();
       }
-      testInput.setpreclear();
-      testOutput.setpreclear();
+      rotaryTableTrigger.setpreclear();
+      sizeAdjust.setpreclear();
+      tableAlignedWithSensor.setpreclear();
+      bottleAtPos5.setpreclear();
+      capOnBottleAtPos1.setpreclear();
       int dummyint = 0;
       for(int qw=0;qw<currsigs.size();++qw){
         dummyint = ((Signal)currsigs.elementAt(qw)).getStatus() ? ((Signal)currsigs.elementAt(qw)).setprepresent() : ((Signal)currsigs.elementAt(qw)).setpreclear();
         ((Signal)currsigs.elementAt(qw)).setpreval(((Signal)currsigs.elementAt(qw)).getValue());
       }
       currsigs.removeAllElements();
-      dummyint = testInput.getStatus() ? testInput.setprepresent() : testInput.setpreclear();
-      testInput.setpreval(testInput.getValue());
-      testInput.setClear();
-      testOutput.sethook();
-      testOutput.setClear();
+      dummyint = rotaryTableTrigger.getStatus() ? rotaryTableTrigger.setprepresent() : rotaryTableTrigger.setpreclear();
+      rotaryTableTrigger.setpreval(rotaryTableTrigger.getValue());
+      rotaryTableTrigger.setClear();
+      dummyint = sizeAdjust.getStatus() ? sizeAdjust.setprepresent() : sizeAdjust.setpreclear();
+      sizeAdjust.setpreval(sizeAdjust.getValue());
+      sizeAdjust.setClear();
+      tableAlignedWithSensor.sethook();
+      tableAlignedWithSensor.setClear();
+      bottleAtPos5.sethook();
+      bottleAtPos5.setClear();
+      capOnBottleAtPos1.sethook();
+      capOnBottleAtPos1.setClear();
       if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
-        testInput.gethook();
+        rotaryTableTrigger.gethook();
+        sizeAdjust.gethook();
       }
       runFinisher();
       if(active[1] == 0){

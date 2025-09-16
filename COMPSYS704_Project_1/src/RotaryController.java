@@ -11,9 +11,13 @@ public class RotaryController extends ClockDomain{
   private char [] active;
   private char [] paused;
   private char [] suspended;
-  public Signal testInput = new Signal("testInput", Signal.INPUT);
-  public Signal testOutput = new Signal("testOutput", Signal.OUTPUT);
-  private int S37 = 1;
+  public Signal tableAlignedWithSensor = new Signal("tableAlignedWithSensor", Signal.INPUT);
+  public Signal bottleAtPos5 = new Signal("bottleAtPos5", Signal.INPUT);
+  public Signal capOnBottleAtPos1 = new Signal("capOnBottleAtPos1", Signal.INPUT);
+  public Signal largeSizeEnable = new Signal("largeSizeEnable", Signal.INPUT);
+  public Signal rotaryTableTrigger = new Signal("rotaryTableTrigger", Signal.OUTPUT);
+  public Signal sizeAdjust = new Signal("sizeAdjust", Signal.OUTPUT);
+  private int S399 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -25,18 +29,18 @@ public class RotaryController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S37){
+      switch(S399){
         case 0 : 
-          S37=0;
+          S399=0;
           break RUN;
         
         case 1 : 
-          S37=2;
+          S399=2;
           System.out.println("RotaryController test");//sysj\RotaryController.sysj line: 6, column: 2
-          S37=0;
+          S399=0;
           active[1]=0;
           ends[1]=0;
-          S37=0;
+          S399=0;
           break RUN;
         
       }
@@ -65,27 +69,48 @@ public class RotaryController extends ClockDomain{
       if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
         if(!df){
-          testInput.gethook();
+          tableAlignedWithSensor.gethook();
+          bottleAtPos5.gethook();
+          capOnBottleAtPos1.gethook();
+          largeSizeEnable.gethook();
           df = true;
         }
         runClockDomain();
       }
-      testInput.setpreclear();
-      testOutput.setpreclear();
+      tableAlignedWithSensor.setpreclear();
+      bottleAtPos5.setpreclear();
+      capOnBottleAtPos1.setpreclear();
+      largeSizeEnable.setpreclear();
+      rotaryTableTrigger.setpreclear();
+      sizeAdjust.setpreclear();
       int dummyint = 0;
       for(int qw=0;qw<currsigs.size();++qw){
         dummyint = ((Signal)currsigs.elementAt(qw)).getStatus() ? ((Signal)currsigs.elementAt(qw)).setprepresent() : ((Signal)currsigs.elementAt(qw)).setpreclear();
         ((Signal)currsigs.elementAt(qw)).setpreval(((Signal)currsigs.elementAt(qw)).getValue());
       }
       currsigs.removeAllElements();
-      dummyint = testInput.getStatus() ? testInput.setprepresent() : testInput.setpreclear();
-      testInput.setpreval(testInput.getValue());
-      testInput.setClear();
-      testOutput.sethook();
-      testOutput.setClear();
+      dummyint = tableAlignedWithSensor.getStatus() ? tableAlignedWithSensor.setprepresent() : tableAlignedWithSensor.setpreclear();
+      tableAlignedWithSensor.setpreval(tableAlignedWithSensor.getValue());
+      tableAlignedWithSensor.setClear();
+      dummyint = bottleAtPos5.getStatus() ? bottleAtPos5.setprepresent() : bottleAtPos5.setpreclear();
+      bottleAtPos5.setpreval(bottleAtPos5.getValue());
+      bottleAtPos5.setClear();
+      dummyint = capOnBottleAtPos1.getStatus() ? capOnBottleAtPos1.setprepresent() : capOnBottleAtPos1.setpreclear();
+      capOnBottleAtPos1.setpreval(capOnBottleAtPos1.getValue());
+      capOnBottleAtPos1.setClear();
+      dummyint = largeSizeEnable.getStatus() ? largeSizeEnable.setprepresent() : largeSizeEnable.setpreclear();
+      largeSizeEnable.setpreval(largeSizeEnable.getValue());
+      largeSizeEnable.setClear();
+      rotaryTableTrigger.sethook();
+      rotaryTableTrigger.setClear();
+      sizeAdjust.sethook();
+      sizeAdjust.setClear();
       if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
-        testInput.gethook();
+        tableAlignedWithSensor.gethook();
+        bottleAtPos5.gethook();
+        capOnBottleAtPos1.gethook();
+        largeSizeEnable.gethook();
       }
       runFinisher();
       if(active[1] == 0){

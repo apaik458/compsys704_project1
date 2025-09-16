@@ -16,27 +16,36 @@ public class Canvas extends JPanel {
 	BufferedImage p2;
 	BufferedImage loader;
 	BufferedImage cap;
+	BufferedImage background;
 	
 	public Canvas(){
 		try {
-			BufferedImage bi = ImageIO.read(new File("res/arm.png"));
+			BufferedImage bi = ImageIO.read(new File("res/RotaryTable.png"));
 			arm1 = bi.getSubimage(0, 0, 64, 256);
 			arm2 = bi.getSubimage(71, 0, 48, 256);
-			loader = ImageIO.read(new File("res/loader.png"));
-			bi = ImageIO.read(new File("res/pusher.png"));
+			loader = ImageIO.read(new File("res/100mlEmpty.png"));
+			bi = ImageIO.read(new File("res/200mlEmpty.png"));
 			p1 = bi.getSubimage(0, 0, 238, 68);
 			p2 = bi.getSubimage(238, 0, 172, 68);
-			cap = ImageIO.read(new File("res/cap.png"));
+			cap = ImageIO.read(new File("res/200mlChocolate.png"));
+			background = ImageIO.read(new File("res/background.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(1);;
 		}
+		
+		// Set the preferred size of the panel to 1920x1080
+        setPreferredSize(new java.awt.Dimension(1920, 1080));
 	}
 	
 	@Override
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
+		
+		g.drawImage(background, 0, 0, null);
+		
 		g.drawImage(loader, 0, 100, null);
+		
 		
 		if(States.ARM_AT_DEST)
 			g.drawImage(arm1, 0, 0, null);

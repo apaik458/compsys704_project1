@@ -15,8 +15,8 @@ public class ConveyorPlant extends ClockDomain{
   public Signal bottleAtPos1 = new Signal("bottleAtPos1", Signal.OUTPUT);
   public Signal bottleLeftPos5 = new Signal("bottleLeftPos5", Signal.OUTPUT);
   public Signal bottleAtPos5 = new Signal("bottleAtPos5", Signal.OUTPUT);
-  private int S13 = 1;
-  private int S1 = 1;
+  private int S306 = 1;
+  private int S294 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -28,29 +28,28 @@ public class ConveyorPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S13){
+      switch(S306){
         case 0 : 
-          S13=0;
+          S306=0;
           break RUN;
         
         case 1 : 
-          S13=2;
-          S13=2;
-          System.out.println("ConveyorPlant running...");//sysj/ConveyorPlant.sysj line: 6, column: 2
-          S1=0;
+          S306=2;
+          S306=2;
+          System.out.println("ConveyorPlant running...");//sysj\ConveyorPlant.sysj line: 6, column: 2
+          S294=0;
           active[1]=1;
           ends[1]=1;
           break RUN;
         
         case 2 : 
-          switch(S1){
+          switch(S294){
             case 0 : 
-              if(motConveyorOnOff.getprestatus()){//sysj/ConveyorPlant.sysj line: 10, column: 9
-                bottleAtPos1.setPresent();//sysj/ConveyorPlant.sysj line: 13, column: 3
+              if(motConveyorOnOff.getprestatus()){//sysj\ConveyorPlant.sysj line: 10, column: 9
+                bottleAtPos1.setPresent();//sysj\ConveyorPlant.sysj line: 13, column: 3
                 currsigs.addElement(bottleAtPos1);
-                System.out.println("Emitted bottleAtPos1");
-                System.out.println("Bottle arrived at Pos1");//sysj/ConveyorPlant.sysj line: 14, column: 3
-                S1=1;
+                System.out.println("Bottle arrived at Pos1");//sysj\ConveyorPlant.sysj line: 14, column: 3
+                S294=1;
                 active[1]=1;
                 ends[1]=1;
                 break RUN;
@@ -62,44 +61,42 @@ public class ConveyorPlant extends ClockDomain{
               }
             
             case 1 : 
-              S1=1;
-              S1=2;
+              S294=1;
+              S294=2;
               active[1]=1;
               ends[1]=1;
               break RUN;
             
             case 2 : 
-              S1=2;
-              bottleAtPos5.setPresent();//sysj/ConveyorPlant.sysj line: 18, column: 3
+              S294=2;
+              bottleAtPos5.setPresent();//sysj\ConveyorPlant.sysj line: 18, column: 3
               currsigs.addElement(bottleAtPos5);
-              System.out.println("Emitted bottleAtPos5");
-              System.out.println("Bottle moved to Pos5");//sysj/ConveyorPlant.sysj line: 19, column: 3
-              S1=3;
+              System.out.println("Bottle moved to Pos5");//sysj\ConveyorPlant.sysj line: 19, column: 3
+              S294=3;
               active[1]=1;
               ends[1]=1;
               break RUN;
             
             case 3 : 
-              S1=3;
-              S1=4;
+              S294=3;
+              S294=4;
               active[1]=1;
               ends[1]=1;
               break RUN;
             
             case 4 : 
-              S1=4;
-              bottleLeftPos5.setPresent();//sysj/ConveyorPlant.sysj line: 23, column: 4
+              S294=4;
+              bottleLeftPos5.setPresent();//sysj\ConveyorPlant.sysj line: 23, column: 3
               currsigs.addElement(bottleLeftPos5);
-              System.out.println("Emitted bottleLeftPos5");
-              System.out.println("Bottle left Pos5");//sysj/ConveyorPlant.sysj line: 24, column: 4
-              S1=5;
+              System.out.println("Bottle left Pos5");//sysj\ConveyorPlant.sysj line: 24, column: 3
+              S294=5;
               active[1]=1;
               ends[1]=1;
               break RUN;
             
             case 5 : 
-              S1=5;
-              S1=0;
+              S294=5;
+              S294=0;
               active[1]=1;
               ends[1]=1;
               break RUN;

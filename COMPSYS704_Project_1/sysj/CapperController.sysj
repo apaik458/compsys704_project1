@@ -3,7 +3,10 @@ CapperController(
 		output signal cylPos5axisExtend,gripperTurnRetract,gripperTurnExtend,capGripperPos5Extend,cylClampBottleExtend;
 		)
 ->{
-	while(1){
+	
+	System.out.println("CapperPlant test");
+	
+	while(true){
 		// Check if a bottle is at position 4, if not, wait until it arrives
 		await(bottleAtPos4);
 		
@@ -17,7 +20,7 @@ CapperController(
 		// Gripper Z-Axis
 		{
 			abort(gripperTurnHomePos){
-				sustain cylPos5ZaxisExtend;
+				sustain cylPos5axisExtend;
 			}
 		}
 		||

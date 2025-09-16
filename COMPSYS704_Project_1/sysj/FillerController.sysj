@@ -3,14 +3,14 @@ FillerController(
 		output signal valveInjectorOnOff,valveInletOnOff,dosUnitValveRetract,dosUnitValveExtend;
 		)
 ->{
-	while(1){
+	while(true){
 		// Check if a bottle is at position 2, if not, wait until it arrives
 		await(bottleAtPos2);
 		
 		// Valve Injector
 		{
 			abort(dosUnitEvac){
-				emit valvInjectorOnOff;
+				emit valveInjectorOnOff;
 				emit dosUnitValveRetract;
 				pause;
 			}
@@ -20,7 +20,7 @@ FillerController(
 		{
 			await(dosUnitFilled);
 			abort(dosUnitEvac){
-				emit valveInletOnoff;
+				emit valveInletOnOff;
 				emit dosUnitValveExtend;
 				pause;
 			}

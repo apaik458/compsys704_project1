@@ -13,7 +13,7 @@ public class FillerPlant extends ClockDomain{
   private char [] suspended;
   public Signal testInput = new Signal("testInput", Signal.INPUT);
   public Signal testOutput = new Signal("testOutput", Signal.OUTPUT);
-  private int S16 = 1;
+  private int S390 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -25,18 +25,18 @@ public class FillerPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S16){
+      switch(S390){
         case 0 : 
-          S16=0;
+          S390=0;
           break RUN;
         
         case 1 : 
-          S16=2;
+          S390=2;
           System.out.println("FillerPlant test");//sysj\FillerPlant.sysj line: 6, column: 2
-          S16=0;
+          S390=0;
           active[1]=0;
           ends[1]=0;
-          S16=0;
+          S390=0;
           break RUN;
         
       }
