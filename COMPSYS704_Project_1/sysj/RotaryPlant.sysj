@@ -5,5 +5,34 @@ RotaryPlant(
 		output signal capOnBottleAtPos1;
 		)
 ->{
-	System.out.println("RotaryPlant test");
+	loop {
+        % Step 1: Idle until a rotation command is received
+        await rotaryTableTrigger;
+
+        % Step 2: Simulate table movement while trigger is high
+        abort (not rotaryTableTrigger) {
+            % During rotation, alignment is lost
+            emit !tableAlignedWithSensor;
+
+            % Bottle at pos5 will move away once rotation starts
+            emit !bottleAtPos5;
+
+            % If any bottle with cap at pos1, keep reporting it
+            % (this comes from the physical condition of table slot)
+            % For now: simulate as a persistent signal until cleared externally
+            if (/* condition: capped bottle present */) {
+                emit capOnBottleAtPos1;
+            } else {
+                emit !capOnBottleAtPos1;
+            }
+        }
+
+        % Step 3: After rotation (~0.5s), emit alignment restored
+        sustain tableAlignedWithSensor for 0.5;
+
+        % Step 4: After alignment, a new bottle appears at pos5
+        emit bottleAtPos5;
+
+        pause; % Wait until next cycle
+    }
 }
