@@ -199,7 +199,7 @@ public class Canvas extends JPanel {
         }
         
         // Draw cap ready indicator if applicable
-        if (States.CAP_READY && !States.MAG_EMPTY) {
+        if (States.CAP_READY && !States.MAG_EMPTY && States.PUSHER_RETRACTED) {
             g.setColor(Color.black);
             // Adjust these coordinates based on where you want the circle
             g.fillOval(1083, 186, 30, 30); // Example position
