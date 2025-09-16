@@ -9,7 +9,7 @@ public class States {
     public static volatile boolean PUSHER_EXTENDED = !PUSHER_RETRACTED;
     public static volatile boolean GRIPPED = false;
     public static volatile boolean MAG_EMPTY = false;
-    public static volatile boolean CAP_READY = false;
+    public static volatile boolean CAP_READY = true;
     
     // Filling Unit
     public static volatile boolean NOZZLE_OPEN = false;
@@ -20,11 +20,11 @@ public class States {
     public static volatile boolean LIQUID_EMPTY = !LIQUID_FULL;
     
     // Capping Unit
-    public static volatile boolean CAPPER_UP = false;
+    public static volatile boolean CAPPER_UP = true;
     public static volatile boolean CAPPER_DOWN = !CAPPER_UP;
-    public static volatile boolean CAPPER_OPEN = false;
+    public static volatile boolean CAPPER_OPEN = true;
     public static volatile boolean CAPPER_GRIPPER = !CAPPER_OPEN;
-    public static volatile boolean CAPPER_STRAIGHT = false;
+    public static volatile boolean CAPPER_STRAIGHT = true;
     public static volatile boolean CAPPER_TWIST = !CAPPER_STRAIGHT;
     
     // Baxter Arm States - Using enums for mutual exclusion
@@ -53,6 +53,15 @@ public class States {
     public static void setRightArmState(RightArmState newState) {
         rightArmState = newState;
     }
+    
+    /* 
+     * To use set arm states methods:
+     * // Set left arm to position A lowered and gripped
+	States.setLeftArmState(States.LeftArmState.POS_A_LOWERED_GRIPPED);
+
+	// Set right arm to position F gripped
+	States.setRightArmState(States.RightArmState.POS_F_GRIPPED);
+     */
     
     // Helper methods to check specific states
     public static boolean isLeftArmAtPosA() {

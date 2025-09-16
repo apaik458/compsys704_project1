@@ -169,41 +169,89 @@ public class Canvas extends JPanel {
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         
-        // Draw all new images at position (0,0)
-        // These are already positioned correctly in the 1920x1080 canvas
+        // Draw background and static elements first
         if (Background != null) g.drawImage(Background, 0, 0, null);
         if (Baxter != null) g.drawImage(Baxter, 0, 0, null);
         if (Conveyors != null) g.drawImage(Conveyors, 0, 0, null);
         if (RotaryTable != null) g.drawImage(RotaryTable, 0, 0, null);
-        if (LoadingUnit != null) g.drawImage(LoadingUnit, 0, 0, null);
-        if (LoadingUnitArmSource != null) g.drawImage(LoadingUnitArmSource, 0, 0, null);
-        if (LoadingUnitArmDest != null) g.drawImage(LoadingUnitArmDest, 0, 0, null);
-        if (LoadingUnitPusherPushed != null) g.drawImage(LoadingUnitPusherPushed, 0, 0, null);
-        if (LoadingUnitPusherIdle != null) g.drawImage(LoadingUnitPusherIdle, 0, 0, null);
-        if (LoadingUnitCaps != null) g.drawImage(LoadingUnitCaps, 0, 0, null);
-        if (FillingUnit != null) g.drawImage(FillingUnit, 0, 0, null);
-        if (FillingUnitNozzle != null) g.drawImage(FillingUnitNozzle, 0, 0, null);
-        if (FillingUnitLiquid != null) g.drawImage(FillingUnitLiquid, 0, 0, null);
-        if (FillingUnitPressure != null) g.drawImage(FillingUnitPressure, 0, 0, null);
-        if (CappingUnitUp != null) g.drawImage(CappingUnitUp, 0, 0, null);
-        if (CappingUnitDown != null) g.drawImage(CappingUnitDown, 0, 0, null);
-        if (CappingUnitTwist != null) g.drawImage(CappingUnitTwist, 0, 0, null);
-        if (CappingUnitGrippedTwist != null) g.drawImage(CappingUnitGrippedTwist, 0, 0, null);
-        if (CappingUnitGrippedStraight != null) g.drawImage(CappingUnitGrippedStraight, 0, 0, null);
         if (DiscardDest != null) g.drawImage(DiscardDest, 0, 0, null);
         if (_100mlSource != null) g.drawImage(_100mlSource, 0, 0, null);
         if (_100mlDest != null) g.drawImage(_100mlDest, 0, 0, null);
-        if (_100mlEmpty != null) g.drawImage(_100mlEmpty, 0, 0, null);
-        if (_100mlChocolate != null) g.drawImage(_100mlChocolate, 0, 0, null);
-        if (_100mlMatcha != null) g.drawImage(_100mlMatcha, 0, 0, null);
         if (_200mlSource != null) g.drawImage(_200mlSource, 0, 0, null);
         if (_200mlDest != null) g.drawImage(_200mlDest, 0, 0, null);
-        if (_200mlEmpty != null) g.drawImage(_200mlEmpty, 0, 0, null);
-        if (_200mlChocolate != null) g.drawImage(_200mlChocolate, 0, 0, null);
-        if (_200mlMatcha != null) g.drawImage(_200mlMatcha, 0, 0, null);
+        
+        // Lid Loader Logic
+        if (LoadingUnit != null) g.drawImage(LoadingUnit, 0, 0, null);        
+        
+        // Draw pusher position based on state
+        if (States.PUSHER_RETRACTED && LoadingUnitPusherIdle != null) {
+            g.drawImage(LoadingUnitPusherIdle, 0, 0, null);
+        } else if (States.PUSHER_EXTENDED && LoadingUnitPusherPushed != null) {
+            g.drawImage(LoadingUnitPusherPushed, 0, 0, null);
+            g.setColor(Color.black);
+            // Adjust these coordinates based on where you want the circle
+            g.fillOval(1040, 186, 30, 30); // Example position
+        }
+        
+        // Draw caps only if magazine is not empty
+        if (!States.MAG_EMPTY && LoadingUnitCaps != null) {
+            g.drawImage(LoadingUnitCaps, 0, 0, null);
+        }
+        
+        // Draw cap ready indicator if applicable
+        if (States.CAP_READY && !States.MAG_EMPTY) {
+            g.setColor(Color.black);
+            // Adjust these coordinates based on where you want the circle
+            g.fillOval(1083, 186, 30, 30); // Example position
+        }
+        
+        // Draw arm position based on state
+        if (States.ARM_AT_SOURCE && LoadingUnitArmSource != null) {
+            g.drawImage(LoadingUnitArmSource, 0, 0, null);
+        } else if (States.ARM_AT_DEST && LoadingUnitArmDest != null) {
+            g.drawImage(LoadingUnitArmDest, 0, 0, null);
+        }
+        
+        // Filling Unit Logic
+        if (FillingUnit != null) g.drawImage(FillingUnit, 0, 0, null);
+        
+        // Draw nozzle only if open
+        if (States.NOZZLE_OPEN && FillingUnitNozzle != null) {
+            g.drawImage(FillingUnitNozzle, 0, 0, null);
+        }
+        
+        // Draw pressure only if up
+        if (States.PRESSURE_UP && FillingUnitPressure != null) {
+            g.drawImage(FillingUnitPressure, 0, 0, null);
+        }
+        
+        // Draw liquid only if full
+        if (States.LIQUID_FULL && FillingUnitLiquid != null) {
+            g.drawImage(FillingUnitLiquid, 0, 0, null);
+        }
+        
+        // Capping Unit Logic
+        // Draw capper up or down
+        if (States.CAPPER_UP && CappingUnitUp != null) {
+            g.drawImage(CappingUnitUp, 0, 0, null);
+        } else if (States.CAPPER_DOWN && CappingUnitDown != null) {
+            g.drawImage(CappingUnitDown, 0, 0, null);
+            
+            // If capper is down, draw gripper state
+            if (States.CAPPER_GRIPPER) {
+                if (States.CAPPER_STRAIGHT && CappingUnitGrippedStraight != null) {
+                    g.drawImage(CappingUnitGrippedStraight, 0, 0, null);
+                } else if (States.CAPPER_TWIST && CappingUnitGrippedTwist != null) {
+                    g.drawImage(CappingUnitGrippedTwist, 0, 0, null);
+                }
+            } else if (States.CAPPER_OPEN && CappingUnitTwist != null) {
+                // Draw twist unit when open (if applicable)
+                g.drawImage(CappingUnitTwist, 0, 0, null);
+            }
+        }
         
         // Draw Baxter arm images
-     // Draw left arm based on state
+        // Draw left arm based on state
         switch (States.leftArmState) {
             case POS_A:
                 if (BaxterLeftArmPosA != null) g.drawImage(BaxterLeftArmPosA, 0, 0, null);
@@ -293,6 +341,9 @@ public class Canvas extends JPanel {
             case POS_F_GRIPPED:
                 if (BaxterRightArmPosFGripped != null) g.drawImage(BaxterRightArmPosFGripped, 0, 0, null);
                 break;
+                
+             // Draw bottles (to be implemented later)
+             // You'll need to add logic here based on bottle states
         }
         
         // Keep the original logic for reference (commented out)

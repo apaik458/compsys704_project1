@@ -4,7 +4,7 @@ CapperController(
 		)
 ->{
 	
-	System.out.println("CapperPlant test");
+	System.out.println("CapperController test");
 	
 	while(true){
 		// Check if a bottle is at position 4, if not, wait until it arrives

@@ -187,7 +187,7 @@ public class CapperController extends ClockDomain{
         case 1 : 
           S247=2;
           S247=2;
-          System.out.println("CapperPlant test");//sysj\CapperController.sysj line: 7, column: 2
+          System.out.println("CapperController test");//sysj\CapperController.sysj line: 7, column: 2
           S45=0;
           active[1]=1;
           ends[1]=1;
