@@ -3,5 +3,20 @@ RotaryController(
 		output signal rotaryTableTrigger, sizeAdjust;
 		)
 ->{
-	System.out.println("RotaryController test");
+	loop {
+		{
+		await(bottleAtPos1);
+		abort(capOnBottleAtPos1 || !bottleAtPos1){
+			await(tableAlignedWithSensor);
+			sustain rotaryTableTrigger;
+		}
+		}
+		||
+		{
+		await(enableRotaryTable);
+		abort(!enableRotaryTable){
+			sustain rotaryTableTrigger;
+		}
+		}
+    }
 }
