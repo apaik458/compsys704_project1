@@ -1,9 +1,41 @@
 import run.GUI;
 
 SystemCoordinator(
-		input signal testInput;
-		output signal testOutput;
-		)
+	    // Input signals from various components
+	    input signal testInput, Baxter_Start_Load_100, Baxter_Start_Load_200, Baxter_Start_UnLoad_100, 
+	             Baxter_Start_UnLoad_200, Baxter_Start_UnLoad_Damaged, Baxter_Done,
+	             bottleAIPoint_100, bottleAIPoint_200, CMDfb,
+	             bottleAtPos1, bottleLeftPos5,
+	             dosUnitEvac, dosUnitFilled, bottleAtPos2,
+	             pusherRetracted, pusherExtended, WPgripped, armAtSource, armAtDest, empty,
+	             bottleAtPos4, gripperZAxisLowered, gripperZAxisLifted, gripperTurnHomePos, gripperTurnFinalPos,
+	             bottleAtPos5, bottleLeftPos5_final, conveyorStatus,
+	             bottleAIPos5, capOnBottleAIPos1, tableAlignedWithSensor, rotaryStatus;
+	             
+	    // Output signals to various components and GUI
+	    output signal testOutput, SysCo_Baxter_Done, CMD, 
+	              SysCo_Initial_Conveyor_Start, motConveyorOnOff,
+	              valveInjectorOnOff, valveInletOnOff, dosUnitValveRetract, dosUnitValveExtend,
+	              pusherExtend, vacOn, armSource, armDest, Cap_Load_Request,
+	              cylPos5ZaxisExtend, gripperTurnExtend, capGripperPos5Extend, cylClampBottleExtend,
+	              rotaryTableTrigger, motConveyorOnOff_final,
+	              GUI_State_Update, EABS_Batch_Complete, EABS_Order_Complete;
+	              
+	    // Signals specifically for GUI
+	    output signal leftArmState, rightArmState,
+	              bottleAIPoint_100_gui, bottleAIPoint_200_gui,
+	              motConveyorOnOff_gui, bottleAtPos1_gui, bottleLeftPos5_gui,
+	              valveInjectorOnOff_gui, valveInletOnOff_gui, dosUnitValveRetract_gui, dosUnitValveExtend_gui,
+	              dosUnitEvac_gui, dosUnitFilled_gui, bottleAtPos2_gui,
+	              pusherRetracted_gui, pusherExtended_gui, WPgripped_gui, armAtSource_gui, armAtDest_gui, empty_gui,
+	              pusherExtend_gui, vacOn_gui, armSource_gui, armDest_gui, bottleAtPos3_gui,
+	              cylPos5ZaxisExtend_gui, gripperTurnExtend_gui, gripperTurnRetract_gui, capGripperPos5Extend_gui,
+	              cylClampBottleExtend_gui, bottleAtPos4_gui, gripperZAxisLowered_gui, gripperZAxisLifted_gui,
+	              gripperTurnHomePos_gui, gripperTurnFinalPos_gui,
+	              motConveyorOnOff_final_gui, bottleAtPos5_gui, conveyorStatus_gui,
+	              rotaryTableTrigger_gui, rotaryStatus_gui, bottleAIPos5_rotary_gui, capOnBottleAIPos1_gui, tableAlignedWithSensor_gui,
+	              systemStatus, currentBatch, orderProgress, faultStatus;
+	)
 ->{
 	new Thread(new GUI()).start();
 	

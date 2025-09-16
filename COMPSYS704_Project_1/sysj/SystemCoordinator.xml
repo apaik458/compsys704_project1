@@ -7,59 +7,59 @@
 			<!-- Baxter Loader Signals -->
 			<oSignal Name="leftArmState" To="UI.leftArmState" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="rightArmState" To="UI.rightArmState" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="bottleAIPoint_100" To="UI.bottleAIPoint_100" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="bottleAIPoint_200" To="UI.bottleAIPoint_200" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottleAIPoint_100_gui" To="UI.bottleAIPoint_100_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottleAIPoint_200_gui" To="UI.bottleAIPoint_200_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			
 			<!-- Initial Conveyor Signals -->
-			<oSignal Name="motConveyorOnOff" To="UI.motConveyorOnOff" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="bottleAtPos1" To="UI.bottleAtPos1" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="bottleLeftPos5" To="UI.bottleLeftPos5" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="motConveyorOnOff_gui" To="UI.motConveyorOnOff_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottleAtPos1_gui" To="UI.bottleAtPos1_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottleLeftPos5_gui" To="UI.bottleLeftPos5_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			
 			<!-- Filling Unit Signals -->
-			<oSignal Name="valveInjectorOnOff" To="UI.valveInjectorOnOff" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="valveInletOnOff" To="UI.valveInletOnOff" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="dosUnitValveRetract" To="UI.dosUnitValveRetract" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="dosUnitValveExtend" To="UI.dosUnitValveExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="dosUnitEvac" To="UI.dosUnitEvac" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="dosUnitFilled" To="UI.dosUnitFilled" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="bottleAtPos2" To="UI.bottleAtPos2" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="valveInjectorOnOff_gui" To="UI.valveInjectorOnOff_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="valveInletOnOff_gui" To="UI.valveInletOnOff_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="dosUnitValveRetract_gui" To="UI.dosUnitValveRetract_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="dosUnitValveExtend_gui" To="UI.dosUnitValveExtend_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="dosUnitEvac_gui" To="UI.dosUnitEvac_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="dosUnitFilled_gui" To="UI.dosUnitFilled_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottleAtPos2_gui" To="UI.bottleAtPos2_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			
 			<!-- Lid/Cap Loading Unit Signals -->
-			<oSignal Name="pusherRetracted" To="UI.pusherRetracted" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="pusherExtended" To="UI.pusherExtended" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="WPgripped" To="UI.WPgripped" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="armAtSource" To="UI.armAtSource" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="armAtDest" To="UI.armAtDest" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="empty" To="UI.empty" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="pusherExtend" To="UI.pusherExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="vacOn" To="UI.vacOn" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="armSource" To="UI.armSource" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="armDest" To="UI.armDest" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="bottleAtPos3" To="UI.bottleAtPos3" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="pusherRetracted_gui" To="UI.pusherRetracted_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="pusherExtended_gui" To="UI.pusherExtended_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="WPgripped_gui" To="UI.WPgripped_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="armAtSource_gui" To="UI.armAtSource_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="armAtDest_gui" To="UI.armAtDest_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="empty_gui" To="UI.empty_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="pusherExtend_gui" To="UI.pusherExtend_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="vacOn_gui" To="UI.vacOn_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="armSource_gui" To="UI.armSource_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="armDest_gui" To="UI.armDest_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottleAtPos3_gui" To="UI.bottleAtPos3_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			
 			<!-- Capping Unit Signals -->
-			<oSignal Name="cylPos5ZaxisExtend" To="UI.cylPos5ZaxisExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="gripperTurnRetract" To="UI.gripperTurnRetract" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="gripperTurnExtend" To="UI.gripperTurnExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="capGripperPos5Extend" To="UI.capGripperPos5Extend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="cylClampBottleExtend" To="UI.cylClampBottleExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="bottleAtPos4" To="UI.bottleAtPos4" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="gripperZAxisLowered" To="UI.gripperZAxisLowered" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="gripperZAxisLifted" To="UI.gripperZAxisLifted" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="gripperTurnHomePos" To="UI.gripperTurnHomePos" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="gripperTurnFinalPos" To="UI.gripperTurnFinalPos" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="cylPos5ZaxisExtend_gui" To="UI.cylPos5ZaxisExtend_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="gripperTurnRetract_gui" To="UI.gripperTurnRetract_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="gripperTurnExtend_gui" To="UI.gripperTurnExtend_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="capGripperPos5Extend_gui" To="UI.capGripperPos5Extend_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="cylClampBottleExtend_gui" To="UI.cylClampBottleExtend_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottleAtPos4_gui" To="UI.bottleAtPos4_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="gripperZAxisLowered_gui" To="UI.gripperZAxisLowered_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="gripperZAxisLifted_gui" To="UI.gripperZAxisLifted_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="gripperTurnHomePos_gui" To="UI.gripperTurnHomePos_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="gripperTurnFinalPos_gui" To="UI.gripperTurnFinalPos_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			
 			<!-- Final Conveyor Signals -->
-			<oSignal Name="motConveyorOnOff_final" To="UI.motConveyorOnOff_final" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="bottleAtPos5" To="UI.bottleAtPos5" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="conveyorStatus" To="UI.conveyorStatus" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="motConveyorOnOff_final_gui" To="UI.motConveyorOnOff_final_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottleAtPos5_gui" To="UI.bottleAtPos5_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="conveyorStatus_gui" To="UI.conveyorStatus_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			
 			<!-- Rotary Table Signals -->
-			<oSignal Name="rotaryTableTrigger" To="UI.rotaryTableTrigger" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="rotaryStatus" To="UI.rotaryStatus" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="bottleAIPos5_rotary" To="UI.bottleAIPos5_rotary" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="capOnBottleAIPos1" To="UI.capOnBottleAIPos1" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="tableAlignedWithSensor" To="UI.tableAlignedWithSensor" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="rotaryTableTrigger_gui" To="UI.rotaryTableTrigger_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="rotaryStatus_gui" To="UI.rotaryStatus_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottleAIPos5_rotary_gui" To="UI.bottleAIPos5_rotary_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="capOnBottleAIPos1_gui" To="UI.capOnBottleAIPos1_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="tableAlignedWithSensor_gui" To="UI.tableAlignedWithSensor_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			
 			<!-- System Coordinator Status Signals -->
 			<oSignal Name="systemStatus" To="UI.systemStatus" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />

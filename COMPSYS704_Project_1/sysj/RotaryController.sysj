@@ -1,5 +1,5 @@
 RotaryController(
-		input signal tableAlignedWithSensor, bottleAtPos5, capOnBottleAtPos1, largeSizeEnable;
+		input signal tableAlignedWithSensor, bottleAtPos5, capOnBottleAtPos1, largeSizeEnable, bottleAtPos1, enableRotaryTable;
 		output signal rotaryTableTrigger, sizeAdjust;
 		)
 ->{
