@@ -1,6 +1,6 @@
 RotaryController(
 		input signal tableAlignedWithSensor, bottleAtPos5, capOnBottleAtPos1, largeSizeEnable, bottleAtPos1, enableRotaryTable;
-		output signal rotaryTableTrigger, sizeAdjust;
+		output signal rotaryTableTrigger, sizeAdjust, storageAdjust;
 		)
 ->{
 	loop {
@@ -16,6 +16,13 @@ RotaryController(
 		await(enableRotaryTable);
 		abort(!enableRotaryTable){
 			sustain rotaryTableTrigger;
+		}
+		}
+		||
+		{
+		abort(!largeSizeEnable){
+			sustain sizeAdjust;
+			sustain storageAdjust;
 		}
 		}
     }

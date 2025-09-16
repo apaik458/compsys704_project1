@@ -19,17 +19,30 @@ public class RotaryController extends ClockDomain{
   public Signal enableRotaryTable = new Signal("enableRotaryTable", Signal.INPUT);
   public Signal rotaryTableTrigger = new Signal("rotaryTableTrigger", Signal.OUTPUT);
   public Signal sizeAdjust = new Signal("sizeAdjust", Signal.OUTPUT);
-  private int S495 = 1;
+  public Signal storageAdjust = new Signal("storageAdjust", Signal.OUTPUT);
+  private int S525 = 1;
   private int S418 = 1;
   private int S417 = 1;
   private int S406 = 1;
   private int S429 = 1;
   private int S428 = 1;
+  private int S439 = 1;
+  private int S436 = 1;
   
-  private int[] ends = new int[4];
-  private int[] tdone = new int[4];
+  private int[] ends = new int[5];
+  private int[] tdone = new int[5];
   
-  public void thread504(int [] tdone, int [] ends){
+  public void thread537(int [] tdone, int [] ends){
+        S439=1;
+    S436=0;
+    sizeAdjust.setPresent();//sysj\RotaryController.sysj line: 24, column: 4
+    currsigs.addElement(sizeAdjust);
+    active[4]=1;
+    ends[4]=1;
+    tdone[4]=1;
+  }
+
+  public void thread536(int [] tdone, int [] ends){
         S429=1;
     S428=0;
     active[3]=1;
@@ -37,7 +50,7 @@ public class RotaryController extends ClockDomain{
     tdone[3]=1;
   }
 
-  public void thread503(int [] tdone, int [] ends){
+  public void thread535(int [] tdone, int [] ends){
         S418=1;
     S417=0;
     active[2]=1;
@@ -45,7 +58,47 @@ public class RotaryController extends ClockDomain{
     tdone[2]=1;
   }
 
-  public void thread501(int [] tdone, int [] ends){
+  public void thread533(int [] tdone, int [] ends){
+        switch(S439){
+      case 0 : 
+        active[4]=0;
+        ends[4]=0;
+        tdone[4]=1;
+        break;
+      
+      case 1 : 
+        if(!largeSizeEnable.getprestatus()){//sysj\RotaryController.sysj line: 23, column: 9
+          S439=0;
+          active[4]=0;
+          ends[4]=0;
+          tdone[4]=1;
+        }
+        else {
+          switch(S436){
+            case 0 : 
+              sizeAdjust.setPresent();//sysj\RotaryController.sysj line: 24, column: 4
+              currsigs.addElement(sizeAdjust);
+              active[4]=1;
+              ends[4]=1;
+              tdone[4]=1;
+              break;
+            
+            case 1 : 
+              storageAdjust.setPresent();//sysj\RotaryController.sysj line: 25, column: 4
+              currsigs.addElement(storageAdjust);
+              active[4]=1;
+              ends[4]=1;
+              tdone[4]=1;
+              break;
+            
+          }
+        }
+        break;
+      
+    }
+  }
+
+  public void thread532(int [] tdone, int [] ends){
         switch(S429){
       case 0 : 
         active[3]=0;
@@ -93,7 +146,7 @@ public class RotaryController extends ClockDomain{
     }
   }
 
-  public void thread500(int [] tdone, int [] ends){
+  public void thread531(int [] tdone, int [] ends){
         switch(S418){
       case 0 : 
         active[2]=0;
@@ -161,7 +214,17 @@ public class RotaryController extends ClockDomain{
     }
   }
 
-  public void thread498(int [] tdone, int [] ends){
+  public void thread529(int [] tdone, int [] ends){
+        S439=1;
+    S436=0;
+    sizeAdjust.setPresent();//sysj\RotaryController.sysj line: 24, column: 4
+    currsigs.addElement(sizeAdjust);
+    active[4]=1;
+    ends[4]=1;
+    tdone[4]=1;
+  }
+
+  public void thread528(int [] tdone, int [] ends){
         S429=1;
     S428=0;
     active[3]=1;
@@ -169,7 +232,7 @@ public class RotaryController extends ClockDomain{
     tdone[3]=1;
   }
 
-  public void thread497(int [] tdone, int [] ends){
+  public void thread527(int [] tdone, int [] ends){
         S418=1;
     S417=0;
     active[2]=1;
@@ -184,56 +247,68 @@ public class RotaryController extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S495){
+      switch(S525){
         case 0 : 
-          S495=0;
+          S525=0;
           break RUN;
         
         case 1 : 
-          S495=2;
-          S495=2;
-          thread497(tdone,ends);
-          thread498(tdone,ends);
-          int biggest499 = 0;
-          if(ends[2]>=biggest499){
-            biggest499=ends[2];
+          S525=2;
+          S525=2;
+          thread527(tdone,ends);
+          thread528(tdone,ends);
+          thread529(tdone,ends);
+          int biggest530 = 0;
+          if(ends[2]>=biggest530){
+            biggest530=ends[2];
           }
-          if(ends[3]>=biggest499){
-            biggest499=ends[3];
+          if(ends[3]>=biggest530){
+            biggest530=ends[3];
           }
-          if(biggest499 == 1){
+          if(ends[4]>=biggest530){
+            biggest530=ends[4];
+          }
+          if(biggest530 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
         
         case 2 : 
-          thread500(tdone,ends);
-          thread501(tdone,ends);
-          int biggest502 = 0;
-          if(ends[2]>=biggest502){
-            biggest502=ends[2];
+          thread531(tdone,ends);
+          thread532(tdone,ends);
+          thread533(tdone,ends);
+          int biggest534 = 0;
+          if(ends[2]>=biggest534){
+            biggest534=ends[2];
           }
-          if(ends[3]>=biggest502){
-            biggest502=ends[3];
+          if(ends[3]>=biggest534){
+            biggest534=ends[3];
           }
-          if(biggest502 == 1){
+          if(ends[4]>=biggest534){
+            biggest534=ends[4];
+          }
+          if(biggest534 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest502 == 0){
-            thread503(tdone,ends);
-            thread504(tdone,ends);
-            int biggest505 = 0;
-            if(ends[2]>=biggest505){
-              biggest505=ends[2];
+          if(biggest534 == 0){
+            thread535(tdone,ends);
+            thread536(tdone,ends);
+            thread537(tdone,ends);
+            int biggest538 = 0;
+            if(ends[2]>=biggest538){
+              biggest538=ends[2];
             }
-            if(ends[3]>=biggest505){
-              biggest505=ends[3];
+            if(ends[3]>=biggest538){
+              biggest538=ends[3];
             }
-            if(biggest505 == 1){
+            if(ends[4]>=biggest538){
+              biggest538=ends[4];
+            }
+            if(biggest538 == 1){
               active[1]=1;
               ends[1]=1;
               break RUN;
@@ -245,9 +320,9 @@ public class RotaryController extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;
@@ -284,6 +359,7 @@ public class RotaryController extends ClockDomain{
       enableRotaryTable.setpreclear();
       rotaryTableTrigger.setpreclear();
       sizeAdjust.setpreclear();
+      storageAdjust.setpreclear();
       int dummyint = 0;
       for(int qw=0;qw<currsigs.size();++qw){
         dummyint = ((Signal)currsigs.elementAt(qw)).getStatus() ? ((Signal)currsigs.elementAt(qw)).setprepresent() : ((Signal)currsigs.elementAt(qw)).setpreclear();
@@ -312,6 +388,8 @@ public class RotaryController extends ClockDomain{
       rotaryTableTrigger.setClear();
       sizeAdjust.sethook();
       sizeAdjust.setClear();
+      storageAdjust.sethook();
+      storageAdjust.setClear();
       if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
         tableAlignedWithSensor.gethook();

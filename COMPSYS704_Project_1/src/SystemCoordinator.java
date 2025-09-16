@@ -45,6 +45,8 @@ public class SystemCoordinator extends ClockDomain{
   public Signal capOnBottleAIPos1 = new Signal("capOnBottleAIPos1", Signal.INPUT);
   public Signal tableAlignedWithSensor = new Signal("tableAlignedWithSensor", Signal.INPUT);
   public Signal rotaryStatus = new Signal("rotaryStatus", Signal.INPUT);
+  public Signal storageAdjust = new Signal("storageAdjust", Signal.INPUT);
+  public Signal sizeAdjust = new Signal("sizeAdjust", Signal.INPUT);
   public Signal testOutput = new Signal("testOutput", Signal.OUTPUT);
   public Signal SysCo_Baxter_Done = new Signal("SysCo_Baxter_Done", Signal.OUTPUT);
   public Signal CMD = new Signal("CMD", Signal.OUTPUT);
@@ -134,17 +136,17 @@ public class SystemCoordinator extends ClockDomain{
   public Signal rightArm_POS_F_LOWERED_gui = new Signal("rightArm_POS_F_LOWERED_gui", Signal.OUTPUT);
   public Signal rightArm_POS_F_LOWERED_GRIPPED_gui = new Signal("rightArm_POS_F_LOWERED_GRIPPED_gui", Signal.OUTPUT);
   public Signal rightArm_POS_F_GRIPPED_gui = new Signal("rightArm_POS_F_GRIPPED_gui", Signal.OUTPUT);
-  private int S557 = 1;
-  private int S515 = 1;
-  private int S523 = 1;
-  private int S517 = 1;
-  private int S531 = 1;
+  private int S590 = 1;
+  private int S548 = 1;
+  private int S556 = 1;
+  private int S550 = 1;
+  private int S564 = 1;
   
   private int[] ends = new int[5];
   private int[] tdone = new int[5];
   
-  public void thread565(int [] tdone, int [] ends){
-        switch(S531){
+  public void thread598(int [] tdone, int [] ends){
+        switch(S564){
       case 0 : 
         active[4]=0;
         ends[4]=0;
@@ -152,8 +154,8 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        if(pusherExtended.getprestatus()){//sysj\SystemCoordinator.sysj line: 68, column: 24
-          pusherExtended_gui.setPresent();//sysj\SystemCoordinator.sysj line: 68, column: 40
+        if(pusherExtended.getprestatus()){//sysj\SystemCoordinator.sysj line: 70, column: 24
+          pusherExtended_gui.setPresent();//sysj\SystemCoordinator.sysj line: 70, column: 40
           currsigs.addElement(pusherExtended_gui);
           active[4]=1;
           ends[4]=1;
@@ -169,8 +171,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread564(int [] tdone, int [] ends){
-        switch(S523){
+  public void thread597(int [] tdone, int [] ends){
+        switch(S556){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -178,19 +180,19 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S517){
+        switch(S550){
           case 0 : 
-            S517=0;
-            if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 66, column: 24
-              pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 66, column: 41
+            S550=0;
+            if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 68, column: 24
+              pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 68, column: 41
               currsigs.addElement(pusherRetracted_gui);
-              S517=1;
+              S550=1;
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
             }
             else {
-              S517=1;
+              S550=1;
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -198,18 +200,18 @@ public class SystemCoordinator extends ClockDomain{
             break;
           
           case 1 : 
-            S517=1;
-            S517=0;
-            if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 66, column: 24
-              pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 66, column: 41
+            S550=1;
+            S550=0;
+            if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 68, column: 24
+              pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 68, column: 41
               currsigs.addElement(pusherRetracted_gui);
-              S517=1;
+              S550=1;
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
             }
             else {
-              S517=1;
+              S550=1;
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -222,8 +224,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread563(int [] tdone, int [] ends){
-        switch(S515){
+  public void thread596(int [] tdone, int [] ends){
+        switch(S548){
       case 0 : 
         active[2]=0;
         ends[2]=0;
@@ -231,7 +233,7 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        pusherExtended.setPresent();//sysj\SystemCoordinator.sysj line: 54, column: 5
+        pusherExtended.setPresent();//sysj\SystemCoordinator.sysj line: 56, column: 5
         currsigs.addElement(pusherExtended);
         active[2]=1;
         ends[2]=1;
@@ -241,10 +243,10 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread561(int [] tdone, int [] ends){
-        S531=1;
-    if(pusherExtended.getprestatus()){//sysj\SystemCoordinator.sysj line: 68, column: 24
-      pusherExtended_gui.setPresent();//sysj\SystemCoordinator.sysj line: 68, column: 40
+  public void thread594(int [] tdone, int [] ends){
+        S564=1;
+    if(pusherExtended.getprestatus()){//sysj\SystemCoordinator.sysj line: 70, column: 24
+      pusherExtended_gui.setPresent();//sysj\SystemCoordinator.sysj line: 70, column: 40
       currsigs.addElement(pusherExtended_gui);
       active[4]=1;
       ends[4]=1;
@@ -257,28 +259,28 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread560(int [] tdone, int [] ends){
-        S523=1;
-    S517=0;
-    if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 66, column: 24
-      pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 66, column: 41
+  public void thread593(int [] tdone, int [] ends){
+        S556=1;
+    S550=0;
+    if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 68, column: 24
+      pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 68, column: 41
       currsigs.addElement(pusherRetracted_gui);
-      S517=1;
+      S550=1;
       active[3]=1;
       ends[3]=1;
       tdone[3]=1;
     }
     else {
-      S517=1;
+      S550=1;
       active[3]=1;
       ends[3]=1;
       tdone[3]=1;
     }
   }
 
-  public void thread559(int [] tdone, int [] ends){
-        S515=1;
-    pusherExtended.setPresent();//sysj\SystemCoordinator.sysj line: 54, column: 5
+  public void thread592(int [] tdone, int [] ends){
+        S548=1;
+    pusherExtended.setPresent();//sysj\SystemCoordinator.sysj line: 56, column: 5
     currsigs.addElement(pusherExtended);
     active[2]=1;
     ends[2]=1;
@@ -292,59 +294,59 @@ public class SystemCoordinator extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S557){
+      switch(S590){
         case 0 : 
-          S557=0;
+          S590=0;
           break RUN;
         
         case 1 : 
-          S557=2;
-          S557=2;
-          new Thread(new GUI()).start();//sysj\SystemCoordinator.sysj line: 49, column: 2
-          thread559(tdone,ends);
-          thread560(tdone,ends);
-          thread561(tdone,ends);
-          int biggest562 = 0;
-          if(ends[2]>=biggest562){
-            biggest562=ends[2];
+          S590=2;
+          S590=2;
+          new Thread(new GUI()).start();//sysj\SystemCoordinator.sysj line: 51, column: 2
+          thread592(tdone,ends);
+          thread593(tdone,ends);
+          thread594(tdone,ends);
+          int biggest595 = 0;
+          if(ends[2]>=biggest595){
+            biggest595=ends[2];
           }
-          if(ends[3]>=biggest562){
-            biggest562=ends[3];
+          if(ends[3]>=biggest595){
+            biggest595=ends[3];
           }
-          if(ends[4]>=biggest562){
-            biggest562=ends[4];
+          if(ends[4]>=biggest595){
+            biggest595=ends[4];
           }
-          if(biggest562 == 1){
+          if(biggest595 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
         
         case 2 : 
-          thread563(tdone,ends);
-          thread564(tdone,ends);
-          thread565(tdone,ends);
-          int biggest566 = 0;
-          if(ends[2]>=biggest566){
-            biggest566=ends[2];
+          thread596(tdone,ends);
+          thread597(tdone,ends);
+          thread598(tdone,ends);
+          int biggest599 = 0;
+          if(ends[2]>=biggest599){
+            biggest599=ends[2];
           }
-          if(ends[3]>=biggest566){
-            biggest566=ends[3];
+          if(ends[3]>=biggest599){
+            biggest599=ends[3];
           }
-          if(ends[4]>=biggest566){
-            biggest566=ends[4];
+          if(ends[4]>=biggest599){
+            biggest599=ends[4];
           }
-          if(biggest566 == 1){
+          if(biggest599 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest566 == 0){
-            S557=0;
+          if(biggest599 == 0){
+            S590=0;
             active[1]=0;
             ends[1]=0;
-            S557=0;
+            S590=0;
             break RUN;
           }
         
@@ -407,6 +409,8 @@ public class SystemCoordinator extends ClockDomain{
           capOnBottleAIPos1.gethook();
           tableAlignedWithSensor.gethook();
           rotaryStatus.gethook();
+          storageAdjust.gethook();
+          sizeAdjust.gethook();
           df = true;
         }
         runClockDomain();
@@ -444,6 +448,8 @@ public class SystemCoordinator extends ClockDomain{
       capOnBottleAIPos1.setpreclear();
       tableAlignedWithSensor.setpreclear();
       rotaryStatus.setpreclear();
+      storageAdjust.setpreclear();
+      sizeAdjust.setpreclear();
       testOutput.setpreclear();
       SysCo_Baxter_Done.setpreclear();
       CMD.setpreclear();
@@ -638,6 +644,12 @@ public class SystemCoordinator extends ClockDomain{
       dummyint = rotaryStatus.getStatus() ? rotaryStatus.setprepresent() : rotaryStatus.setpreclear();
       rotaryStatus.setpreval(rotaryStatus.getValue());
       rotaryStatus.setClear();
+      dummyint = storageAdjust.getStatus() ? storageAdjust.setprepresent() : storageAdjust.setpreclear();
+      storageAdjust.setpreval(storageAdjust.getValue());
+      storageAdjust.setClear();
+      dummyint = sizeAdjust.getStatus() ? sizeAdjust.setprepresent() : sizeAdjust.setpreclear();
+      sizeAdjust.setpreval(sizeAdjust.getValue());
+      sizeAdjust.setClear();
       testOutput.sethook();
       testOutput.setClear();
       SysCo_Baxter_Done.sethook();
@@ -851,6 +863,8 @@ public class SystemCoordinator extends ClockDomain{
         capOnBottleAIPos1.gethook();
         tableAlignedWithSensor.gethook();
         rotaryStatus.gethook();
+        storageAdjust.gethook();
+        sizeAdjust.gethook();
       }
       runFinisher();
       if(active[1] == 0){

@@ -12,7 +12,9 @@ SystemCoordinator(
              pusherRetracted, pusherExtended, WPgripped, armAtSource, armAtDest, empty,
              bottleAtPos4, gripperZAxisLowered, gripperZAxisLifted, gripperTurnHomePos, gripperTurnFinalPos,
              bottleAtPos5, bottleLeftPos5_final, conveyorStatus,
-             bottleAIPos5, capOnBottleAIPos1, tableAlignedWithSensor, rotaryStatus;
+             bottleAIPos5, capOnBottleAIPos1, tableAlignedWithSensor, rotaryStatus,
+             // used to show the size of rotary turntable and individual storage for different bottles
+             storageAdjust, sizeAdjust;
              
     // Output signals (to various components and GUI)
     output signal testOutput, SysCo_Baxter_Done, CMD, 
@@ -43,7 +45,7 @@ SystemCoordinator(
               rightArm_POS_B_gui, rightArm_POS_B_LOWERED_gui, rightArm_POS_B_LOWERED_GRIPPED_gui, rightArm_POS_B_GRIPPED_gui,
               rightArm_POS_E_gui, rightArm_POS_E_LOWERED_gui, rightArm_POS_E_LOWERED_GRIPPED_gui, rightArm_POS_E_GRIPPED_gui,
               rightArm_POS_F_gui, rightArm_POS_F_LOWERED_gui, rightArm_POS_F_LOWERED_GRIPPED_gui, rightArm_POS_F_GRIPPED_gui;
-	) 
+	)
 ->{
     // Your SystemCoordinator logic here
 	new Thread(new GUI()).start();
