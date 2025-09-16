@@ -1,7 +1,37 @@
 LidLoaderController(
-		input signal testInput;
-		output signal testOutput;
+		input signal bottleAtPos3,pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,request;
+		output signal pusherExtend,vacOn,armSource,armDest;
 		)
 ->{
-	System.out.println("LidLoaderController test");
+	while(true){
+		// Check if a bottle is at position 3, if not, wait until it arrives
+		await(bottleAtPos3);
+
+		// The arm swivels to the position "extended" if a new workpiece is requested
+		await(request && !empty);
+
+		// The pusher extends and pushes a workpiece out of the magazine
+		abort(pusherExtended){
+			sustain pusherExtend;
+		}
+		pause;
+
+		// The pusher retracts back once it is fully extended
+		await(pusherRetracted);
+
+		// The arm swivels back to the position "retracted"
+		abort(armAtSource){
+			sustain armSource;
+		}
+		pause;
+
+		abort(armAtDest){
+			{sustain vacOn;}
+			||
+			{
+				await (WPgripped);
+				sustain armDest;
+			}
+		}
+	}
 }
