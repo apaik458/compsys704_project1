@@ -134,11 +134,157 @@ public class SystemCoordinator extends ClockDomain{
   public Signal rightArm_POS_F_LOWERED_gui = new Signal("rightArm_POS_F_LOWERED_gui", Signal.OUTPUT);
   public Signal rightArm_POS_F_LOWERED_GRIPPED_gui = new Signal("rightArm_POS_F_LOWERED_GRIPPED_gui", Signal.OUTPUT);
   public Signal rightArm_POS_F_GRIPPED_gui = new Signal("rightArm_POS_F_GRIPPED_gui", Signal.OUTPUT);
-  private int S509 = 1;
+  private int S557 = 1;
+  private int S515 = 1;
+  private int S523 = 1;
+  private int S517 = 1;
+  private int S531 = 1;
   
-  private int[] ends = new int[2];
-  private int[] tdone = new int[2];
+  private int[] ends = new int[5];
+  private int[] tdone = new int[5];
   
+  public void thread565(int [] tdone, int [] ends){
+        switch(S531){
+      case 0 : 
+        active[4]=0;
+        ends[4]=0;
+        tdone[4]=1;
+        break;
+      
+      case 1 : 
+        if(pusherExtended.getprestatus()){//sysj\SystemCoordinator.sysj line: 68, column: 24
+          pusherExtended_gui.setPresent();//sysj\SystemCoordinator.sysj line: 68, column: 40
+          currsigs.addElement(pusherExtended_gui);
+          active[4]=1;
+          ends[4]=1;
+          tdone[4]=1;
+        }
+        else {
+          active[4]=1;
+          ends[4]=1;
+          tdone[4]=1;
+        }
+        break;
+      
+    }
+  }
+
+  public void thread564(int [] tdone, int [] ends){
+        switch(S523){
+      case 0 : 
+        active[3]=0;
+        ends[3]=0;
+        tdone[3]=1;
+        break;
+      
+      case 1 : 
+        switch(S517){
+          case 0 : 
+            S517=0;
+            if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 66, column: 24
+              pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 66, column: 41
+              currsigs.addElement(pusherRetracted_gui);
+              S517=1;
+              active[3]=1;
+              ends[3]=1;
+              tdone[3]=1;
+            }
+            else {
+              S517=1;
+              active[3]=1;
+              ends[3]=1;
+              tdone[3]=1;
+            }
+            break;
+          
+          case 1 : 
+            S517=1;
+            S517=0;
+            if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 66, column: 24
+              pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 66, column: 41
+              currsigs.addElement(pusherRetracted_gui);
+              S517=1;
+              active[3]=1;
+              ends[3]=1;
+              tdone[3]=1;
+            }
+            else {
+              S517=1;
+              active[3]=1;
+              ends[3]=1;
+              tdone[3]=1;
+            }
+            break;
+          
+        }
+        break;
+      
+    }
+  }
+
+  public void thread563(int [] tdone, int [] ends){
+        switch(S515){
+      case 0 : 
+        active[2]=0;
+        ends[2]=0;
+        tdone[2]=1;
+        break;
+      
+      case 1 : 
+        pusherExtended.setPresent();//sysj\SystemCoordinator.sysj line: 54, column: 5
+        currsigs.addElement(pusherExtended);
+        active[2]=1;
+        ends[2]=1;
+        tdone[2]=1;
+        break;
+      
+    }
+  }
+
+  public void thread561(int [] tdone, int [] ends){
+        S531=1;
+    if(pusherExtended.getprestatus()){//sysj\SystemCoordinator.sysj line: 68, column: 24
+      pusherExtended_gui.setPresent();//sysj\SystemCoordinator.sysj line: 68, column: 40
+      currsigs.addElement(pusherExtended_gui);
+      active[4]=1;
+      ends[4]=1;
+      tdone[4]=1;
+    }
+    else {
+      active[4]=1;
+      ends[4]=1;
+      tdone[4]=1;
+    }
+  }
+
+  public void thread560(int [] tdone, int [] ends){
+        S523=1;
+    S517=0;
+    if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 66, column: 24
+      pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 66, column: 41
+      currsigs.addElement(pusherRetracted_gui);
+      S517=1;
+      active[3]=1;
+      ends[3]=1;
+      tdone[3]=1;
+    }
+    else {
+      S517=1;
+      active[3]=1;
+      ends[3]=1;
+      tdone[3]=1;
+    }
+  }
+
+  public void thread559(int [] tdone, int [] ends){
+        S515=1;
+    pusherExtended.setPresent();//sysj\SystemCoordinator.sysj line: 54, column: 5
+    currsigs.addElement(pusherExtended);
+    active[2]=1;
+    ends[2]=1;
+    tdone[2]=1;
+  }
+
   public void runClockDomain(){
     for(int i=0;i<ends.length;i++){
       ends[i] = 0;
@@ -146,28 +292,70 @@ public class SystemCoordinator extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S509){
+      switch(S557){
         case 0 : 
-          S509=0;
+          S557=0;
           break RUN;
         
         case 1 : 
-          S509=2;
+          S557=2;
+          S557=2;
           new Thread(new GUI()).start();//sysj\SystemCoordinator.sysj line: 49, column: 2
-          S509=0;
-          active[1]=0;
-          ends[1]=0;
-          S509=0;
-          break RUN;
+          thread559(tdone,ends);
+          thread560(tdone,ends);
+          thread561(tdone,ends);
+          int biggest562 = 0;
+          if(ends[2]>=biggest562){
+            biggest562=ends[2];
+          }
+          if(ends[3]>=biggest562){
+            biggest562=ends[3];
+          }
+          if(ends[4]>=biggest562){
+            biggest562=ends[4];
+          }
+          if(biggest562 == 1){
+            active[1]=1;
+            ends[1]=1;
+            break RUN;
+          }
+        
+        case 2 : 
+          thread563(tdone,ends);
+          thread564(tdone,ends);
+          thread565(tdone,ends);
+          int biggest566 = 0;
+          if(ends[2]>=biggest566){
+            biggest566=ends[2];
+          }
+          if(ends[3]>=biggest566){
+            biggest566=ends[3];
+          }
+          if(ends[4]>=biggest566){
+            biggest566=ends[4];
+          }
+          if(biggest566 == 1){
+            active[1]=1;
+            ends[1]=1;
+            break RUN;
+          }
+          //FINXME code
+          if(biggest566 == 0){
+            S557=0;
+            active[1]=0;
+            ends[1]=0;
+            S557=0;
+            break RUN;
+          }
         
       }
     }
   }
 
   public void init(){
-    char [] active1 = {1, 1};
-    char [] paused1 = {0, 0};
-    char [] suspended1 = {0, 0};
+    char [] active1 = {1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;

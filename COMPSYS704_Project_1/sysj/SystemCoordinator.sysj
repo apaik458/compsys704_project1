@@ -47,4 +47,24 @@ SystemCoordinator(
 ->{
     // Your SystemCoordinator logic here
 	new Thread(new GUI()).start();
-}
+
+	{// Pusher
+		while(true){
+			//abort(pusherExtend && enable){
+				sustain pusherExtended;
+			//}
+			//await(!enable);
+			//abort(!pusherExtend && enable){
+			//	sustain pusherExtended;
+			//}
+			//await(!enable);
+		}
+	}
+	||
+		
+		// To viz
+		{while(true){present(pusherRetracted){emit pusherRetracted_gui;} pause;}}
+		||
+		{while(true){present(pusherExtended){emit pusherExtended_gui;} pause;}}
+
+	}

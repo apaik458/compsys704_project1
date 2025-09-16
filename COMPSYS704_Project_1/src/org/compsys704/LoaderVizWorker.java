@@ -61,8 +61,10 @@ public class LoaderVizWorker extends Worker {
                 break;
             case "dosUnitValveExtend_gui":
                 // Assuming this controls pressure state
+            	System.out.println("Received dosUnitValveExtend_gui: " + status);
                 States.PRESSURE_DOWN = status;
                 States.PRESSURE_UP = !status;
+                System.out.println("PRESSURE_DOWN: " + States.PRESSURE_DOWN + ", PRESSURE_UP: " + States.PRESSURE_UP);
                 break;
                 
             // Capping Unit Signals
