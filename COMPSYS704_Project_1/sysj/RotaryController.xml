@@ -6,6 +6,7 @@
 			<iSignal Name="tableAlignedWithSensor" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 			<iSignal Name="largeSizeEnable" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 			<oSignal Name="sizeAdjust" To="RotaryPlantCD.sizeAdjust" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />
+			<oSignal Name="rotaryTableTrigger" To="RotaryPlantCD.rotaryTableTrigger" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />
 		</ClockDomain>
 	</SubSystem>
 </System>
