@@ -4,16 +4,47 @@
 			<iSignal Name="testInput" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 			<oSignal Name="testOutput" To="PlantCD.pusherExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />
 			
-			<!-- Baxter Loader Signals -->
-			<oSignal Name="leftArmState" To="UI.leftArmState" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="rightArmState" To="UI.rightArmState" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="bottleAIPoint_100_gui" To="UI.bottleAIPoint_100_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="bottleAIPoint_200_gui" To="UI.bottleAIPoint_200_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<!-- Left Arm Position Signals -->
+			<oSignal Name="leftArm_POS_A_gui" To="UI.leftArm_POS_A_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="leftArm_POS_A_LOWERED_gui" To="UI.leftArm_POS_A_LOWERED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="leftArm_POS_A_LOWERED_GRIPPED_gui" To="UI.leftArm_POS_A_LOWERED_GRIPPED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="leftArm_POS_A_GRIPPED_gui" To="UI.leftArm_POS_A_GRIPPED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			
+			<oSignal Name="leftArm_POS_B_gui" To="UI.leftArm_POS_B_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="leftArm_POS_B_LOWERED_gui" To="UI.leftArm_POS_B_LOWERED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="leftArm_POS_B_LOWERED_GRIPPED_gui" To="UI.leftArm_POS_B_LOWERED_GRIPPED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="leftArm_POS_B_GRIPPED_gui" To="UI.leftArm_POS_B_GRIPPED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			
+			<oSignal Name="leftArm_POS_E_gui" To="UI.leftArm_POS_E_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="leftArm_POS_E_LOWERED_gui" To="UI.leftArm_POS_E_LOWERED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="leftArm_POS_E_LOWERED_GRIPPED_gui" To="UI.leftArm_POS_E_LOWERED_GRIPPED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="leftArm_POS_E_GRIPPED_gui" To="UI.leftArm_POS_E_GRIPPED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			
+			<!-- Right Arm Position Signals -->
+			<oSignal Name="rightArm_POS_A_gui" To="UI.rightArm_POS_A_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="rightArm_POS_A_LOWERED_gui" To="UI.rightArm_POS_A_LOWERED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="rightArm_POS_A_LOWERED_GRIPPED_gui" To="UI.rightArm_POS_A_LOWERED_GRIPPED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="rightArm_POS_A_GRIPPED_gui" To="UI.rightArm_POS_A_GRIPPED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			
+			<oSignal Name="rightArm_POS_B_gui" To="UI.rightArm_POS_B_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="rightArm_POS_B_LOWERED_gui" To="UI.rightArm_POS_B_LOWERED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="rightArm_POS_B_LOWERED_GRIPPED_gui" To="UI.rightArm_POS_B_LOWERED_GRIPPED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="rightArm_POS_B_GRIPPED_gui" To="UI.rightArm_POS_B_GRIPPED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			
+			<oSignal Name="rightArm_POS_E_gui" To="UI.rightArm_POS_E_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="rightArm_POS_E_LOWERED_gui" To="UI.rightArm_POS_E_LOWERED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="rightArm_POS_E_LOWERED_GRIPPED_gui" To="UI.rightArm_POS_E_LOWERED_GRIPPED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="rightArm_POS_E_GRIPPED_gui" To="UI.rightArm_POS_E_GRIPPED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			
+			<oSignal Name="rightArm_POS_F_gui" To="UI.rightArm_POS_F_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="rightArm_POS_F_LOWERED_gui" To="UI.rightArm_POS_F_LOWERED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="rightArm_POS_F_LOWERED_GRIPPED_gui" To="UI.rightArm_POS_F_LOWERED_GRIPPED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="rightArm_POS_F_GRIPPED_gui" To="UI.rightArm_POS_F_GRIPPED_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			
 			
 			<!-- Initial Conveyor Signals -->
 			<oSignal Name="motConveyorOnOff_gui" To="UI.motConveyorOnOff_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="bottleAtPos1_gui" To="UI.bottleAtPos1_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="bottleLeftPos5_gui" To="UI.bottleLeftPos5_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			
 			<!-- Filling Unit Signals -->
 			<oSignal Name="valveInjectorOnOff_gui" To="UI.valveInjectorOnOff_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
@@ -61,11 +92,6 @@
 			<oSignal Name="capOnBottleAIPos1_gui" To="UI.capOnBottleAIPos1_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="tableAlignedWithSensor_gui" To="UI.tableAlignedWithSensor_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			
-			<!-- System Coordinator Status Signals -->
-			<oSignal Name="systemStatus" To="UI.systemStatus" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="currentBatch" To="UI.currentBatch" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="orderProgress" To="UI.orderProgress" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
-			<oSignal Name="faultStatus" To="UI.faultStatus" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 		</ClockDomain>
 	</SubSystem>
 </System>

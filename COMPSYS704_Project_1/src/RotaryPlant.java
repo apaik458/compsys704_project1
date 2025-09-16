@@ -16,7 +16,7 @@ public class RotaryPlant extends ClockDomain{
   public Signal tableAlignedWithSensor = new Signal("tableAlignedWithSensor", Signal.OUTPUT);
   public Signal bottleAtPos5 = new Signal("bottleAtPos5", Signal.OUTPUT);
   public Signal capOnBottleAtPos1 = new Signal("capOnBottleAtPos1", Signal.OUTPUT);
-  private int S507 = 1;
+  private int S506 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -28,18 +28,17 @@ public class RotaryPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S507){
+      switch(S506){
         case 0 : 
-          S507=0;
+          S506=0;
           break RUN;
         
         case 1 : 
-          S507=2;
-          System.out.println("RotaryPlant test");//sysj\RotaryPlant.sysj line: 8, column: 2
-          S507=0;
+          S506=2;
+          S506=2;
           active[1]=0;
           ends[1]=0;
-          S507=0;
+          S506=0;
           break RUN;
         
       }
