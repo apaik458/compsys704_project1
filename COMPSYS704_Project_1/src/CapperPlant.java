@@ -3,7 +3,6 @@ import com.systemj.ClockDomain;
 import com.systemj.Signal;
 import com.systemj.input_Channel;
 import com.systemj.output_Channel;
-import run.GUI;//sysj\CapperPlant.sysj line: 1, column: 1
 
 public class CapperPlant extends ClockDomain{
   public CapperPlant(String name){super(name);}
@@ -33,8 +32,7 @@ public class CapperPlant extends ClockDomain{
         
         case 1 : 
           S258=2;
-          new Thread(new GUI()).start();//sysj\CapperPlant.sysj line: 8, column: 2
-          System.out.println("CapperPlant test");//sysj\CapperPlant.sysj line: 10, column: 2
+          System.out.println("CapperPlant test");//sysj\CapperPlant.sysj line: 7, column: 2
           S258=0;
           active[1]=0;
           ends[1]=0;

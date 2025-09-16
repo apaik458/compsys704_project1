@@ -1,11 +1,8 @@
-import run.GUI;
-
 CapperPlant(
 		input signal testInput;
 		output signal testOutput;
 		)
 ->{
-	new Thread(new GUI()).start();
 
 	System.out.println("CapperPlant test");
 }

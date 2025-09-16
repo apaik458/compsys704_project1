@@ -1,7 +1,11 @@
+import run.GUI;
+
 SystemCoordinator(
 		input signal testInput;
 		output signal testOutput;
 		)
 ->{
+	new Thread(new GUI()).start();
+	
 	System.out.println("SystemCoordinator test");
 }

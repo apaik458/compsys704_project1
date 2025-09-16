@@ -3,6 +3,7 @@ import com.systemj.ClockDomain;
 import com.systemj.Signal;
 import com.systemj.input_Channel;
 import com.systemj.output_Channel;
+import run.GUI;//sysj\SystemCoordinator.sysj line: 1, column: 1
 
 public class SystemCoordinator extends ClockDomain{
   public SystemCoordinator(String name){super(name);}
@@ -32,7 +33,8 @@ public class SystemCoordinator extends ClockDomain{
         
         case 1 : 
           S405=2;
-          System.out.println("SystemCoordinator test");//sysj\SystemCoordinator.sysj line: 6, column: 2
+          new Thread(new GUI()).start();//sysj\SystemCoordinator.sysj line: 8, column: 2
+          System.out.println("SystemCoordinator test");//sysj\SystemCoordinator.sysj line: 10, column: 2
           S405=0;
           active[1]=0;
           ends[1]=0;
