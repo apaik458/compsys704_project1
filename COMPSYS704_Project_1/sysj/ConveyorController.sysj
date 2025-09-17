@@ -5,7 +5,7 @@ ConveyorController(
 ->{
 	while (true) {
 		await(conveyorEnable);
-    	abort((bottleAtPos1 && bottleLeftPos5 && bottleAtPos5) || !conveyorEnable){
+    	abort((!bottleAtPos1 && !bottleLeftPos5 && bottleAtPos5) || !conveyorEnable){
     		sustain motConveyorOnOff;
   		}
   	pause;

@@ -1,28 +1,28 @@
 RotaryController(
 		input signal tableAlignedWithSensor, bottleAtPos5, capOnBottleAtPos1, largeSizeEnable, bottleAtPos1, enableRotaryTable;
+		input signal bottleAtPos2Done, bottleAtPos3Done, bottleAtPos4Done;
 		output signal rotaryTableTrigger, sizeAdjust, storageAdjust;
 		)
 ->{
-	loop {
+	while(true) {
 		{
-		await(bottleAtPos1);
-		abort(capOnBottleAtPos1 || !bottleAtPos1){
-			await(tableAlignedWithSensor);
-			sustain rotaryTableTrigger;
+			await(bottleAtPos1);
+			await(!capOnBottleAtPos1);
+			await(!bottleAtPos5);
+			abort(tableAlignedWithSensor){
+	            sustain rotaryTableTrigger;
+	        }
+		}
+		||
+		{
+			abort(!largeSizeEnable){
+				sustain storageAdjust;
 		}
 		}
 		||
 		{
-		await(enableRotaryTable);
-		abort(!enableRotaryTable){
-			sustain rotaryTableTrigger;
-		}
-		}
-		||
-		{
-		abort(!largeSizeEnable){
-			sustain sizeAdjust;
-			sustain storageAdjust;
+			abort(!largeSizeEnable){
+				sustain sizeAdjust;
 		}
 		}
     }

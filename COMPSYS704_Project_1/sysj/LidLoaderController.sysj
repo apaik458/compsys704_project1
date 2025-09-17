@@ -1,5 +1,5 @@
 LidLoaderController(
-		input signal bottleAtPos3,pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,request;
+		input signal bottleAtPos3,pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,request,empty;
 		output signal pusherExtend,vacOn,armSource,armDest;
 		)
 ->{

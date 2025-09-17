@@ -60,7 +60,7 @@ public class ConveyorController extends ClockDomain{
               }
             
             case 1 : 
-              if((bottleAtPos1.getprestatus() && bottleLeftPos5.getprestatus() && bottleAtPos5.getprestatus()) || !conveyorEnable.getprestatus()){//sysj\ConveyorController.sysj line: 8, column: 12
+              if((!bottleAtPos1.getprestatus() && !bottleLeftPos5.getprestatus() && bottleAtPos5.getprestatus()) || !conveyorEnable.getprestatus()){//sysj\ConveyorController.sysj line: 8, column: 12
                 S269=2;
                 active[1]=1;
                 ends[1]=1;
