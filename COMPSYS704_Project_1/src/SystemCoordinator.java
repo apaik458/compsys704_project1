@@ -136,17 +136,17 @@ public class SystemCoordinator extends ClockDomain{
   public Signal rightArm_POS_F_LOWERED_gui = new Signal("rightArm_POS_F_LOWERED_gui", Signal.OUTPUT);
   public Signal rightArm_POS_F_LOWERED_GRIPPED_gui = new Signal("rightArm_POS_F_LOWERED_GRIPPED_gui", Signal.OUTPUT);
   public Signal rightArm_POS_F_GRIPPED_gui = new Signal("rightArm_POS_F_GRIPPED_gui", Signal.OUTPUT);
-  private int S759 = 1;
-  private int S717 = 1;
-  private int S725 = 1;
-  private int S719 = 1;
-  private int S733 = 1;
+  private int S856 = 1;
+  private int S814 = 1;
+  private int S822 = 1;
+  private int S816 = 1;
+  private int S830 = 1;
   
   private int[] ends = new int[5];
   private int[] tdone = new int[5];
   
-  public void thread767(int [] tdone, int [] ends){
-        switch(S733){
+  public void thread864(int [] tdone, int [] ends){
+        switch(S830){
       case 0 : 
         active[4]=0;
         ends[4]=0;
@@ -171,8 +171,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread766(int [] tdone, int [] ends){
-        switch(S725){
+  public void thread863(int [] tdone, int [] ends){
+        switch(S822){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -180,19 +180,19 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S719){
+        switch(S816){
           case 0 : 
-            S719=0;
+            S816=0;
             if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 68, column: 24
               pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 68, column: 41
               currsigs.addElement(pusherRetracted_gui);
-              S719=1;
+              S816=1;
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
             }
             else {
-              S719=1;
+              S816=1;
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -200,18 +200,18 @@ public class SystemCoordinator extends ClockDomain{
             break;
           
           case 1 : 
-            S719=1;
-            S719=0;
+            S816=1;
+            S816=0;
             if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 68, column: 24
               pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 68, column: 41
               currsigs.addElement(pusherRetracted_gui);
-              S719=1;
+              S816=1;
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
             }
             else {
-              S719=1;
+              S816=1;
               active[3]=1;
               ends[3]=1;
               tdone[3]=1;
@@ -224,8 +224,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread765(int [] tdone, int [] ends){
-        switch(S717){
+  public void thread862(int [] tdone, int [] ends){
+        switch(S814){
       case 0 : 
         active[2]=0;
         ends[2]=0;
@@ -243,8 +243,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread763(int [] tdone, int [] ends){
-        S733=1;
+  public void thread860(int [] tdone, int [] ends){
+        S830=1;
     if(pusherExtended.getprestatus()){//sysj\SystemCoordinator.sysj line: 70, column: 24
       pusherExtended_gui.setPresent();//sysj\SystemCoordinator.sysj line: 70, column: 40
       currsigs.addElement(pusherExtended_gui);
@@ -259,27 +259,27 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread762(int [] tdone, int [] ends){
-        S725=1;
-    S719=0;
+  public void thread859(int [] tdone, int [] ends){
+        S822=1;
+    S816=0;
     if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 68, column: 24
       pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 68, column: 41
       currsigs.addElement(pusherRetracted_gui);
-      S719=1;
+      S816=1;
       active[3]=1;
       ends[3]=1;
       tdone[3]=1;
     }
     else {
-      S719=1;
+      S816=1;
       active[3]=1;
       ends[3]=1;
       tdone[3]=1;
     }
   }
 
-  public void thread761(int [] tdone, int [] ends){
-        S717=1;
+  public void thread858(int [] tdone, int [] ends){
+        S814=1;
     pusherExtended.setPresent();//sysj\SystemCoordinator.sysj line: 56, column: 5
     currsigs.addElement(pusherExtended);
     active[2]=1;
@@ -294,59 +294,59 @@ public class SystemCoordinator extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S759){
+      switch(S856){
         case 0 : 
-          S759=0;
+          S856=0;
           break RUN;
         
         case 1 : 
-          S759=2;
-          S759=2;
+          S856=2;
+          S856=2;
           new Thread(new GUI()).start();//sysj\SystemCoordinator.sysj line: 51, column: 2
-          thread761(tdone,ends);
-          thread762(tdone,ends);
-          thread763(tdone,ends);
-          int biggest764 = 0;
-          if(ends[2]>=biggest764){
-            biggest764=ends[2];
+          thread858(tdone,ends);
+          thread859(tdone,ends);
+          thread860(tdone,ends);
+          int biggest861 = 0;
+          if(ends[2]>=biggest861){
+            biggest861=ends[2];
           }
-          if(ends[3]>=biggest764){
-            biggest764=ends[3];
+          if(ends[3]>=biggest861){
+            biggest861=ends[3];
           }
-          if(ends[4]>=biggest764){
-            biggest764=ends[4];
+          if(ends[4]>=biggest861){
+            biggest861=ends[4];
           }
-          if(biggest764 == 1){
+          if(biggest861 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
         
         case 2 : 
-          thread765(tdone,ends);
-          thread766(tdone,ends);
-          thread767(tdone,ends);
-          int biggest768 = 0;
-          if(ends[2]>=biggest768){
-            biggest768=ends[2];
+          thread862(tdone,ends);
+          thread863(tdone,ends);
+          thread864(tdone,ends);
+          int biggest865 = 0;
+          if(ends[2]>=biggest865){
+            biggest865=ends[2];
           }
-          if(ends[3]>=biggest768){
-            biggest768=ends[3];
+          if(ends[3]>=biggest865){
+            biggest865=ends[3];
           }
-          if(ends[4]>=biggest768){
-            biggest768=ends[4];
+          if(ends[4]>=biggest865){
+            biggest865=ends[4];
           }
-          if(biggest768 == 1){
+          if(biggest865 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest768 == 0){
-            S759=0;
+          if(biggest865 == 0){
+            S856=0;
             active[1]=0;
             ends[1]=0;
-            S759=0;
+            S856=0;
             break RUN;
           }
         

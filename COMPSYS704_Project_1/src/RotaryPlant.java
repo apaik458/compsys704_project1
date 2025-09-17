@@ -13,10 +13,11 @@ public class RotaryPlant extends ClockDomain{
   private char [] suspended;
   public Signal rotaryTableTrigger = new Signal("rotaryTableTrigger", Signal.INPUT);
   public Signal sizeAdjust = new Signal("sizeAdjust", Signal.INPUT);
+  public Signal storageAdjust = new Signal("storageAdjust", Signal.INPUT);
   public Signal tableAlignedWithSensor = new Signal("tableAlignedWithSensor", Signal.OUTPUT);
-  public Signal bottleAtPos5 = new Signal("bottleAtPos5", Signal.OUTPUT);
-  public Signal capOnBottleAtPos1 = new Signal("capOnBottleAtPos1", Signal.OUTPUT);
-  private int S708 = 1;
+  private long __start_thread_1;//sysj\RotaryPlant.sysj line: 7, column: 2
+  private int S805 = 1;
+  private int S743 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -28,18 +29,72 @@ public class RotaryPlant extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S708){
+      switch(S805){
         case 0 : 
-          S708=0;
+          S805=0;
           break RUN;
         
         case 1 : 
-          S708=2;
-          S708=2;
-          active[1]=0;
-          ends[1]=0;
-          S708=0;
+          S805=2;
+          S805=2;
+          S743=0;
+          active[1]=1;
+          ends[1]=1;
           break RUN;
+        
+        case 2 : 
+          switch(S743){
+            case 0 : 
+              if(rotaryTableTrigger.getprestatus()){//sysj\RotaryPlant.sysj line: 9, column: 15
+                S743=1;
+                __start_thread_1 = com.systemj.Timer.getMs();//sysj\RotaryPlant.sysj line: 7, column: 2
+                if(com.systemj.Timer.getMs() - __start_thread_1 >= (0.5) * 1000){//sysj\RotaryPlant.sysj line: 7, column: 2
+                  ends[1]=2;
+                  ;//sysj\RotaryPlant.sysj line: 7, column: 2
+                  tableAlignedWithSensor.setPresent();//sysj\RotaryPlant.sysj line: 11, column: 9
+                  currsigs.addElement(tableAlignedWithSensor);
+                  S743=2;
+                  active[1]=1;
+                  ends[1]=1;
+                  break RUN;
+                }
+                else {
+                  active[1]=1;
+                  ends[1]=1;
+                  break RUN;
+                }
+              }
+              else {
+                active[1]=1;
+                ends[1]=1;
+                break RUN;
+              }
+            
+            case 1 : 
+              if(com.systemj.Timer.getMs() - __start_thread_1 >= (0.5) * 1000){//sysj\RotaryPlant.sysj line: 7, column: 2
+                ends[1]=2;
+                ;//sysj\RotaryPlant.sysj line: 7, column: 2
+                tableAlignedWithSensor.setPresent();//sysj\RotaryPlant.sysj line: 11, column: 9
+                currsigs.addElement(tableAlignedWithSensor);
+                S743=2;
+                active[1]=1;
+                ends[1]=1;
+                break RUN;
+              }
+              else {
+                active[1]=1;
+                ends[1]=1;
+                break RUN;
+              }
+            
+            case 2 : 
+              S743=2;
+              S743=0;
+              active[1]=1;
+              ends[1]=1;
+              break RUN;
+            
+          }
         
       }
     }
@@ -69,15 +124,15 @@ public class RotaryPlant extends ClockDomain{
         if(!df){
           rotaryTableTrigger.gethook();
           sizeAdjust.gethook();
+          storageAdjust.gethook();
           df = true;
         }
         runClockDomain();
       }
       rotaryTableTrigger.setpreclear();
       sizeAdjust.setpreclear();
+      storageAdjust.setpreclear();
       tableAlignedWithSensor.setpreclear();
-      bottleAtPos5.setpreclear();
-      capOnBottleAtPos1.setpreclear();
       int dummyint = 0;
       for(int qw=0;qw<currsigs.size();++qw){
         dummyint = ((Signal)currsigs.elementAt(qw)).getStatus() ? ((Signal)currsigs.elementAt(qw)).setprepresent() : ((Signal)currsigs.elementAt(qw)).setpreclear();
@@ -90,16 +145,16 @@ public class RotaryPlant extends ClockDomain{
       dummyint = sizeAdjust.getStatus() ? sizeAdjust.setprepresent() : sizeAdjust.setpreclear();
       sizeAdjust.setpreval(sizeAdjust.getValue());
       sizeAdjust.setClear();
+      dummyint = storageAdjust.getStatus() ? storageAdjust.setprepresent() : storageAdjust.setpreclear();
+      storageAdjust.setpreval(storageAdjust.getValue());
+      storageAdjust.setClear();
       tableAlignedWithSensor.sethook();
       tableAlignedWithSensor.setClear();
-      bottleAtPos5.sethook();
-      bottleAtPos5.setClear();
-      capOnBottleAtPos1.sethook();
-      capOnBottleAtPos1.setClear();
       if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
         rotaryTableTrigger.gethook();
         sizeAdjust.gethook();
+        storageAdjust.gethook();
       }
       runFinisher();
       if(active[1] == 0){
