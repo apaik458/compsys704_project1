@@ -8,7 +8,8 @@ RotaryController(
 		{
 			await(bottleAtPos1);
 			await(!capOnBottleAtPos1);
-			await(!bottleAtPos5);
+			await(!bottleAtPos5);	
+			await(bottleAtPos2Done && bottleAtPos3Done && bottleAtPos4Done);
 			abort(tableAlignedWithSensor){
 	            sustain rotaryTableTrigger;
 	        }
