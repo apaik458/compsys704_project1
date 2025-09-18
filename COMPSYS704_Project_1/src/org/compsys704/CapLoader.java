@@ -109,12 +109,14 @@ public class CapLoader extends JFrame {
     }
 
     public static void main(String[] args) {
+    	System.out.println("Program starting...");
         CapLoader cl = new CapLoader();
         cl.pack();
         cl.setVisible(true);
         
         SignalServer<LoaderVizWorker> server = new SignalServer<LoaderVizWorker>(Ports.PORT_LOADER_VIZ, LoaderVizWorker.class);
         new Thread(server).start();
+        System.out.println("Server Started");
         while(true){
             try {
                 cl.repaint();

@@ -12,12 +12,14 @@ public class LoaderVizWorker extends Worker {
         // Lid Loader Signals
         switch(signame){
             case "pusherRetracted_gui":
+            	System.out.println("Received pusherRetracted_gui: " + status);
                 States.PUSHER_RETRACTED = status;
-                States.PUSHER_EXTENDED = !status;
+                //States.PUSHER_EXTENDED = !status;
                 break;
             case "pusherExtended_gui":
+            	System.out.println("Received pusherRetracted_gui: " + status);
                 States.PUSHER_EXTENDED = status;
-                States.PUSHER_RETRACTED = !status;
+                //States.PUSHER_RETRACTED = !status;
                 if(status && !States.MAG_EMPTY) {
                     States.CAP_READY = true;
                 }

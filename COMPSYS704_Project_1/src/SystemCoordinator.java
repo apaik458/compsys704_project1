@@ -28,7 +28,6 @@ public class SystemCoordinator extends ClockDomain{
   public Signal dosUnitFilled = new Signal("dosUnitFilled", Signal.INPUT);
   public Signal bottleAtPos2 = new Signal("bottleAtPos2", Signal.INPUT);
   public Signal pusherRetracted = new Signal("pusherRetracted", Signal.INPUT);
-  public Signal pusherExtended = new Signal("pusherExtended", Signal.INPUT);
   public Signal WPgripped = new Signal("WPgripped", Signal.INPUT);
   public Signal armAtSource = new Signal("armAtSource", Signal.INPUT);
   public Signal armAtDest = new Signal("armAtDest", Signal.INPUT);
@@ -136,17 +135,46 @@ public class SystemCoordinator extends ClockDomain{
   public Signal rightArm_POS_F_LOWERED_gui = new Signal("rightArm_POS_F_LOWERED_gui", Signal.OUTPUT);
   public Signal rightArm_POS_F_LOWERED_GRIPPED_gui = new Signal("rightArm_POS_F_LOWERED_GRIPPED_gui", Signal.OUTPUT);
   public Signal rightArm_POS_F_GRIPPED_gui = new Signal("rightArm_POS_F_GRIPPED_gui", Signal.OUTPUT);
-  private int S856 = 1;
-  private int S814 = 1;
-  private int S822 = 1;
-  private int S816 = 1;
-  private int S830 = 1;
+  public Signal pusherExtended = new Signal("pusherExtended", Signal.OUTPUT);
+  private Signal testing_1;
+  private int S876 = 1;
+  private int S815 = 1;
+  private int S839 = 1;
+  private int S826 = 1;
+  private int S837 = 1;
   
-  private int[] ends = new int[5];
-  private int[] tdone = new int[5];
+  private int[] ends = new int[6];
+  private int[] tdone = new int[6];
   
-  public void thread864(int [] tdone, int [] ends){
-        switch(S830){
+  public void thread887(int [] tdone, int [] ends){
+        switch(S837){
+      case 0 : 
+        active[5]=0;
+        ends[5]=0;
+        tdone[5]=1;
+        break;
+      
+      case 1 : 
+        if(pusherExtended.getprestatus()){//sysj\SystemCoordinator.sysj line: 95, column: 24
+          pusherExtended_gui.setPresent();//sysj\SystemCoordinator.sysj line: 95, column: 40
+          currsigs.addElement(pusherExtended_gui);
+          System.out.println("Sending Extended pusher to guiextend");//sysj\SystemCoordinator.sysj line: 95, column: 64
+          active[5]=1;
+          ends[5]=1;
+          tdone[5]=1;
+        }
+        else {
+          active[5]=1;
+          ends[5]=1;
+          tdone[5]=1;
+        }
+        break;
+      
+    }
+  }
+
+  public void thread886(int [] tdone, int [] ends){
+        switch(S826){
       case 0 : 
         active[4]=0;
         ends[4]=0;
@@ -154,9 +182,10 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        if(pusherExtended.getprestatus()){//sysj\SystemCoordinator.sysj line: 70, column: 24
-          pusherExtended_gui.setPresent();//sysj\SystemCoordinator.sysj line: 70, column: 40
-          currsigs.addElement(pusherExtended_gui);
+        if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 93, column: 24
+          pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 93, column: 41
+          currsigs.addElement(pusherRetracted_gui);
+          System.out.println("Sending Extended pusher to gui");//sysj\SystemCoordinator.sysj line: 93, column: 67
           active[4]=1;
           ends[4]=1;
           tdone[4]=1;
@@ -171,8 +200,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread863(int [] tdone, int [] ends){
-        switch(S822){
+  public void thread885(int [] tdone, int [] ends){
+        switch(S839){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -180,52 +209,34 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S816){
-          case 0 : 
-            S816=0;
-            if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 68, column: 24
-              pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 68, column: 41
-              currsigs.addElement(pusherRetracted_gui);
-              S816=1;
-              active[3]=1;
-              ends[3]=1;
-              tdone[3]=1;
-            }
-            else {
-              S816=1;
-              active[3]=1;
-              ends[3]=1;
-              tdone[3]=1;
-            }
-            break;
-          
-          case 1 : 
-            S816=1;
-            S816=0;
-            if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 68, column: 24
-              pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 68, column: 41
-              currsigs.addElement(pusherRetracted_gui);
-              S816=1;
-              active[3]=1;
-              ends[3]=1;
-              tdone[3]=1;
-            }
-            else {
-              S816=1;
-              active[3]=1;
-              ends[3]=1;
-              tdone[3]=1;
-            }
-            break;
-          
+        thread886(tdone,ends);
+        thread887(tdone,ends);
+        int biggest888 = 0;
+        if(ends[4]>=biggest888){
+          biggest888=ends[4];
+        }
+        if(ends[5]>=biggest888){
+          biggest888=ends[5];
+        }
+        if(biggest888 == 1){
+          active[3]=1;
+          ends[3]=1;
+          tdone[3]=1;
+        }
+        //FINXME code
+        if(biggest888 == 0){
+          S839=0;
+          active[3]=0;
+          ends[3]=0;
+          tdone[3]=1;
         }
         break;
       
     }
   }
 
-  public void thread862(int [] tdone, int [] ends){
-        switch(S814){
+  public void thread884(int [] tdone, int [] ends){
+        switch(S815){
       case 0 : 
         active[2]=0;
         ends[2]=0;
@@ -233,7 +244,8 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        pusherExtended.setPresent();//sysj\SystemCoordinator.sysj line: 56, column: 5
+        System.out.println("Starting to extend pusher12");//sysj\SystemCoordinator.sysj line: 82, column: 4
+        pusherExtended.setPresent();//sysj\SystemCoordinator.sysj line: 83, column: 4
         currsigs.addElement(pusherExtended);
         active[2]=1;
         ends[2]=1;
@@ -243,44 +255,63 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread860(int [] tdone, int [] ends){
-        S830=1;
-    if(pusherExtended.getprestatus()){//sysj\SystemCoordinator.sysj line: 70, column: 24
-      pusherExtended_gui.setPresent();//sysj\SystemCoordinator.sysj line: 70, column: 40
+  public void thread881(int [] tdone, int [] ends){
+        S837=1;
+    if(pusherExtended.getprestatus()){//sysj\SystemCoordinator.sysj line: 95, column: 24
+      pusherExtended_gui.setPresent();//sysj\SystemCoordinator.sysj line: 95, column: 40
       currsigs.addElement(pusherExtended_gui);
-      active[4]=1;
-      ends[4]=1;
-      tdone[4]=1;
+      System.out.println("Sending Extended pusher to guiextend");//sysj\SystemCoordinator.sysj line: 95, column: 64
+      active[5]=1;
+      ends[5]=1;
+      tdone[5]=1;
     }
     else {
-      active[4]=1;
-      ends[4]=1;
-      tdone[4]=1;
+      active[5]=1;
+      ends[5]=1;
+      tdone[5]=1;
     }
   }
 
-  public void thread859(int [] tdone, int [] ends){
-        S822=1;
-    S816=0;
-    if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 68, column: 24
-      pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 68, column: 41
+  public void thread880(int [] tdone, int [] ends){
+        S826=1;
+    if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 93, column: 24
+      pusherRetracted_gui.setPresent();//sysj\SystemCoordinator.sysj line: 93, column: 41
       currsigs.addElement(pusherRetracted_gui);
-      S816=1;
-      active[3]=1;
-      ends[3]=1;
-      tdone[3]=1;
+      System.out.println("Sending Extended pusher to gui");//sysj\SystemCoordinator.sysj line: 93, column: 67
+      active[4]=1;
+      ends[4]=1;
+      tdone[4]=1;
     }
     else {
-      S816=1;
+      active[4]=1;
+      ends[4]=1;
+      tdone[4]=1;
+    }
+  }
+
+  public void thread879(int [] tdone, int [] ends){
+        S839=1;
+    thread880(tdone,ends);
+    thread881(tdone,ends);
+    int biggest882 = 0;
+    if(ends[4]>=biggest882){
+      biggest882=ends[4];
+    }
+    if(ends[5]>=biggest882){
+      biggest882=ends[5];
+    }
+    if(biggest882 == 1){
       active[3]=1;
       ends[3]=1;
       tdone[3]=1;
     }
   }
 
-  public void thread858(int [] tdone, int [] ends){
-        S814=1;
-    pusherExtended.setPresent();//sysj\SystemCoordinator.sysj line: 56, column: 5
+  public void thread878(int [] tdone, int [] ends){
+        S815=1;
+    System.out.println("Starting to extend pusher");//sysj\SystemCoordinator.sysj line: 58, column: 3
+    System.out.println("Starting to extend pusher12");//sysj\SystemCoordinator.sysj line: 82, column: 4
+    pusherExtended.setPresent();//sysj\SystemCoordinator.sysj line: 83, column: 4
     currsigs.addElement(pusherExtended);
     active[2]=1;
     ends[2]=1;
@@ -294,59 +325,53 @@ public class SystemCoordinator extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S856){
+      switch(S876){
         case 0 : 
-          S856=0;
+          S876=0;
           break RUN;
         
         case 1 : 
-          S856=2;
-          S856=2;
-          new Thread(new GUI()).start();//sysj\SystemCoordinator.sysj line: 51, column: 2
-          thread858(tdone,ends);
-          thread859(tdone,ends);
-          thread860(tdone,ends);
-          int biggest861 = 0;
-          if(ends[2]>=biggest861){
-            biggest861=ends[2];
+          S876=2;
+          S876=2;
+          new Thread(new GUI()).start();//sysj\SystemCoordinator.sysj line: 53, column: 2
+          testing_1.setClear();//sysj\SystemCoordinator.sysj line: 54, column: 2
+          thread878(tdone,ends);
+          thread879(tdone,ends);
+          int biggest883 = 0;
+          if(ends[2]>=biggest883){
+            biggest883=ends[2];
           }
-          if(ends[3]>=biggest861){
-            biggest861=ends[3];
+          if(ends[3]>=biggest883){
+            biggest883=ends[3];
           }
-          if(ends[4]>=biggest861){
-            biggest861=ends[4];
-          }
-          if(biggest861 == 1){
+          if(biggest883 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
         
         case 2 : 
-          thread862(tdone,ends);
-          thread863(tdone,ends);
-          thread864(tdone,ends);
-          int biggest865 = 0;
-          if(ends[2]>=biggest865){
-            biggest865=ends[2];
+          testing_1.setClear();//sysj\SystemCoordinator.sysj line: 54, column: 2
+          thread884(tdone,ends);
+          thread885(tdone,ends);
+          int biggest889 = 0;
+          if(ends[2]>=biggest889){
+            biggest889=ends[2];
           }
-          if(ends[3]>=biggest865){
-            biggest865=ends[3];
+          if(ends[3]>=biggest889){
+            biggest889=ends[3];
           }
-          if(ends[4]>=biggest865){
-            biggest865=ends[4];
-          }
-          if(biggest865 == 1){
+          if(biggest889 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest865 == 0){
-            S856=0;
+          if(biggest889 == 0){
+            S876=0;
             active[1]=0;
             ends[1]=0;
-            S856=0;
+            S876=0;
             break RUN;
           }
         
@@ -355,13 +380,14 @@ public class SystemCoordinator extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;
     // Now instantiate all the local signals ONLY
+    testing_1 = new Signal();
     // --------------------------------------------------
   }
   
@@ -392,7 +418,6 @@ public class SystemCoordinator extends ClockDomain{
           dosUnitFilled.gethook();
           bottleAtPos2.gethook();
           pusherRetracted.gethook();
-          pusherExtended.gethook();
           WPgripped.gethook();
           armAtSource.gethook();
           armAtDest.gethook();
@@ -431,7 +456,6 @@ public class SystemCoordinator extends ClockDomain{
       dosUnitFilled.setpreclear();
       bottleAtPos2.setpreclear();
       pusherRetracted.setpreclear();
-      pusherExtended.setpreclear();
       WPgripped.setpreclear();
       armAtSource.setpreclear();
       armAtDest.setpreclear();
@@ -539,6 +563,8 @@ public class SystemCoordinator extends ClockDomain{
       rightArm_POS_F_LOWERED_gui.setpreclear();
       rightArm_POS_F_LOWERED_GRIPPED_gui.setpreclear();
       rightArm_POS_F_GRIPPED_gui.setpreclear();
+      pusherExtended.setpreclear();
+      testing_1.setpreclear();
       int dummyint = 0;
       for(int qw=0;qw<currsigs.size();++qw){
         dummyint = ((Signal)currsigs.elementAt(qw)).getStatus() ? ((Signal)currsigs.elementAt(qw)).setprepresent() : ((Signal)currsigs.elementAt(qw)).setpreclear();
@@ -593,9 +619,6 @@ public class SystemCoordinator extends ClockDomain{
       dummyint = pusherRetracted.getStatus() ? pusherRetracted.setprepresent() : pusherRetracted.setpreclear();
       pusherRetracted.setpreval(pusherRetracted.getValue());
       pusherRetracted.setClear();
-      dummyint = pusherExtended.getStatus() ? pusherExtended.setprepresent() : pusherExtended.setpreclear();
-      pusherExtended.setpreval(pusherExtended.getValue());
-      pusherExtended.setClear();
       dummyint = WPgripped.getStatus() ? WPgripped.setprepresent() : WPgripped.setpreclear();
       WPgripped.setpreval(WPgripped.getValue());
       WPgripped.setClear();
@@ -828,6 +851,9 @@ public class SystemCoordinator extends ClockDomain{
       rightArm_POS_F_LOWERED_GRIPPED_gui.setClear();
       rightArm_POS_F_GRIPPED_gui.sethook();
       rightArm_POS_F_GRIPPED_gui.setClear();
+      pusherExtended.sethook();
+      pusherExtended.setClear();
+      testing_1.setClear();
       if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
         testInput.gethook();
@@ -846,7 +872,6 @@ public class SystemCoordinator extends ClockDomain{
         dosUnitFilled.gethook();
         bottleAtPos2.gethook();
         pusherRetracted.gethook();
-        pusherExtended.gethook();
         WPgripped.gethook();
         armAtSource.gethook();
         armAtDest.gethook();

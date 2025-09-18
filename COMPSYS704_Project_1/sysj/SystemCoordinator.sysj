@@ -9,7 +9,7 @@ SystemCoordinator(
              bottleAIPoint_100, bottleAIPoint_200, CMDfb,
              bottleAtPos1, bottleLeftPos5,
              dosUnitEvac, dosUnitFilled, bottleAtPos2,
-             pusherRetracted, pusherExtended, WPgripped, armAtSource, armAtDest, empty,
+             pusherRetracted, WPgripped, armAtSource, armAtDest, empty,
              bottleAtPos4, gripperZAxisLowered, gripperZAxisLifted, gripperTurnHomePos, gripperTurnFinalPos,
              bottleAtPos5, bottleLeftPos5_final, conveyorStatus,
              bottleAIPos5, capOnBottleAIPos1, tableAlignedWithSensor, rotaryStatus,
@@ -44,29 +44,55 @@ SystemCoordinator(
               rightArm_POS_A_gui, rightArm_POS_A_LOWERED_gui, rightArm_POS_A_LOWERED_GRIPPED_gui, rightArm_POS_A_GRIPPED_gui,
               rightArm_POS_B_gui, rightArm_POS_B_LOWERED_gui, rightArm_POS_B_LOWERED_GRIPPED_gui, rightArm_POS_B_GRIPPED_gui,
               rightArm_POS_E_gui, rightArm_POS_E_LOWERED_gui, rightArm_POS_E_LOWERED_GRIPPED_gui, rightArm_POS_E_GRIPPED_gui,
-              rightArm_POS_F_gui, rightArm_POS_F_LOWERED_gui, rightArm_POS_F_LOWERED_GRIPPED_gui, rightArm_POS_F_GRIPPED_gui;
+              rightArm_POS_F_gui, rightArm_POS_F_LOWERED_gui, rightArm_POS_F_LOWERED_GRIPPED_gui, rightArm_POS_F_GRIPPED_gui,
+              
+              pusherExtended;
 	)
 ->{
     // Your SystemCoordinator logic here
 	new Thread(new GUI()).start();
+	signal testing;
 
 	{// Pusher
-		while(true){
-			//abort(pusherExtend && enable){
-				sustain pusherExtended;
-			//}
-			//await(!enable);
-			//abort(!pusherExtend && enable){
-			//	sustain pusherExtended;
-			//}
-			//await(!enable);
-		}
-	}
-	||
 		
-		// To viz
-		{while(true){present(pusherRetracted){emit pusherRetracted_gui;} pause;}}
-		||
-		{while(true){present(pusherExtended){emit pusherExtended_gui;} pause;}}
-
+		System.out.println("Starting to extend pusher");
+		while(true){
+		//loop {
+			/*
+			abort(testInput){
+				{
+				System.out.println("Extending Pusher");
+				}
+				||
+				{
+				sustain pusherExtended;
+				}
+				pause;
+			}
+			*/
+			//await(!testInput);
+			
+			/*{emit pusherExtended_gui;
+			System.out.println("Sending Extended pusher to gui");
+			pause;}
+			
+			||*/
+			
+			
+			System.out.println("Starting to extend pusher12");
+			emit pusherExtended;
+			pause;
+			
+		
+		 	}
+		
 	}
+		||
+		{
+		// To viz
+		{while(true){present(pusherRetracted){emit pusherRetracted_gui; System.out.println("Sending Extended pusher to gui");} pause;}}
+		||
+		{while(true){present(pusherExtended){emit pusherExtended_gui;System.out.println("Sending Extended pusher to guiextend");} pause;}}
+		}
+	
+}

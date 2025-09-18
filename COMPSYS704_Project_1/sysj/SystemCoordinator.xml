@@ -3,6 +3,7 @@
 		<ClockDomain Name="MyCD" Class="SystemCoordinator">
 			<iSignal Name="testInput" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 			<oSignal Name="testOutput" To="PlantCD.pusherExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />
+			<oSignal Name="pusherExtended" To="PlantCD.pusherExtended" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />
 			
 			<!-- Left Arm Position Signals -->
 			<oSignal Name="leftArm_POS_A_gui" To="UI.leftArm_POS_A_gui" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
