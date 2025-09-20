@@ -123,8 +123,8 @@ public class CapLoader extends JFrame {
             boolean isSmall = smallBottle.isSelected();
             boolean isLarge = largeBottle.isSelected();
 
-            System.out.println("POS STARTED -> Ratio: " + ratio1 + "/" + ratio2 +
-                    ", Bottle: " + (isSmall ? "Small " : "") + (isLarge ? "Large" : ""));
+            /*System.out.println("POS STARTED -> Ratio: " + ratio1 + "/" + ratio2 +
+                    ", Bottle: " + (isSmall ? "Small " : "") + (isLarge ? "Large" : ""));*/
             
             // TODO: hook into SignalClient here if needed
         });

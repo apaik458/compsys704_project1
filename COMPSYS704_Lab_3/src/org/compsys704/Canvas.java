@@ -44,20 +44,7 @@ public class Canvas extends JPanel {
 			g.drawImage(arm2, 30, 0, null);
 		
 		if(States.GRIPPED){
-			if(States.ARM_AT_DEST){
-				g.setColor(Color.black);
-				g.fillOval(10, 11, 30, 30);
-				g.setColor(Color.red);
-				g.fillOval(10, 11, 15, 15);
-
-			}
-			else{
-				g.setColor(Color.black);
-				g.fillOval(40, 243, 30, 30);
-				g.setColor(Color.red);
-				g.fillOval(35, 232, 15, 15);
-			}
-			g.setColor(Color.black);
+			g.drawImage(arm2, 100, 100, null);
 		}
 //		else{
 			if(States.CAP_READY){ // A cap is pushed to the source pos

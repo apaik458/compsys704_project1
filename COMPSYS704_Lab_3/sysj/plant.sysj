@@ -3,6 +3,7 @@ import run.GUI;
 Plant(
 		input signal pusherExtend,vacOn,armSource,armDest;
 		input signal enable,refill;
+		//input signal amount;
 		output signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,empty;
 		output signal pusherRetractedE,pusherExtendedE,WPgrippedE,armAtSourceE,armAtDestE,emptyE;
 		)
@@ -10,92 +11,19 @@ Plant(
 {
 	new Thread(new GUI()).start();
 
-	signal capDec;
-	int signal capPos;
-	emit capPos(0);
-	{// Arm
-		while(true){
-			abort(armSource && enable){
-				sustain armAtDest;
-			}
-			await(!enable);
-			abort(armDest && enable){
-				sustain armAtSource;
-			}
-			await(!enable);
+	{while(true){
+		abort(enable){
+		System.out.println("It works");	
+			sustain armAtSource;
+		}
+		await(!enable);
+		abort(enable){
+			sustain WPgripped;
 		}
 	}
-	||
-	{// Pusher
-		while(true){
-			abort(pusherExtend && enable){
-				sustain pusherRetracted;
-			}
-			await(!enable);
-			abort(!pusherExtend && enable){
-				sustain pusherExtended;
-			}
-			await(!enable);
-		}
 	}
 	||
-	{// Vacuum
-		while(true){
-			present(vacOn && armAtSource){
-				if((Integer)#capPos == 1){
-					emit capPos(0);
-					abort(!vacOn){
-						sustain WPgripped; 
-					}
-					present(armAtSource){
-						emit capPos(1);
-					}
-				}
-			}
-			pause;
-		}
-	}
-	||
-	{
-		/*
-		 * Cap positions
-		 * 0 = at Mag
-		 * 1 = at pick-up
-		 */
-		while(true){
-			// At mag
-			abort(empty){
-				while(true){
-						await(pusherRetracted);
-						await(pusherExtended);
-						// At pick-up
-						emit capPos(1);
-						await(pusherRetracted);
-						emit capDec;
-				}
-			}
-			await(refill);
-		}
-	}
-	||
-	{
-		int capcount = 5;
-		while(true){
-			present(capDec){
-				if(capcount > 0)
-					capcount--;
-			}
-			present(refill){
-				capcount = 5;
-			}
-//			present(pusherRetracted){
-				if(capcount == 0)
-					emit empty;
-//			}
-			pause;
-		}
-	}
-	||
+	//to viz
 	{// To viz
 		{while(true){present(pusherRetracted){emit pusherRetractedE;} pause;}}
 		||
