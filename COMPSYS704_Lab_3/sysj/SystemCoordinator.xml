@@ -14,7 +14,8 @@
 			<oSignal Name="armAtSource"     To="ControllerCD.armAtSource"     Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10000" />
 			<oSignal Name="armAtDest"       To="ControllerCD.armAtDest"       Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10000" />
 			<oSignal Name="empty"           To="ControllerCD.empty"           Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10000" />
-
+			<oSignal Name="capAdd"           To="ControllerCD.capAdd"           Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10000" />
+			
 			<oSignal Name="pusherRetractedE" To="UI.pusherRetractedE" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="pusherExtendedE"  To="UI.pusherExtendedE"  Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="WPgrippedE"       To="UI.WPgrippedE"       Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
