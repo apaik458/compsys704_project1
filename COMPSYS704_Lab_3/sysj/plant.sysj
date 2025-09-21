@@ -1,40 +1,280 @@
-import run.GUI;
 
-Plant(
-		input signal pusherExtend,vacOn,armSource,armDest;
-		input signal enable,refill;
-		//input signal amount;
-		output signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,empty;
-		output signal pusherRetractedE,pusherExtendedE,WPgrippedE,armAtSourceE,armAtDestE,emptyE;
+Plant(	
+		// Global ////////////////////////////////////////////////////////
+		input signal  systemEnabl; 
+		
+		// Conveyor/////////////////////////////////////////////////////// 
+		input signal motConveyorOnOff;
+		output signal bottleAtPos1, bottleAtPos5, RTbottleAtPos1, bottleLeftPos5;
+		
+		// Filler
+		input signal valveInjectorOnOff,valveInletOnOff,dosUnitValveRetract,dosUnitValveExtend; //to plant
+		output signal dosUnitEvac, valveInjectorActive;  // from plant
+		output signal dosUnitFilled; 
+		
+		// CapLoader
+		input signal pusherExtend,vacOn,armSource,armDest,magReq;
+		output signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,magEmpty;
+
+		// Capper
+		
+		//Input signals from capper controller
+		input signal cylPos5ZAxisExtend; 
+		input signal gripperTurnRetract, gripperTurnExtend;
+		input signal capGripperPos5Extend;
+		input signal cylClampBottleExtend;
+		
+		//Output signals to capper controller
+		output signal bottleAtPos4;
+		output signal gripperZAxisLowered;
+		output signal gripperZAxisLifted;
+		output signal gripperTurnHomePos;
+		output signal gripperTurnFinalPos;
+		output signal cylClampedBottle;
+	
+		//Rotatry Table
+		
+		input signal rotaryTableTrigger;
+		output signal tableAlignedWithSensor, capOnBottleAtPos1, bottleAtPos2, bottleAtPos3; //bottleAtPos1; dupe
+		output signal moveToPos5, moveToPos4, moveToPos3, moveToPos2;
+
+		
 		)
 ->
 {
-	new Thread(new GUI()).start();
+	signal removePos4,removePos2,removePos3;
+//Conveyor
+	{
+		while(true){
+			present(motConveyorOnOff){
+				waitl(2 s);
+				{			
+						abort(moveToPos2) {
+							sustain bottleAtPos1;
+						}					
+				}
+				||
+				{	
+						abort(!motConveyorOnOff) {
+							sustain bottleLeftPos5;
+						}
 
-	{while(true){
-		abort(enable){
-		System.out.println("It works");	
-			sustain armAtSource;
+				}
+			}
+//			System.out.println("motor is off");
+			pause;
 		}
-		await(!enable);
-		abort(enable){
-			sustain WPgripped;
+	}		
+	||
+	
+	//Filler
+	{
+		{ //Filler Injector
+			while(true) {
+				present(valveInjectorOnOff){
+					abort(!valveInjectorOnOff){
+						sustain valveInjectorActive;
+					}
+				}
+				pause;
+			}
 		}
-	}
+		||
+		{ 
+			while(true) {
+				
+				present(dosUnitValveExtend && !dosUnitValveRetract){
+					abort (dosUnitValveRetract){
+						sustain dosUnitEvac; 
+					}
+				}
+				present(dosUnitValveRetract && !dosUnitValveExtend) {
+					abort (dosUnitValveExtend) {
+						sustain dosUnitFilled; 
+					}
+				}
+				pause;
+			}
+		}
 	}
 	||
-	//to viz
-	{// To viz
-		{while(true){present(pusherRetracted){emit pusherRetractedE;} pause;}}
-		||
-		{while(true){present(pusherExtended){emit pusherExtendedE;} pause;}}
-		||
-		{while(true){present(WPgripped){emit WPgrippedE;} pause;}}
-		||
-		{while(true){present(armAtSource){emit armAtSourceE;} pause;}}
-		||
-		{while(true){present(armAtDest){emit armAtDestE;} pause;}}
-		||
-		{while(true){present(empty){emit emptyE;} pause;}}
+	
+//Cap Loader	
+	{// Arm
+		while(true){
+			present(armSource && !armDest){
+				abort (armDest){
+					sustain armAtSource; 
+				}
+			}
+			present(armDest && !armSource) {
+				abort (armSource) {
+					sustain armAtDest;
+				}
+			}
+			pause;
+		}
 	}
+	||
+	{// Pusher
+		while(true){
+			abort(pusherExtend){
+				sustain pusherRetracted;
+			}
+			waitl(2 s); 
+			abort(!pusherExtend){
+				sustain pusherExtended;
+			}
+			pause;
+		}
+	}
+	||
+	{// Vacuum
+		while(true){
+			present(vacOn && armAtSource){
+				abort(!vacOn) {
+					sustain WPgripped;
+				}
+			}
+			pause;
+		}
+	}
+	||
+	// Capper
+		{
+			while(true) {
+				await(moveToPos4);//bottle is in position 4. Need to inform controller. 
+				abort(moveToPos5) {
+					sustain bottleAtPos4; //Maintain bottleAtPos4 signal until a signal is received to turn the table.
+				}
+				pause;
+			}
+		}
+		||
+	//Cap Screwer - Move Gripper
+		{
+			while(true) {
+				abort(cylPos5ZAxisExtend) {
+					sustain gripperZAxisLifted; //If cylPos5ZaxisExtend is absent, sustain lifted signal.
+				}
+				abort(!cylPos5ZAxisExtend) {
+					sustain gripperZAxisLowered; //If cylPos5ZaxisExtend is present, sustain lowered signal.
+				}
+				pause;
+			}
+		}
+		||	
+	//Cap Screwer - Twister
+		{
+			while(true) {
+				present(gripperTurnExtend && !gripperTurnRetract){
+					abort(gripperTurnRetract){
+						sustain gripperTurnFinalPos; 
+					}
+				}
+				present(gripperTurnRetract && !gripperTurnExtend) {
+					abort(gripperTurnExtend) {
+						sustain gripperTurnHomePos; 
+					}
+				}
+				pause;
+			}
+		}
+		|| 
+	//Cap Screwer - Clamps
+		{
+			while(true) {
+				await(cylClampBottleExtend);
+				
+				abort (!cylClampBottleExtend) {
+					sustain cylClampedBottle; //Maintain bottleAtPos4 signal until a signal is received to turn the table.
+				}
+				pause;
+			}
+		}
+	||	
+	//Rotary Table
+	{
+		while(true) {
+			present(rotaryTableTrigger){
+				waitl(100 ms);
+				//Ensure the table positions are aligned with the sensors via tableAlignedWithSensor.
+
+				// if there is a bottle at pos 4 move to pos 5
+				present(bottleAtPos4) {
+					emit moveToPos5;
+					pause;
+					emit removePos4;
+				}
+				
+				// if there is a bottle at pos 3 move to pos 4
+				present(bottleAtPos3){
+					emit moveToPos4;
+					pause;
+					emit removePos3;
+				}
+				// if there is a obttle at pos 2 move to pos 3
+				
+				present(bottleAtPos2){
+					emit moveToPos3;
+					pause;
+					emit removePos2;
+				}
+				// if there is a bottle at pos 1 move to pos 2.
+				present(bottleAtPos1){
+					emit moveToPos2;
+					pause;
+				}
+			
+				abort(!rotaryTableTrigger) {
+					sustain tableAlignedWithSensor;
+				}				
+			}	
+			pause;
+				
+		}
+	}
+	||
+	{
+		while(true) {
+			abort(bottleLeftPos5){ // stop emitting bottleAtPos5 when bottle has left pos 5
+				present(moveToPos5){
+					abort(tableAlignedWithSensor){
+						emit removePos4;
+						pause;
+						sustain bottleAtPos5;
+					}
+				} 
+			}
+			pause;
+		}
+	}
+	||
+	{while(true){
+		present(moveToPos4){
+			abort(removePos4 && !moveToPos4){
+				sustain bottleAtPos4;
+			}
+		}
+		pause;
+		}
+	}
+	||
+	{while(true){
+		present(moveToPos3){
+			abort(removePos3 && !moveToPos3){
+				sustain bottleAtPos3;
+			}
+		}
+			pause;
+	}}
+	||
+	{while(true){
+		present(moveToPos2){
+			abort(removePos2 && !moveToPos2){
+				sustain bottleAtPos2;
+			}
+		}
+		pause;}}
+
 }

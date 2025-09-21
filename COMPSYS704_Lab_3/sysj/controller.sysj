@@ -1,20 +1,190 @@
-Controller(
-		input signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,empty,request;
-		output signal pusherExtend,vacOn,armSource,armDest;
-		input Integer signal mode;
-		input signal pusherExtendM,vacOnM,armSourceM,armDestM;
-		
-		// from system coorindator
+
+Conveyor(
+		input signal bottleAtPos1, bottleLeftPos5, bottleAtPos5;	
 		input signal systemEnable;
+		output signal motConveyorOnOff;
+		
 		)
 ->{
-/* TODO: Write control-logic */
-	{
-		while(true) {
-			await(systemEnable);
-			abort(!systemEnable){
-				System.out.println("enable works");
+
+	while(true) {
+		await(systemEnable);
+		//bottle has entered from left side.
+			//"ConveyorController: Request received from orch."
+			present(bottleAtPos5){
+				//"ConveyorController: Moving bottle 5..."
+				abort(bottleLeftPos5){ // run until bottle has left position5
+					{sustain motConveyorOnOff;}
+				}
+				//"ConveyorController: Moved bottle 5."
+			}	
+			
+			// abort when bottle is at position 1, otherwise turn on motor
+			present(!bottleAtPos1 && !bottleAtPos5 && !bottleLeftPos5){
+				//"ConveyorController: No bottle at pos 1 or pos 5."
+				abort(bottleAtPos1) {
+					//"ConveyorController: Motor is on" 
+					{sustain motConveyorOnOff;}
+				}
 			}
+			//"ConveyorController: Motor is off"	
+		pause;
+	}
+}
+
+
+RotaryTable(
+        input signal tableAlignedWithSensor, capOnBottleAtPos1;   
+        input signal systemEnable;
+        output signal rotaryTableTrigger; // To Plant
+        )
+->{
+    while(true) {
+    	await(systemEnable); 
+        // wait until it receives an OK from orchestrator
+        	//await(RTbottleAtPos1);
+        	await(!capOnBottleAtPos1);
+        	// when the rotoray table is aligned with sensor stop sustaining the trigger
+            abort(tableAlignedWithSensor){
+                sustain rotaryTableTrigger;
+            }
+            //"RotaryController - finished"
+            pause;
+    }
+}
+
+LiquidFiller(
+		
+		input signal bottleAtPos2,dosUnitEvac,dosUnitFilled;
+		input signal systemEnable;
+		output signal valveInjectorOnOff,valveInletOnOff,dosUnitValveRetract,dosUnitValveExtend;
+		
+	
+		)
+->{
+	
+	while(true) {
+		await(systemEnable);
+		// bottle IS at position 2 then do filler work
+		present(bottleAtPos2){
+			//"FillerController: - Bottle detected at position 2."			
+
+				 abort(dosUnitFilled){ 
+						{sustain dosUnitValveRetract;} || {sustain valveInjectorOnOff;}
+				 }
+				 //System.out.println("FillerController: Canister at top. Turned off valve injector.");
+				 
+				 //System.out.println("FillerController: Turning on valve inlet & forcing bottle down.");
+				 abort(dosUnitEvac){
+					 {sustain valveInletOnOff;}||{sustain dosUnitValveExtend;} //Turn on valve inlet and bring bottle to bottom.
+				 }
+				 pause;
 		}
+		pause;
+	}
+		
+}
+
+
+Capper(
+		
+		input signal systemEnable;
+		input signal bottleAtPos4;
+		input signal gripperZAxisLowered;
+		input signal gripperZAxisLifted;
+		input signal gripperTurnHomePos;
+		input signal gripperTurnFinalPos;
+		
+		//To Capper Plant
+		output signal cylPos5ZAxisExtend; //Brings the gripper down (absence of this signal will bring the gripper up)
+		output signal gripperTurnRetract; //Untwists the gripper
+		output signal gripperTurnExtend; //Twists the gripper
+		output signal capGripperPos5Extend; //Grips the cap (absence of this signal will release the cap)
+		output signal cylClampBottleExtend; //Clamps the bottle (absence of this signal will unclamp the bottle)
+		)
+
+		
+
+->{
+	signal releaseCap, raiseGripper, unclampBottle; 
+	while(true) {
+		await(systemEnable);
+		
+			present(bottleAtPos4) { //Check if a bottle is at position 4, if not, wait until it arrives.
+				{ 
+					abort(unclampBottle) {
+						//System.out.println("Capper1");
+						sustain cylClampBottleExtend; //Keep gripping the bottle until steps 1-7 have completed (in-doc).
+					}
+				}
+				||
+				{
+					abort(raiseGripper) {
+						//System.out.println("Capper2");
+						sustain cylPos5ZAxisExtend; //Keep the gripper lowered until steps 1-7 have completed.
+					}
+				}
+				||
+				{
+					//Wait until gripper is lowered and bottle is clamped.
+					{await(gripperZAxisLowered);} 
+					//System.out.println("Capper3");
+					abort(releaseCap) {
+						sustain capGripperPos5Extend; //Grip the cap
+					}
+				}
+				||
+				{	
+					abort(gripperTurnFinalPos) {
+						sustain gripperTurnExtend; // Twist the gripper
+					}
+					emit releaseCap; //Release the cap
+					
+					abort(gripperTurnHomePos) {
+						sustain gripperTurnRetract; //Untwist gripper
+					}		
+					emit raiseGripper; //Raise gripper
+					emit unclampBottle; //Unclamp bottle
+				} 		
+			}
+		pause;
+	}
+}
+
+
+Caploader(
+		input signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,bottleAtPos3, magEmpty;
+		input signal systemEnable;
+		output signal pusherExtend,vacOn,armSource,armDest, magReq;
+
+		)
+->{
+	signal vacOff;
+	while(true) {	
+		await(systemEnable);
+				present (bottleAtPos3){
+					await(pusherRetracted);
+					abort(pusherExtended) { 
+						sustain pusherExtend; 
+					}
+					//Move arm to object to pickup
+					abort(armAtSource) {
+						sustain armSource;
+					}
+					{
+						abort(vacOff) {
+							sustain vacOn;
+						}	
+					}
+					||
+					{
+						await(WPgripped);
+						abort (armAtDest) {
+							sustain armDest;
+						}
+						emit vacOff;
+					}
+				}
+			pause;
 	}
 }
