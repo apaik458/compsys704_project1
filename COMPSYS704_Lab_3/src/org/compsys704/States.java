@@ -10,4 +10,6 @@ public class States {
 	public static volatile boolean MAG_EMPTY = false;
 	
 	public static volatile boolean CAP_READY = false;
+	
+	public static volatile boolean CAP_ADD = false;
 }

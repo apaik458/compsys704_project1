@@ -30,23 +30,52 @@ public class SystemCoordinator extends ClockDomain{
   public Signal armAtSourceE = new Signal("armAtSourceE", Signal.OUTPUT);
   public Signal armAtDestE = new Signal("armAtDestE", Signal.OUTPUT);
   public Signal emptyE = new Signal("emptyE", Signal.OUTPUT);
-  private int S462 = 1;
-  private int S301 = 1;
-  private int S253 = 1;
-  private int S351 = 1;
-  private int S309 = 1;
-  private int S303 = 1;
-  private int S317 = 1;
-  private int S325 = 1;
-  private int S333 = 1;
-  private int S341 = 1;
-  private int S349 = 1;
+  public Signal capAddE = new Signal("capAddE", Signal.OUTPUT);
+  private Signal tester_1;
+  private int S379 = 1;
+  private int S252 = 1;
+  private int S245 = 1;
+  private int S310 = 1;
+  private int S260 = 1;
+  private int S254 = 1;
+  private int S268 = 1;
+  private int S276 = 1;
+  private int S284 = 1;
+  private int S292 = 1;
+  private int S300 = 1;
+  private int S308 = 1;
   
-  private int[] ends = new int[10];
-  private int[] tdone = new int[10];
+  private int[] ends = new int[11];
+  private int[] tdone = new int[11];
   
-  public void thread481(int [] tdone, int [] ends){
-        switch(S349){
+  public void thread400(int [] tdone, int [] ends){
+        switch(S308){
+      case 0 : 
+        active[10]=0;
+        ends[10]=0;
+        tdone[10]=1;
+        break;
+      
+      case 1 : 
+        if(tester_1.getprestatus()){//sysj\SystemCoordinator.sysj line: 37, column: 24
+          capAddE.setPresent();//sysj\SystemCoordinator.sysj line: 37, column: 32
+          currsigs.addElement(capAddE);
+          active[10]=1;
+          ends[10]=1;
+          tdone[10]=1;
+        }
+        else {
+          active[10]=1;
+          ends[10]=1;
+          tdone[10]=1;
+        }
+        break;
+      
+    }
+  }
+
+  public void thread399(int [] tdone, int [] ends){
+        switch(S300){
       case 0 : 
         active[9]=0;
         ends[9]=0;
@@ -54,8 +83,8 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        if(empty.getprestatus()){//sysj\SystemCoordinator.sysj line: 38, column: 24
-          emptyE.setPresent();//sysj\SystemCoordinator.sysj line: 38, column: 31
+        if(empty.getprestatus()){//sysj\SystemCoordinator.sysj line: 35, column: 24
+          emptyE.setPresent();//sysj\SystemCoordinator.sysj line: 35, column: 31
           currsigs.addElement(emptyE);
           active[9]=1;
           ends[9]=1;
@@ -71,8 +100,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread480(int [] tdone, int [] ends){
-        switch(S341){
+  public void thread398(int [] tdone, int [] ends){
+        switch(S292){
       case 0 : 
         active[8]=0;
         ends[8]=0;
@@ -80,8 +109,8 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        if(armAtDest.getprestatus()){//sysj\SystemCoordinator.sysj line: 36, column: 24
-          armAtDestE.setPresent();//sysj\SystemCoordinator.sysj line: 36, column: 35
+        if(armAtDest.getprestatus()){//sysj\SystemCoordinator.sysj line: 33, column: 24
+          armAtDestE.setPresent();//sysj\SystemCoordinator.sysj line: 33, column: 35
           currsigs.addElement(armAtDestE);
           active[8]=1;
           ends[8]=1;
@@ -97,8 +126,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread479(int [] tdone, int [] ends){
-        switch(S333){
+  public void thread397(int [] tdone, int [] ends){
+        switch(S284){
       case 0 : 
         active[7]=0;
         ends[7]=0;
@@ -106,8 +135,8 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        if(armAtSource.getprestatus()){//sysj\SystemCoordinator.sysj line: 34, column: 24
-          armAtSourceE.setPresent();//sysj\SystemCoordinator.sysj line: 34, column: 37
+        if(armAtSource.getprestatus()){//sysj\SystemCoordinator.sysj line: 31, column: 24
+          armAtSourceE.setPresent();//sysj\SystemCoordinator.sysj line: 31, column: 37
           currsigs.addElement(armAtSourceE);
           active[7]=1;
           ends[7]=1;
@@ -123,8 +152,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread478(int [] tdone, int [] ends){
-        switch(S325){
+  public void thread396(int [] tdone, int [] ends){
+        switch(S276){
       case 0 : 
         active[6]=0;
         ends[6]=0;
@@ -132,8 +161,8 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        if(WPgripped.getprestatus()){//sysj\SystemCoordinator.sysj line: 32, column: 24
-          WPgrippedE.setPresent();//sysj\SystemCoordinator.sysj line: 32, column: 35
+        if(WPgripped.getprestatus()){//sysj\SystemCoordinator.sysj line: 29, column: 24
+          WPgrippedE.setPresent();//sysj\SystemCoordinator.sysj line: 29, column: 35
           currsigs.addElement(WPgrippedE);
           active[6]=1;
           ends[6]=1;
@@ -149,8 +178,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread477(int [] tdone, int [] ends){
-        switch(S317){
+  public void thread395(int [] tdone, int [] ends){
+        switch(S268){
       case 0 : 
         active[5]=0;
         ends[5]=0;
@@ -158,8 +187,8 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        if(pusherExtended.getprestatus()){//sysj\SystemCoordinator.sysj line: 30, column: 24
-          pusherExtendedE.setPresent();//sysj\SystemCoordinator.sysj line: 30, column: 40
+        if(pusherExtended.getprestatus()){//sysj\SystemCoordinator.sysj line: 27, column: 24
+          pusherExtendedE.setPresent();//sysj\SystemCoordinator.sysj line: 27, column: 40
           currsigs.addElement(pusherExtendedE);
           active[5]=1;
           ends[5]=1;
@@ -175,8 +204,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread476(int [] tdone, int [] ends){
-        switch(S309){
+  public void thread394(int [] tdone, int [] ends){
+        switch(S260){
       case 0 : 
         active[4]=0;
         ends[4]=0;
@@ -184,19 +213,19 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S303){
+        switch(S254){
           case 0 : 
-            S303=0;
-            if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 28, column: 24
-              pusherRetractedE.setPresent();//sysj\SystemCoordinator.sysj line: 28, column: 41
+            S254=0;
+            if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 25, column: 24
+              pusherRetractedE.setPresent();//sysj\SystemCoordinator.sysj line: 25, column: 41
               currsigs.addElement(pusherRetractedE);
-              S303=1;
+              S254=1;
               active[4]=1;
               ends[4]=1;
               tdone[4]=1;
             }
             else {
-              S303=1;
+              S254=1;
               active[4]=1;
               ends[4]=1;
               tdone[4]=1;
@@ -204,18 +233,18 @@ public class SystemCoordinator extends ClockDomain{
             break;
           
           case 1 : 
-            S303=1;
-            S303=0;
-            if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 28, column: 24
-              pusherRetractedE.setPresent();//sysj\SystemCoordinator.sysj line: 28, column: 41
+            S254=1;
+            S254=0;
+            if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 25, column: 24
+              pusherRetractedE.setPresent();//sysj\SystemCoordinator.sysj line: 25, column: 41
               currsigs.addElement(pusherRetractedE);
-              S303=1;
+              S254=1;
               active[4]=1;
               ends[4]=1;
               tdone[4]=1;
             }
             else {
-              S303=1;
+              S254=1;
               active[4]=1;
               ends[4]=1;
               tdone[4]=1;
@@ -228,8 +257,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread475(int [] tdone, int [] ends){
-        switch(S351){
+  public void thread393(int [] tdone, int [] ends){
+        switch(S310){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -237,39 +266,43 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        thread476(tdone,ends);
-        thread477(tdone,ends);
-        thread478(tdone,ends);
-        thread479(tdone,ends);
-        thread480(tdone,ends);
-        thread481(tdone,ends);
-        int biggest482 = 0;
-        if(ends[4]>=biggest482){
-          biggest482=ends[4];
+        thread394(tdone,ends);
+        thread395(tdone,ends);
+        thread396(tdone,ends);
+        thread397(tdone,ends);
+        thread398(tdone,ends);
+        thread399(tdone,ends);
+        thread400(tdone,ends);
+        int biggest401 = 0;
+        if(ends[4]>=biggest401){
+          biggest401=ends[4];
         }
-        if(ends[5]>=biggest482){
-          biggest482=ends[5];
+        if(ends[5]>=biggest401){
+          biggest401=ends[5];
         }
-        if(ends[6]>=biggest482){
-          biggest482=ends[6];
+        if(ends[6]>=biggest401){
+          biggest401=ends[6];
         }
-        if(ends[7]>=biggest482){
-          biggest482=ends[7];
+        if(ends[7]>=biggest401){
+          biggest401=ends[7];
         }
-        if(ends[8]>=biggest482){
-          biggest482=ends[8];
+        if(ends[8]>=biggest401){
+          biggest401=ends[8];
         }
-        if(ends[9]>=biggest482){
-          biggest482=ends[9];
+        if(ends[9]>=biggest401){
+          biggest401=ends[9];
         }
-        if(biggest482 == 1){
+        if(ends[10]>=biggest401){
+          biggest401=ends[10];
+        }
+        if(biggest401 == 1){
           active[3]=1;
           ends[3]=1;
           tdone[3]=1;
         }
         //FINXME code
-        if(biggest482 == 0){
-          S351=0;
+        if(biggest401 == 0){
+          S310=0;
           active[3]=0;
           ends[3]=0;
           tdone[3]=1;
@@ -279,8 +312,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread474(int [] tdone, int [] ends){
-        switch(S301){
+  public void thread392(int [] tdone, int [] ends){
+        switch(S252){
       case 0 : 
         active[2]=0;
         ends[2]=0;
@@ -288,17 +321,18 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S253){
+        switch(S245){
           case 0 : 
-            if(enable.getprestatus()){//sysj\SystemCoordinator.sysj line: 15, column: 9
-              S253=1;
+            if(enable.getprestatus()){//sysj\SystemCoordinator.sysj line: 18, column: 9
+              System.out.println("it works");//sysj\SystemCoordinator.sysj line: 19, column: 3
+              S245=1;
+              tester_1.setPresent();//sysj\SystemCoordinator.sysj line: 20, column: 3
+              currsigs.addElement(tester_1);
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
             }
             else {
-              armAtSource.setPresent();//sysj\SystemCoordinator.sysj line: 17, column: 4
-              currsigs.addElement(armAtSource);
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -306,38 +340,11 @@ public class SystemCoordinator extends ClockDomain{
             break;
           
           case 1 : 
-            if(!enable.getprestatus()){//sysj\SystemCoordinator.sysj line: 19, column: 9
-              S253=2;
-              WPgripped.setPresent();//sysj\SystemCoordinator.sysj line: 21, column: 4
-              currsigs.addElement(WPgripped);
-              active[2]=1;
-              ends[2]=1;
-              tdone[2]=1;
-            }
-            else {
-              active[2]=1;
-              ends[2]=1;
-              tdone[2]=1;
-            }
-            break;
-          
-          case 2 : 
-            if(enable.getprestatus()){//sysj\SystemCoordinator.sysj line: 20, column: 9
-              S253=0;
-              System.out.println("It works");//sysj\SystemCoordinator.sysj line: 16, column: 3
-              armAtSource.setPresent();//sysj\SystemCoordinator.sysj line: 17, column: 4
-              currsigs.addElement(armAtSource);
-              active[2]=1;
-              ends[2]=1;
-              tdone[2]=1;
-            }
-            else {
-              WPgripped.setPresent();//sysj\SystemCoordinator.sysj line: 21, column: 4
-              currsigs.addElement(WPgripped);
-              active[2]=1;
-              ends[2]=1;
-              tdone[2]=1;
-            }
+            tester_1.setPresent();//sysj\SystemCoordinator.sysj line: 20, column: 3
+            currsigs.addElement(tester_1);
+            active[2]=1;
+            ends[2]=1;
+            tdone[2]=1;
             break;
           
         }
@@ -346,10 +353,26 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread471(int [] tdone, int [] ends){
-        S349=1;
-    if(empty.getprestatus()){//sysj\SystemCoordinator.sysj line: 38, column: 24
-      emptyE.setPresent();//sysj\SystemCoordinator.sysj line: 38, column: 31
+  public void thread389(int [] tdone, int [] ends){
+        S308=1;
+    if(tester_1.getprestatus()){//sysj\SystemCoordinator.sysj line: 37, column: 24
+      capAddE.setPresent();//sysj\SystemCoordinator.sysj line: 37, column: 32
+      currsigs.addElement(capAddE);
+      active[10]=1;
+      ends[10]=1;
+      tdone[10]=1;
+    }
+    else {
+      active[10]=1;
+      ends[10]=1;
+      tdone[10]=1;
+    }
+  }
+
+  public void thread388(int [] tdone, int [] ends){
+        S300=1;
+    if(empty.getprestatus()){//sysj\SystemCoordinator.sysj line: 35, column: 24
+      emptyE.setPresent();//sysj\SystemCoordinator.sysj line: 35, column: 31
       currsigs.addElement(emptyE);
       active[9]=1;
       ends[9]=1;
@@ -362,10 +385,10 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread470(int [] tdone, int [] ends){
-        S341=1;
-    if(armAtDest.getprestatus()){//sysj\SystemCoordinator.sysj line: 36, column: 24
-      armAtDestE.setPresent();//sysj\SystemCoordinator.sysj line: 36, column: 35
+  public void thread387(int [] tdone, int [] ends){
+        S292=1;
+    if(armAtDest.getprestatus()){//sysj\SystemCoordinator.sysj line: 33, column: 24
+      armAtDestE.setPresent();//sysj\SystemCoordinator.sysj line: 33, column: 35
       currsigs.addElement(armAtDestE);
       active[8]=1;
       ends[8]=1;
@@ -378,10 +401,10 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread469(int [] tdone, int [] ends){
-        S333=1;
-    if(armAtSource.getprestatus()){//sysj\SystemCoordinator.sysj line: 34, column: 24
-      armAtSourceE.setPresent();//sysj\SystemCoordinator.sysj line: 34, column: 37
+  public void thread386(int [] tdone, int [] ends){
+        S284=1;
+    if(armAtSource.getprestatus()){//sysj\SystemCoordinator.sysj line: 31, column: 24
+      armAtSourceE.setPresent();//sysj\SystemCoordinator.sysj line: 31, column: 37
       currsigs.addElement(armAtSourceE);
       active[7]=1;
       ends[7]=1;
@@ -394,10 +417,10 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread468(int [] tdone, int [] ends){
-        S325=1;
-    if(WPgripped.getprestatus()){//sysj\SystemCoordinator.sysj line: 32, column: 24
-      WPgrippedE.setPresent();//sysj\SystemCoordinator.sysj line: 32, column: 35
+  public void thread385(int [] tdone, int [] ends){
+        S276=1;
+    if(WPgripped.getprestatus()){//sysj\SystemCoordinator.sysj line: 29, column: 24
+      WPgrippedE.setPresent();//sysj\SystemCoordinator.sysj line: 29, column: 35
       currsigs.addElement(WPgrippedE);
       active[6]=1;
       ends[6]=1;
@@ -410,10 +433,10 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread467(int [] tdone, int [] ends){
-        S317=1;
-    if(pusherExtended.getprestatus()){//sysj\SystemCoordinator.sysj line: 30, column: 24
-      pusherExtendedE.setPresent();//sysj\SystemCoordinator.sysj line: 30, column: 40
+  public void thread384(int [] tdone, int [] ends){
+        S268=1;
+    if(pusherExtended.getprestatus()){//sysj\SystemCoordinator.sysj line: 27, column: 24
+      pusherExtendedE.setPresent();//sysj\SystemCoordinator.sysj line: 27, column: 40
       currsigs.addElement(pusherExtendedE);
       active[5]=1;
       ends[5]=1;
@@ -426,65 +449,66 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread466(int [] tdone, int [] ends){
-        S309=1;
-    S303=0;
-    if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 28, column: 24
-      pusherRetractedE.setPresent();//sysj\SystemCoordinator.sysj line: 28, column: 41
+  public void thread383(int [] tdone, int [] ends){
+        S260=1;
+    S254=0;
+    if(pusherRetracted.getprestatus()){//sysj\SystemCoordinator.sysj line: 25, column: 24
+      pusherRetractedE.setPresent();//sysj\SystemCoordinator.sysj line: 25, column: 41
       currsigs.addElement(pusherRetractedE);
-      S303=1;
+      S254=1;
       active[4]=1;
       ends[4]=1;
       tdone[4]=1;
     }
     else {
-      S303=1;
+      S254=1;
       active[4]=1;
       ends[4]=1;
       tdone[4]=1;
     }
   }
 
-  public void thread465(int [] tdone, int [] ends){
-        S351=1;
-    thread466(tdone,ends);
-    thread467(tdone,ends);
-    thread468(tdone,ends);
-    thread469(tdone,ends);
-    thread470(tdone,ends);
-    thread471(tdone,ends);
-    int biggest472 = 0;
-    if(ends[4]>=biggest472){
-      biggest472=ends[4];
+  public void thread382(int [] tdone, int [] ends){
+        S310=1;
+    thread383(tdone,ends);
+    thread384(tdone,ends);
+    thread385(tdone,ends);
+    thread386(tdone,ends);
+    thread387(tdone,ends);
+    thread388(tdone,ends);
+    thread389(tdone,ends);
+    int biggest390 = 0;
+    if(ends[4]>=biggest390){
+      biggest390=ends[4];
     }
-    if(ends[5]>=biggest472){
-      biggest472=ends[5];
+    if(ends[5]>=biggest390){
+      biggest390=ends[5];
     }
-    if(ends[6]>=biggest472){
-      biggest472=ends[6];
+    if(ends[6]>=biggest390){
+      biggest390=ends[6];
     }
-    if(ends[7]>=biggest472){
-      biggest472=ends[7];
+    if(ends[7]>=biggest390){
+      biggest390=ends[7];
     }
-    if(ends[8]>=biggest472){
-      biggest472=ends[8];
+    if(ends[8]>=biggest390){
+      biggest390=ends[8];
     }
-    if(ends[9]>=biggest472){
-      biggest472=ends[9];
+    if(ends[9]>=biggest390){
+      biggest390=ends[9];
     }
-    if(biggest472 == 1){
+    if(ends[10]>=biggest390){
+      biggest390=ends[10];
+    }
+    if(biggest390 == 1){
       active[3]=1;
       ends[3]=1;
       tdone[3]=1;
     }
   }
 
-  public void thread464(int [] tdone, int [] ends){
-        S301=1;
-    S253=0;
-    System.out.println("It works");//sysj\SystemCoordinator.sysj line: 16, column: 3
-    armAtSource.setPresent();//sysj\SystemCoordinator.sysj line: 17, column: 4
-    currsigs.addElement(armAtSource);
+  public void thread381(int [] tdone, int [] ends){
+        S252=1;
+    S245=0;
     active[2]=1;
     ends[2]=1;
     tdone[2]=1;
@@ -497,51 +521,53 @@ public class SystemCoordinator extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S462){
+      switch(S379){
         case 0 : 
-          S462=0;
+          S379=0;
           break RUN;
         
         case 1 : 
-          S462=2;
-          S462=2;
-          new Thread(new GUI()).start();//sysj\SystemCoordinator.sysj line: 12, column: 2
-          thread464(tdone,ends);
-          thread465(tdone,ends);
-          int biggest473 = 0;
-          if(ends[2]>=biggest473){
-            biggest473=ends[2];
+          S379=2;
+          S379=2;
+          tester_1.setClear();//sysj\SystemCoordinator.sysj line: 14, column: 2
+          new Thread(new GUI()).start();//sysj\SystemCoordinator.sysj line: 15, column: 2
+          thread381(tdone,ends);
+          thread382(tdone,ends);
+          int biggest391 = 0;
+          if(ends[2]>=biggest391){
+            biggest391=ends[2];
           }
-          if(ends[3]>=biggest473){
-            biggest473=ends[3];
+          if(ends[3]>=biggest391){
+            biggest391=ends[3];
           }
-          if(biggest473 == 1){
+          if(biggest391 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
         
         case 2 : 
-          thread474(tdone,ends);
-          thread475(tdone,ends);
-          int biggest483 = 0;
-          if(ends[2]>=biggest483){
-            biggest483=ends[2];
+          tester_1.setClear();//sysj\SystemCoordinator.sysj line: 14, column: 2
+          thread392(tdone,ends);
+          thread393(tdone,ends);
+          int biggest402 = 0;
+          if(ends[2]>=biggest402){
+            biggest402=ends[2];
           }
-          if(ends[3]>=biggest483){
-            biggest483=ends[3];
+          if(ends[3]>=biggest402){
+            biggest402=ends[3];
           }
-          if(biggest483 == 1){
+          if(biggest402 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest483 == 0){
-            S462=0;
+          if(biggest402 == 0){
+            S379=0;
             active[1]=0;
             ends[1]=0;
-            S462=0;
+            S379=0;
             break RUN;
           }
         
@@ -550,13 +576,14 @@ public class SystemCoordinator extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;
     // Now instantiate all the local signals ONLY
+    tester_1 = new Signal();
     // --------------------------------------------------
   }
   
@@ -599,6 +626,8 @@ public class SystemCoordinator extends ClockDomain{
       armAtSourceE.setpreclear();
       armAtDestE.setpreclear();
       emptyE.setpreclear();
+      capAddE.setpreclear();
+      tester_1.setpreclear();
       int dummyint = 0;
       for(int qw=0;qw<currsigs.size();++qw){
         dummyint = ((Signal)currsigs.elementAt(qw)).getStatus() ? ((Signal)currsigs.elementAt(qw)).setprepresent() : ((Signal)currsigs.elementAt(qw)).setpreclear();
@@ -647,6 +676,9 @@ public class SystemCoordinator extends ClockDomain{
       armAtDestE.setClear();
       emptyE.sethook();
       emptyE.setClear();
+      capAddE.sethook();
+      capAddE.setClear();
+      tester_1.setClear();
       if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
         pusherExtend.gethook();

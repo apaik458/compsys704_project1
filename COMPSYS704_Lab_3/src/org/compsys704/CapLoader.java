@@ -123,16 +123,16 @@ public class CapLoader extends JFrame {
 
         // ---- Third row: Start button ----
         JButton startPOS = new JButton("Start POS");
-        startPOS.addActionListener
-        (e -> {
-            SignalClient sc = new SignalClient(Ports.PORT_ABS_UI, Ports.ENABLE_SIGNAL);
-            new Thread(() -> {
-                for (int i = 0; i < 5; i++) { // emit for ~100ms
-                    sc.actionPerformed(null);
-                    try { Thread.sleep(20); } catch (InterruptedException ex) {}
-                }
-            }).start();
-        });
+        startPOS.addActionListener(new SignalClient(Ports.PORT_ABS_UI, Ports.ENABLE_SIGNAL));
+//        (e -> {
+//            SignalClient sc = new SignalClient(Ports.PORT_ABS_UI, Ports.ENABLE_SIGNAL);
+//            new Thread(() -> {
+//                for (int i = 0; i < 5; i++) { // emit for ~100ms
+//                    sc.actionPerformed(null);
+//                    try { Thread.sleep(20); } catch (InterruptedException ex) {}
+//                }
+//            }).start();
+//        });
 
         // Add everything to posPanel
         posPanel.add(liquidPanel);

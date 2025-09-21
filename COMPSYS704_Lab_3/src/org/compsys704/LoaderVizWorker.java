@@ -29,6 +29,9 @@ public class LoaderVizWorker extends Worker{
 		case "emptyE":
 			States.MAG_EMPTY = status;
 			break;
+		case "capAddE":
+			States.CAP_ADD = status;
+			break;
 		default: 
 			System.err.println("Wrong sig name : "+signame);
 			System.exit(1);

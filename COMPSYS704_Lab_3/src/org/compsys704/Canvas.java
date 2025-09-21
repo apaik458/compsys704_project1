@@ -17,6 +17,16 @@ public class Canvas extends JPanel {
 	BufferedImage loader;
 	BufferedImage cap;
 	
+	// rotary turntable
+	BufferedImage rotaryTable;
+	
+	//conveyor
+	BufferedImage conveyor1;
+	BufferedImage conveyor2;
+	
+	//filler
+	BufferedImage filler;
+	
 	public Canvas(){
 		try {
 			BufferedImage bi = ImageIO.read(new File("res/arm.png"));
@@ -27,6 +37,10 @@ public class Canvas extends JPanel {
 			p1 = bi.getSubimage(0, 0, 238, 68);
 			p2 = bi.getSubimage(238, 0, 172, 68);
 			cap = ImageIO.read(new File("res/cap.png"));
+			rotaryTable = ImageIO.read(new File("res/empty.png"));
+			conveyor1 = ImageIO.read(new File("res/Conveyor_empty.png"));
+			conveyor2 = ImageIO.read(new File("res/Conveyor_empty.png"));
+			filler = ImageIO.read(new File("res/filler.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(1);;
@@ -36,36 +50,13 @@ public class Canvas extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.drawImage(loader, 0, 100, null);
+		//default lookings
+		g.drawImage(rotaryTable, 600, 100, null);
+		g.drawImage(conveyor1, 240, 550, null);
+		g.drawImage(conveyor2, 1480, 550, null);
+		g.drawImage(loader, 1000, 0, null);
+		g.drawImage(filler, 760, 220, null);
 		
-		if(States.ARM_AT_DEST)
-			g.drawImage(arm1, 0, 0, null);
-		else
-			g.drawImage(arm2, 30, 0, null);
-		
-		if(States.GRIPPED){
-			g.drawImage(arm2, 100, 100, null);
-		}
-//		else{
-			if(States.CAP_READY){ // A cap is pushed to the source pos
-				g.setColor(Color.black);
-				g.fillOval(40, 243, 30, 30);
-			}
-//		}
-		
-		if(States.PUSHER_RETRACTED){
-			g.drawImage(p1, 90, 225, null);
-			if(!States.MAG_EMPTY){
-				g.setColor(Color.black);
-				g.fillOval(154, 243, 30, 30);
-			}
-		}
-		else{
-			g.drawImage(p2, 90, 225, null);
-		}
-		
-		if(!States.MAG_EMPTY){
-			g.drawImage(cap, 152, 155, null);
-		}
+		if(States.CAP_ADD){g.drawImage(rotaryTable, 0, 0, null);}
 	}
 }

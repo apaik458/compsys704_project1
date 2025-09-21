@@ -5,22 +5,19 @@ SystemCoordinator(
 		input signal enable,refill;
 		//input signal amount;
 		output signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,empty;
+		//output signal capAdd;
 		output signal pusherRetractedE,pusherExtendedE,WPgrippedE,armAtSourceE,armAtDestE,emptyE;
+		output signal capAddE;
 		)
 ->
-{
+{	
+	signal tester;
 	new Thread(new GUI()).start();
 
-	{while(true){
-		abort(enable){
-		System.out.println("It works");	
-			sustain armAtSource;
-		}
-		await(!enable);
-		abort(enable){
-			sustain WPgripped;
-		}
-	}
+	{
+		await(enable);
+		System.out.println("it works");
+		sustain tester;
 	}
 	||
 	//to viz
@@ -36,5 +33,7 @@ SystemCoordinator(
 		{while(true){present(armAtDest){emit armAtDestE;} pause;}}
 		||
 		{while(true){present(empty){emit emptyE;} pause;}}
+		||
+		{while(true){present(tester){emit capAddE;} pause;}}
 	}
 }
