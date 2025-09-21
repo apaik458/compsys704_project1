@@ -123,10 +123,11 @@ public class CapLoader extends JFrame {
 
         // ---- Third row: Start button ----
         JButton startPOS = new JButton("Start POS");
-        startPOS.addActionListener(e -> {
-            SignalClient sc = new SignalClient(Ports.PORT_LOADER_PLANT, Ports.ENABLE_SIGNAL);
+        startPOS.addActionListener
+        (e -> {
+            SignalClient sc = new SignalClient(Ports.PORT_ABS_UI, Ports.ENABLE_SIGNAL);
             new Thread(() -> {
-                for (int i = 0; i < 5; i++) { // emit for ~200ms
+                for (int i = 0; i < 5; i++) { // emit for ~100ms
                     sc.actionPerformed(null);
                     try { Thread.sleep(20); } catch (InterruptedException ex) {}
                 }

@@ -1,5 +1,5 @@
 <System xmlns="http://systemjtechnology.com">
-	<SubSystem Name="SS1" Local="true">
+	<SubSystem Name="SS2" Local="true">
 		<ClockDomain Name="ControllerCD" Class="Controller">
 			<iSignal Name="pusherRetracted" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 			<iSignal Name="pusherExtended"  Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />

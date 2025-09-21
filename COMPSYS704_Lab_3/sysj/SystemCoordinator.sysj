@@ -1,0 +1,40 @@
+import run.GUI;
+
+SystemCoordinator(
+		input signal pusherExtend,vacOn,armSource,armDest;
+		input signal enable,refill;
+		//input signal amount;
+		output signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,empty;
+		output signal pusherRetractedE,pusherExtendedE,WPgrippedE,armAtSourceE,armAtDestE,emptyE;
+		)
+->
+{
+	new Thread(new GUI()).start();
+
+	{while(true){
+		abort(enable){
+		System.out.println("It works");	
+			sustain armAtSource;
+		}
+		await(!enable);
+		abort(enable){
+			sustain WPgripped;
+		}
+	}
+	}
+	||
+	//to viz
+	{// To viz
+		{while(true){present(pusherRetracted){emit pusherRetractedE;} pause;}}
+		||
+		{while(true){present(pusherExtended){emit pusherExtendedE;} pause;}}
+		||
+		{while(true){present(WPgripped){emit WPgrippedE;} pause;}}
+		||
+		{while(true){present(armAtSource){emit armAtSourceE;} pause;}}
+		||
+		{while(true){present(armAtDest){emit armAtDestE;} pause;}}
+		||
+		{while(true){present(empty){emit emptyE;} pause;}}
+	}
+}
