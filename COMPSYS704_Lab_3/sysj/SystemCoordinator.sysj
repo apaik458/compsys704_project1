@@ -26,8 +26,9 @@ SystemCoordinator(
 	{
 		while(true){
 			await(enable);
-			System.out.println("It works again");
-			sustain capAdd;
+			abort(stop){
+			sustain systemEnable;
+			}
 		}
 	}
 	||

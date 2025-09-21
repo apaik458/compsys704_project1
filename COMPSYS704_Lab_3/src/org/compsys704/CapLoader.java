@@ -133,7 +133,9 @@ public class CapLoader extends JFrame {
         JButton setL2 = new JButton("set Liquid2");
         JButton setAMT = new JButton("set Amount");
         JButton enable = new JButton("Enable");
+        JButton stop = new JButton("Stop");
         enable.addActionListener(new SignalClient(Ports.PORT_ABS_UI, Ports.ENABLE_SIGNAL));
+        stop.addActionListener(new SignalClient(Ports.PORT_ABS_UI, Ports.STOP_SIGNAL));
         SignalRadioClient src1 = new SignalRadioClient(Ports.PORT_ABS_UI, Ports.SIGNAL_LIQUID1);
         SignalRadioClient src2 = new SignalRadioClient(Ports.PORT_ABS_UI, Ports.SIGNAL_LIQUID2);
         SignalRadioClient src3 = new SignalRadioClient(Ports.PORT_ABS_UI, Ports.SIGNAL_BOTTLEAMT);
@@ -162,6 +164,7 @@ public class CapLoader extends JFrame {
         buttonPanel.add(setL2);
         buttonPanel.add(setAMT);
         buttonPanel.add(enable);
+        buttonPanel.add(stop);
 
         // Add everything to posPanel
         posPanel.add(liquidPanel);

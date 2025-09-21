@@ -3,6 +3,7 @@ package org.compsys704;
 public class Ports {
 	public static final String ENABLE_SIGNAL = "ABSCD.enable";
 	public static final String SIZE_SIGNAL = "ABSCD.largeSize";
+	public static final String STOP_SIGNAL = "ABSCD.stop";
 	public static final int PORT_LOADER_PLANT = 10001;
 	public static final int PORT_LOADER_CONTROLLER = 10000;
 	public static final int PORT_LOADER_VIZ = 20000;

@@ -23,11 +23,12 @@ public class Controller extends ClockDomain{
   public Signal vacOnM = new Signal("vacOnM", Signal.INPUT);
   public Signal armSourceM = new Signal("armSourceM", Signal.INPUT);
   public Signal armDestM = new Signal("armDestM", Signal.INPUT);
+  public Signal systemEnable = new Signal("systemEnable", Signal.INPUT);
   public Signal pusherExtend = new Signal("pusherExtend", Signal.OUTPUT);
   public Signal vacOn = new Signal("vacOn", Signal.OUTPUT);
   public Signal armSource = new Signal("armSource", Signal.OUTPUT);
   public Signal armDest = new Signal("armDest", Signal.OUTPUT);
-  private int S0 = 1;
+  private int S21 = 1;
   
   private int[] ends = new int[2];
   private int[] tdone = new int[2];
@@ -39,18 +40,30 @@ public class Controller extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S0){
+      switch(S21){
         case 0 : 
-          S0=0;
+          S21=0;
           break RUN;
         
         case 1 : 
-          S0=2;
-          S0=2;
-          active[1]=0;
-          ends[1]=0;
-          S0=0;
+          S21=2;
+          S21=2;
+          active[1]=1;
+          ends[1]=1;
           break RUN;
+        
+        case 2 : 
+          if(systemEnable.getprestatus()){//sysj\controller.sysj line: 13, column: 10
+            System.out.println("enable works");//sysj\controller.sysj line: 15, column: 5
+            active[1]=1;
+            ends[1]=1;
+            break RUN;
+          }
+          else {
+            active[1]=1;
+            ends[1]=1;
+            break RUN;
+          }
         
       }
     }
@@ -90,6 +103,7 @@ public class Controller extends ClockDomain{
           vacOnM.gethook();
           armSourceM.gethook();
           armDestM.gethook();
+          systemEnable.gethook();
           df = true;
         }
         runClockDomain();
@@ -106,6 +120,7 @@ public class Controller extends ClockDomain{
       vacOnM.setpreclear();
       armSourceM.setpreclear();
       armDestM.setpreclear();
+      systemEnable.setpreclear();
       pusherExtend.setpreclear();
       vacOn.setpreclear();
       armSource.setpreclear();
@@ -152,6 +167,9 @@ public class Controller extends ClockDomain{
       dummyint = armDestM.getStatus() ? armDestM.setprepresent() : armDestM.setpreclear();
       armDestM.setpreval(armDestM.getValue());
       armDestM.setClear();
+      dummyint = systemEnable.getStatus() ? systemEnable.setprepresent() : systemEnable.setpreclear();
+      systemEnable.setpreval(systemEnable.getValue());
+      systemEnable.setClear();
       pusherExtend.sethook();
       pusherExtend.setClear();
       vacOn.sethook();
@@ -174,6 +192,7 @@ public class Controller extends ClockDomain{
         vacOnM.gethook();
         armSourceM.gethook();
         armDestM.gethook();
+        systemEnable.gethook();
       }
       runFinisher();
       if(active[1] == 0){

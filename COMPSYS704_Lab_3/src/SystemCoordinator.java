@@ -22,6 +22,7 @@ public class SystemCoordinator extends ClockDomain{
   public Signal liquid2Val = new Signal("liquid2Val", Signal.INPUT);
   public Signal bottleAmount = new Signal("bottleAmount", Signal.INPUT);
   public Signal largeSize = new Signal("largeSize", Signal.INPUT);
+  public Signal stop = new Signal("stop", Signal.INPUT);
   public Signal pusherRetracted = new Signal("pusherRetracted", Signal.OUTPUT);
   public Signal pusherExtended = new Signal("pusherExtended", Signal.OUTPUT);
   public Signal WPgripped = new Signal("WPgripped", Signal.OUTPUT);
@@ -38,20 +39,20 @@ public class SystemCoordinator extends ClockDomain{
   public Signal largeSizeE = new Signal("largeSizeE", Signal.OUTPUT);
   public Signal capAdd = new Signal("capAdd", Signal.OUTPUT);
   public Signal capAddE = new Signal("capAddE", Signal.OUTPUT);
-  private int S442 = 1;
-  private int S260 = 1;
-  private int S244 = 1;
-  private int S268 = 1;
-  private int S324 = 1;
-  private int S286 = 1;
-  private int S341 = 1;
-  private int S329 = 1;
+  private int S443 = 1;
+  private int S295 = 1;
+  private int S273 = 1;
+  private int S303 = 1;
+  private int S335 = 1;
+  private int S313 = 1;
+  private int S352 = 1;
+  private int S340 = 1;
   
   private int[] ends = new int[6];
   private int[] tdone = new int[6];
   
-  public void thread452(int [] tdone, int [] ends){
-        switch(S341){
+  public void thread453(int [] tdone, int [] ends){
+        switch(S352){
       case 0 : 
         active[5]=0;
         ends[5]=0;
@@ -59,9 +60,9 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S329){
+        switch(S340){
           case 0 : 
-            capAddE.setPresent();//sysj\SystemCoordinator.sysj line: 53, column: 32
+            capAddE.setPresent();//sysj\SystemCoordinator.sysj line: 58, column: 32
             currsigs.addElement(capAddE);
             active[5]=1;
             ends[5]=1;
@@ -69,20 +70,68 @@ public class SystemCoordinator extends ClockDomain{
             break;
           
           case 1 : 
-            S329=1;
-            S329=0;
-            if(capAdd.getprestatus()){//sysj\SystemCoordinator.sysj line: 53, column: 24
-              capAddE.setPresent();//sysj\SystemCoordinator.sysj line: 53, column: 32
+            S340=1;
+            S340=0;
+            if(capAdd.getprestatus()){//sysj\SystemCoordinator.sysj line: 58, column: 24
+              capAddE.setPresent();//sysj\SystemCoordinator.sysj line: 58, column: 32
               currsigs.addElement(capAddE);
               active[5]=1;
               ends[5]=1;
               tdone[5]=1;
             }
             else {
-              S329=1;
+              S340=1;
               active[5]=1;
               ends[5]=1;
               tdone[5]=1;
+            }
+            break;
+          
+        }
+        break;
+      
+    }
+  }
+
+  public void thread452(int [] tdone, int [] ends){
+        switch(S335){
+      case 0 : 
+        active[4]=0;
+        ends[4]=0;
+        tdone[4]=1;
+        break;
+      
+      case 1 : 
+        switch(S313){
+          case 0 : 
+            if(largeSize.getprestatus()){//sysj\SystemCoordinator.sysj line: 47, column: 10
+              S313=1;
+              largeSizeE.setPresent();//sysj\SystemCoordinator.sysj line: 51, column: 5
+              currsigs.addElement(largeSizeE);
+              active[4]=1;
+              ends[4]=1;
+              tdone[4]=1;
+            }
+            else {
+              active[4]=1;
+              ends[4]=1;
+              tdone[4]=1;
+            }
+            break;
+          
+          case 1 : 
+            if(!largeSize.getprestatus()){//sysj\SystemCoordinator.sysj line: 48, column: 10
+              S313=0;
+              active[4]=1;
+              ends[4]=1;
+              tdone[4]=1;
+            }
+            else {
+              largeSizeE.setPresent();//sysj\SystemCoordinator.sysj line: 51, column: 5
+              currsigs.addElement(largeSizeE);
+              active[4]=1;
+              ends[4]=1;
+              tdone[4]=1;
             }
             break;
           
@@ -93,56 +142,7 @@ public class SystemCoordinator extends ClockDomain{
   }
 
   public void thread451(int [] tdone, int [] ends){
-        switch(S324){
-      case 0 : 
-        active[4]=0;
-        ends[4]=0;
-        tdone[4]=1;
-        break;
-      
-      case 1 : 
-        switch(S286){
-          case 0 : 
-            if(largeSize.getprestatus()){//sysj\SystemCoordinator.sysj line: 43, column: 10
-              S286=1;
-              System.out.println("It works for size");//sysj\SystemCoordinator.sysj line: 45, column: 5
-              largeSizeE.setPresent();//sysj\SystemCoordinator.sysj line: 46, column: 5
-              currsigs.addElement(largeSizeE);
-              active[4]=1;
-              ends[4]=1;
-              tdone[4]=1;
-            }
-            else {
-              active[4]=1;
-              ends[4]=1;
-              tdone[4]=1;
-            }
-            break;
-          
-          case 1 : 
-            if(!largeSize.getprestatus()){//sysj\SystemCoordinator.sysj line: 44, column: 10
-              S286=0;
-              active[4]=1;
-              ends[4]=1;
-              tdone[4]=1;
-            }
-            else {
-              largeSizeE.setPresent();//sysj\SystemCoordinator.sysj line: 46, column: 5
-              currsigs.addElement(largeSizeE);
-              active[4]=1;
-              ends[4]=1;
-              tdone[4]=1;
-            }
-            break;
-          
-        }
-        break;
-      
-    }
-  }
-
-  public void thread450(int [] tdone, int [] ends){
-        switch(S268){
+        switch(S303){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -150,10 +150,10 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        if(enable.getprestatus()){//sysj\SystemCoordinator.sysj line: 34, column: 10
-          System.out.println((liquid1Val.getpreval() == null ? null : ((Integer)liquid1Val.getpreval())));//sysj\SystemCoordinator.sysj line: 35, column: 4
-          System.out.println((liquid2Val.getpreval() == null ? null : ((Integer)liquid2Val.getpreval())));//sysj\SystemCoordinator.sysj line: 36, column: 4
-          System.out.println((bottleAmount.getpreval() == null ? null : ((Integer)bottleAmount.getpreval())));//sysj\SystemCoordinator.sysj line: 37, column: 4
+        if(enable.getprestatus()){//sysj\SystemCoordinator.sysj line: 37, column: 10
+          System.out.println((liquid1Val.getpreval() == null ? null : ((Integer)liquid1Val.getpreval())));//sysj\SystemCoordinator.sysj line: 38, column: 4
+          System.out.println((liquid2Val.getpreval() == null ? null : ((Integer)liquid2Val.getpreval())));//sysj\SystemCoordinator.sysj line: 39, column: 4
+          System.out.println((bottleAmount.getpreval() == null ? null : ((Integer)bottleAmount.getpreval())));//sysj\SystemCoordinator.sysj line: 40, column: 4
           active[3]=1;
           ends[3]=1;
           tdone[3]=1;
@@ -168,8 +168,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread449(int [] tdone, int [] ends){
-        switch(S260){
+  public void thread450(int [] tdone, int [] ends){
+        switch(S295){
       case 0 : 
         active[2]=0;
         ends[2]=0;
@@ -177,13 +177,12 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S244){
+        switch(S273){
           case 0 : 
-            if(enable.getprestatus()){//sysj\SystemCoordinator.sysj line: 26, column: 10
-              System.out.println("It works again");//sysj\SystemCoordinator.sysj line: 27, column: 4
-              S244=1;
-              capAdd.setPresent();//sysj\SystemCoordinator.sysj line: 28, column: 4
-              currsigs.addElement(capAdd);
+            if(enable.getprestatus()){//sysj\SystemCoordinator.sysj line: 28, column: 10
+              S273=1;
+              systemEnable.setPresent();//sysj\SystemCoordinator.sysj line: 30, column: 4
+              currsigs.addElement(systemEnable);
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -196,11 +195,19 @@ public class SystemCoordinator extends ClockDomain{
             break;
           
           case 1 : 
-            capAdd.setPresent();//sysj\SystemCoordinator.sysj line: 28, column: 4
-            currsigs.addElement(capAdd);
-            active[2]=1;
-            ends[2]=1;
-            tdone[2]=1;
+            if(stop.getprestatus()){//sysj\SystemCoordinator.sysj line: 29, column: 10
+              S273=0;
+              active[2]=1;
+              ends[2]=1;
+              tdone[2]=1;
+            }
+            else {
+              systemEnable.setPresent();//sysj\SystemCoordinator.sysj line: 30, column: 4
+              currsigs.addElement(systemEnable);
+              active[2]=1;
+              ends[2]=1;
+              tdone[2]=1;
+            }
             break;
           
         }
@@ -209,42 +216,42 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread447(int [] tdone, int [] ends){
-        S341=1;
-    S329=0;
-    if(capAdd.getprestatus()){//sysj\SystemCoordinator.sysj line: 53, column: 24
-      capAddE.setPresent();//sysj\SystemCoordinator.sysj line: 53, column: 32
+  public void thread448(int [] tdone, int [] ends){
+        S352=1;
+    S340=0;
+    if(capAdd.getprestatus()){//sysj\SystemCoordinator.sysj line: 58, column: 24
+      capAddE.setPresent();//sysj\SystemCoordinator.sysj line: 58, column: 32
       currsigs.addElement(capAddE);
       active[5]=1;
       ends[5]=1;
       tdone[5]=1;
     }
     else {
-      S329=1;
+      S340=1;
       active[5]=1;
       ends[5]=1;
       tdone[5]=1;
     }
   }
 
-  public void thread446(int [] tdone, int [] ends){
-        S324=1;
-    S286=0;
+  public void thread447(int [] tdone, int [] ends){
+        S335=1;
+    S313=0;
     active[4]=1;
     ends[4]=1;
     tdone[4]=1;
   }
 
-  public void thread445(int [] tdone, int [] ends){
-        S268=1;
+  public void thread446(int [] tdone, int [] ends){
+        S303=1;
     active[3]=1;
     ends[3]=1;
     tdone[3]=1;
   }
 
-  public void thread444(int [] tdone, int [] ends){
-        S260=1;
-    S244=0;
+  public void thread445(int [] tdone, int [] ends){
+        S295=1;
+    S273=0;
     active[2]=1;
     ends[2]=1;
     tdone[2]=1;
@@ -257,67 +264,67 @@ public class SystemCoordinator extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S442){
+      switch(S443){
         case 0 : 
-          S442=0;
+          S443=0;
           break RUN;
         
         case 1 : 
-          S442=2;
-          S442=2;
-          new Thread(new GUI()).start();//sysj\SystemCoordinator.sysj line: 22, column: 2
-          thread444(tdone,ends);
+          S443=2;
+          S443=2;
+          new Thread(new GUI()).start();//sysj\SystemCoordinator.sysj line: 24, column: 2
           thread445(tdone,ends);
           thread446(tdone,ends);
           thread447(tdone,ends);
-          int biggest448 = 0;
-          if(ends[2]>=biggest448){
-            biggest448=ends[2];
+          thread448(tdone,ends);
+          int biggest449 = 0;
+          if(ends[2]>=biggest449){
+            biggest449=ends[2];
           }
-          if(ends[3]>=biggest448){
-            biggest448=ends[3];
+          if(ends[3]>=biggest449){
+            biggest449=ends[3];
           }
-          if(ends[4]>=biggest448){
-            biggest448=ends[4];
+          if(ends[4]>=biggest449){
+            biggest449=ends[4];
           }
-          if(ends[5]>=biggest448){
-            biggest448=ends[5];
+          if(ends[5]>=biggest449){
+            biggest449=ends[5];
           }
-          if(biggest448 == 1){
+          if(biggest449 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
         
         case 2 : 
-          thread449(tdone,ends);
           thread450(tdone,ends);
           thread451(tdone,ends);
           thread452(tdone,ends);
-          int biggest453 = 0;
-          if(ends[2]>=biggest453){
-            biggest453=ends[2];
+          thread453(tdone,ends);
+          int biggest454 = 0;
+          if(ends[2]>=biggest454){
+            biggest454=ends[2];
           }
-          if(ends[3]>=biggest453){
-            biggest453=ends[3];
+          if(ends[3]>=biggest454){
+            biggest454=ends[3];
           }
-          if(ends[4]>=biggest453){
-            biggest453=ends[4];
+          if(ends[4]>=biggest454){
+            biggest454=ends[4];
           }
-          if(ends[5]>=biggest453){
-            biggest453=ends[5];
+          if(ends[5]>=biggest454){
+            biggest454=ends[5];
           }
-          if(biggest453 == 1){
+          if(biggest454 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest453 == 0){
-            S442=0;
+          if(biggest454 == 0){
+            S443=0;
             active[1]=0;
             ends[1]=0;
-            S442=0;
+            S443=0;
             break RUN;
           }
         
@@ -357,6 +364,7 @@ public class SystemCoordinator extends ClockDomain{
           liquid2Val.gethook();
           bottleAmount.gethook();
           largeSize.gethook();
+          stop.gethook();
           df = true;
         }
         runClockDomain();
@@ -371,6 +379,7 @@ public class SystemCoordinator extends ClockDomain{
       liquid2Val.setpreclear();
       bottleAmount.setpreclear();
       largeSize.setpreclear();
+      stop.setpreclear();
       pusherRetracted.setpreclear();
       pusherExtended.setpreclear();
       WPgripped.setpreclear();
@@ -423,6 +432,9 @@ public class SystemCoordinator extends ClockDomain{
       dummyint = largeSize.getStatus() ? largeSize.setprepresent() : largeSize.setpreclear();
       largeSize.setpreval(largeSize.getValue());
       largeSize.setClear();
+      dummyint = stop.getStatus() ? stop.setprepresent() : stop.setpreclear();
+      stop.setpreval(stop.getValue());
+      stop.setClear();
       pusherRetracted.sethook();
       pusherRetracted.setClear();
       pusherExtended.sethook();
@@ -467,6 +479,7 @@ public class SystemCoordinator extends ClockDomain{
         liquid2Val.gethook();
         bottleAmount.gethook();
         largeSize.gethook();
+        stop.gethook();
       }
       runFinisher();
       if(active[1] == 0){

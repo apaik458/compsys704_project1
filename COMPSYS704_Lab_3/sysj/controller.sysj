@@ -3,7 +3,18 @@ Controller(
 		output signal pusherExtend,vacOn,armSource,armDest;
 		input Integer signal mode;
 		input signal pusherExtendM,vacOnM,armSourceM,armDestM;
+		
+		// from system coorindator
+		input signal systemEnable;
 		)
 ->{
 /* TODO: Write control-logic */
+	{
+		while(true) {
+			await(systemEnable);
+			abort(!systemEnable){
+				System.out.println("enable works");
+			}
+		}
+	}
 }
