@@ -1,4 +1,5 @@
-
+import run.GUI;
+ 
 Plant(	
 		// Global ////////////////////////////////////////////////////////
 		input signal  systemEnable; 
@@ -276,5 +277,19 @@ Plant(
 			}
 		}
 		pause;}}
+	||
+	{// To viz
+		{while(true){present(pusherRetracted){emit pusherRetractedE;} pause;}}
+		||
+		{while(true){present(pusherExtended){emit pusherExtendedE;} pause;}}
+		||
+		{while(true){present(WPgripped){emit WPgrippedE;} pause;}}
+		||
+		{while(true){present(armAtSource){emit armAtSourceE;} pause;}}
+		||
+		{while(true){present(armAtDest){emit armAtDestE;} pause;}}
+		||
+		{while(true){present(empty){emit emptyE;} pause;}}
+	}
 
 }
