@@ -36,7 +36,7 @@ public class LoaderVizWorker extends Worker{
 			States.LARGE_SIZE = status;
 			break;
 		case "bottleAtPos1E":
-<<<<<<< HEAD
+
 			States.bPos1 = status;
 			break;
 		case "bottleAtPos2E":
@@ -50,15 +50,6 @@ public class LoaderVizWorker extends Worker{
 			break;
 		case "bottleAtPos5E":
 			States.bPos5 = status;
-=======
-			States.BOTTLE_AT_POS1 = status;
-			break;
-		case "bottleAtPos5E":
-			States.BOTTLE_AT_POS5 = status;
-			break;			
-		case "motConveyorOnOffE":
-			States.CONVEYOR_MOVE = status;
->>>>>>> c214799972727dbaa52af8294a2de7df0643b1b9
 			break;
 		default: 
 			System.err.println("Wrong sig name : "+signame);

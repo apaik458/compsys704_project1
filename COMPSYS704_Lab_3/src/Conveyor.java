@@ -16,12 +16,130 @@ public class Conveyor extends ClockDomain{
   public Signal bottleAtPos5 = new Signal("bottleAtPos5", Signal.INPUT);
   public Signal systemEnable = new Signal("systemEnable", Signal.INPUT);
   public Signal motConveyorOnOff = new Signal("motConveyorOnOff", Signal.OUTPUT);
-  private int S82 = 1;
-  private int S11 = 1;
+  public Signal motorPos1On = new Signal("motorPos1On", Signal.OUTPUT);
+  public Signal motorPos5On = new Signal("motorPos5On", Signal.OUTPUT);
+  private int S157 = 1;
+  private int S15 = 1;
+  private int S7 = 1;
+  private int S12 = 1;
+  private int S20 = 1;
+  private int S25 = 1;
   
-  private int[] ends = new int[16];
-  private int[] tdone = new int[16];
+  private int[] ends = new int[20];
+  private int[] tdone = new int[20];
   
+  public void thread631(int [] tdone, int [] ends){
+        switch(S25){
+      case 0 : 
+        active[5]=0;
+        ends[5]=0;
+        tdone[5]=1;
+        break;
+      
+      case 1 : 
+        motorPos1On.setPresent();//sysj\controller.sysj line: 29, column: 38
+        currsigs.addElement(motorPos1On);
+        active[5]=1;
+        ends[5]=1;
+        tdone[5]=1;
+        break;
+      
+    }
+  }
+
+  public void thread630(int [] tdone, int [] ends){
+        switch(S20){
+      case 0 : 
+        active[4]=0;
+        ends[4]=0;
+        tdone[4]=1;
+        break;
+      
+      case 1 : 
+        motConveyorOnOff.setPresent();//sysj\controller.sysj line: 29, column: 7
+        currsigs.addElement(motConveyorOnOff);
+        active[4]=1;
+        ends[4]=1;
+        tdone[4]=1;
+        break;
+      
+    }
+  }
+
+  public void thread628(int [] tdone, int [] ends){
+        S25=1;
+    motorPos1On.setPresent();//sysj\controller.sysj line: 29, column: 38
+    currsigs.addElement(motorPos1On);
+    active[5]=1;
+    ends[5]=1;
+    tdone[5]=1;
+  }
+
+  public void thread627(int [] tdone, int [] ends){
+        S20=1;
+    motConveyorOnOff.setPresent();//sysj\controller.sysj line: 29, column: 7
+    currsigs.addElement(motConveyorOnOff);
+    active[4]=1;
+    ends[4]=1;
+    tdone[4]=1;
+  }
+
+  public void thread625(int [] tdone, int [] ends){
+        switch(S12){
+      case 0 : 
+        active[3]=0;
+        ends[3]=0;
+        tdone[3]=1;
+        break;
+      
+      case 1 : 
+        motorPos5On.setPresent();//sysj\controller.sysj line: 19, column: 38
+        currsigs.addElement(motorPos5On);
+        active[3]=1;
+        ends[3]=1;
+        tdone[3]=1;
+        break;
+      
+    }
+  }
+
+  public void thread624(int [] tdone, int [] ends){
+        switch(S7){
+      case 0 : 
+        active[2]=0;
+        ends[2]=0;
+        tdone[2]=1;
+        break;
+      
+      case 1 : 
+        motConveyorOnOff.setPresent();//sysj\controller.sysj line: 19, column: 7
+        currsigs.addElement(motConveyorOnOff);
+        active[2]=1;
+        ends[2]=1;
+        tdone[2]=1;
+        break;
+      
+    }
+  }
+
+  public void thread622(int [] tdone, int [] ends){
+        S25=1;
+    motorPos1On.setPresent();//sysj\controller.sysj line: 29, column: 38
+    currsigs.addElement(motorPos1On);
+    active[5]=1;
+    ends[5]=1;
+    tdone[5]=1;
+  }
+
+  public void thread621(int [] tdone, int [] ends){
+        S20=1;
+    motConveyorOnOff.setPresent();//sysj\controller.sysj line: 29, column: 7
+    currsigs.addElement(motConveyorOnOff);
+    active[4]=1;
+    ends[4]=1;
+    tdone[4]=1;
+  }
+
   public void runClockDomain(){
     for(int i=0;i<ends.length;i++){
       ends[i] = 0;
@@ -29,97 +147,135 @@ public class Conveyor extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S82){
+      switch(S157){
         case 0 : 
-          S82=0;
+          S157=0;
           break RUN;
         
         case 1 : 
-          S82=2;
-          S82=2;
-          S11=0;
+          S157=2;
+          S157=2;
+          S15=0;
+          motConveyorOnOff.setPresent();//sysj\controller.sysj line: 13, column: 3
+          currsigs.addElement(motConveyorOnOff);
           active[1]=1;
           ends[1]=1;
           break RUN;
         
         case 2 : 
-          switch(S11){
+          switch(S15){
             case 0 : 
-              if(systemEnable.getprestatus()){//sysj\controller.sysj line: 11, column: 9
-                S11=1;
-                if(bottleAtPos5.getprestatus()){//sysj\controller.sysj line: 14, column: 12
-                  motConveyorOnOff.setPresent();//sysj\controller.sysj line: 17, column: 7
-                  currsigs.addElement(motConveyorOnOff);
-                  active[1]=1;
-                  ends[1]=1;
-                  break RUN;
-                }
-                else {
-                  S11=2;
-                  if(!bottleAtPos1.getprestatus() && !bottleAtPos5.getprestatus() && !bottleLeftPos5.getprestatus()){//sysj\controller.sysj line: 23, column: 12
-                    motConveyorOnOff.setPresent();//sysj\controller.sysj line: 27, column: 7
-                    currsigs.addElement(motConveyorOnOff);
-                    active[1]=1;
-                    ends[1]=1;
-                    break RUN;
-                  }
-                  else {
-                    S11=3;
-                    active[1]=1;
-                    ends[1]=1;
-                    break RUN;
-                  }
-                }
-              }
-              else {
-                active[1]=1;
-                ends[1]=1;
-                break RUN;
-              }
+              motConveyorOnOff.setPresent();//sysj\controller.sysj line: 13, column: 3
+              currsigs.addElement(motConveyorOnOff);
+              active[1]=1;
+              ends[1]=1;
+              break RUN;
             
             case 1 : 
-              if(bottleLeftPos5.getprestatus()){//sysj\controller.sysj line: 16, column: 11
-                S11=2;
-                if(!bottleAtPos1.getprestatus() && !bottleAtPos5.getprestatus() && !bottleLeftPos5.getprestatus()){//sysj\controller.sysj line: 23, column: 12
-                  motConveyorOnOff.setPresent();//sysj\controller.sysj line: 27, column: 7
-                  currsigs.addElement(motConveyorOnOff);
-                  active[1]=1;
-                  ends[1]=1;
-                  break RUN;
+              if(bottleLeftPos5.getprestatus()){//sysj\controller.sysj line: 18, column: 11
+                S15=2;
+                if(!bottleAtPos1.getprestatus() && !bottleAtPos5.getprestatus() && !bottleLeftPos5.getprestatus()){//sysj\controller.sysj line: 25, column: 12
+                  thread621(tdone,ends);
+                  thread622(tdone,ends);
+                  int biggest623 = 0;
+                  if(ends[4]>=biggest623){
+                    biggest623=ends[4];
+                  }
+                  if(ends[5]>=biggest623){
+                    biggest623=ends[5];
+                  }
+                  if(biggest623 == 1){
+                    active[1]=1;
+                    ends[1]=1;
+                    break RUN;
+                  }
                 }
                 else {
-                  S11=3;
+                  S15=3;
                   active[1]=1;
                   ends[1]=1;
                   break RUN;
                 }
               }
               else {
-                motConveyorOnOff.setPresent();//sysj\controller.sysj line: 17, column: 7
-                currsigs.addElement(motConveyorOnOff);
-                active[1]=1;
-                ends[1]=1;
-                break RUN;
+                thread624(tdone,ends);
+                thread625(tdone,ends);
+                int biggest626 = 0;
+                if(ends[2]>=biggest626){
+                  biggest626=ends[2];
+                }
+                if(ends[3]>=biggest626){
+                  biggest626=ends[3];
+                }
+                if(biggest626 == 1){
+                  active[1]=1;
+                  ends[1]=1;
+                  break RUN;
+                }
+                //FINXME code
+                if(biggest626 == 0){
+                  S15=2;
+                  if(!bottleAtPos1.getprestatus() && !bottleAtPos5.getprestatus() && !bottleLeftPos5.getprestatus()){//sysj\controller.sysj line: 25, column: 12
+                    thread627(tdone,ends);
+                    thread628(tdone,ends);
+                    int biggest629 = 0;
+                    if(ends[4]>=biggest629){
+                      biggest629=ends[4];
+                    }
+                    if(ends[5]>=biggest629){
+                      biggest629=ends[5];
+                    }
+                    if(biggest629 == 1){
+                      active[1]=1;
+                      ends[1]=1;
+                      break RUN;
+                    }
+                  }
+                  else {
+                    S15=3;
+                    active[1]=1;
+                    ends[1]=1;
+                    break RUN;
+                  }
+                }
               }
             
             case 2 : 
-              if(bottleAtPos1.getprestatus()){//sysj\controller.sysj line: 25, column: 11
-                S11=3;
+              if(bottleAtPos1.getprestatus()){//sysj\controller.sysj line: 27, column: 11
+                S15=3;
                 active[1]=1;
                 ends[1]=1;
                 break RUN;
               }
               else {
-                motConveyorOnOff.setPresent();//sysj\controller.sysj line: 27, column: 7
-                currsigs.addElement(motConveyorOnOff);
-                active[1]=1;
-                ends[1]=1;
-                break RUN;
+                thread630(tdone,ends);
+                thread631(tdone,ends);
+                int biggest632 = 0;
+                if(ends[4]>=biggest632){
+                  biggest632=ends[4];
+                }
+                if(ends[5]>=biggest632){
+                  biggest632=ends[5];
+                }
+                if(biggest632 == 1){
+                  active[1]=1;
+                  ends[1]=1;
+                  break RUN;
+                }
+                //FINXME code
+                if(biggest632 == 0){
+                  S15=3;
+                  active[1]=1;
+                  ends[1]=1;
+                  break RUN;
+                }
               }
             
             case 3 : 
-              S11=3;
-              S11=0;
+              S15=3;
+              S15=0;
+              motConveyorOnOff.setPresent();//sysj\controller.sysj line: 13, column: 3
+              currsigs.addElement(motConveyorOnOff);
               active[1]=1;
               ends[1]=1;
               break RUN;
@@ -131,9 +287,9 @@ public class Conveyor extends ClockDomain{
   }
 
   public void init(){
-    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] active1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    char [] paused1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    char [] suspended1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     paused = paused1;
     active = active1;
     suspended = suspended1;
@@ -165,6 +321,8 @@ public class Conveyor extends ClockDomain{
       bottleAtPos5.setpreclear();
       systemEnable.setpreclear();
       motConveyorOnOff.setpreclear();
+      motorPos1On.setpreclear();
+      motorPos5On.setpreclear();
       int dummyint = 0;
       for(int qw=0;qw<currsigs.size();++qw){
         dummyint = ((Signal)currsigs.elementAt(qw)).getStatus() ? ((Signal)currsigs.elementAt(qw)).setprepresent() : ((Signal)currsigs.elementAt(qw)).setpreclear();
@@ -185,6 +343,10 @@ public class Conveyor extends ClockDomain{
       systemEnable.setClear();
       motConveyorOnOff.sethook();
       motConveyorOnOff.setClear();
+      motorPos1On.sethook();
+      motorPos1On.setClear();
+      motorPos5On.sethook();
+      motorPos5On.setClear();
       if(paused[1]!=0 || suspended[1]!=0 || active[1]!=1);
       else{
         bottleAtPos1.gethook();

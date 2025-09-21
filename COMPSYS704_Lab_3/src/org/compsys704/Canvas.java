@@ -20,6 +20,8 @@ public class Canvas extends JPanel {
 	// storage
 	BufferedImage s100ml;
 	BufferedImage s200ml;
+	BufferedImage source100ml;
+	BufferedImage source200ml;
 	
 	// rotary turntable
 	BufferedImage rotaryTable;
@@ -62,6 +64,8 @@ public class Canvas extends JPanel {
 			filler = ImageIO.read(new File("res/filler.png"));
 			s100ml = ImageIO.read(new File("res/100mlDest.png"));
 			s200ml = ImageIO.read(new File("res/200mlDest.png"));
+			source100ml = ImageIO.read(new File("res/100mlSource.png"));
+			source200ml = ImageIO.read(new File("res/200mlSource.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(1);;
@@ -80,8 +84,10 @@ public class Canvas extends JPanel {
 		
 		if (States.LARGE_SIZE){
 			g.drawImage(s200ml, 200, 0, null);
+			g.drawImage(source200ml, 50, 0, null);
 		}else{
 			g.drawImage(s100ml, 200, 0, null);
+			g.drawImage(source100ml, 50, 0, null);
 		}
 		
 		if (States.Conveyor1){
