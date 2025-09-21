@@ -39,20 +39,20 @@ public class SystemCoordinator extends ClockDomain{
   public Signal largeSizeE = new Signal("largeSizeE", Signal.OUTPUT);
   public Signal capAdd = new Signal("capAdd", Signal.OUTPUT);
   public Signal capAddE = new Signal("capAddE", Signal.OUTPUT);
-  private int S443 = 1;
-  private int S295 = 1;
-  private int S273 = 1;
-  private int S303 = 1;
-  private int S335 = 1;
-  private int S313 = 1;
-  private int S352 = 1;
-  private int S340 = 1;
+  private int S2303 = 1;
+  private int S2155 = 1;
+  private int S2133 = 1;
+  private int S2163 = 1;
+  private int S2195 = 1;
+  private int S2173 = 1;
+  private int S2212 = 1;
+  private int S2200 = 1;
   
   private int[] ends = new int[6];
   private int[] tdone = new int[6];
   
-  public void thread453(int [] tdone, int [] ends){
-        switch(S352){
+  public void thread2313(int [] tdone, int [] ends){
+        switch(S2212){
       case 0 : 
         active[5]=0;
         ends[5]=0;
@@ -60,7 +60,7 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S340){
+        switch(S2200){
           case 0 : 
             capAddE.setPresent();//sysj\SystemCoordinator.sysj line: 58, column: 32
             currsigs.addElement(capAddE);
@@ -70,8 +70,8 @@ public class SystemCoordinator extends ClockDomain{
             break;
           
           case 1 : 
-            S340=1;
-            S340=0;
+            S2200=1;
+            S2200=0;
             if(capAdd.getprestatus()){//sysj\SystemCoordinator.sysj line: 58, column: 24
               capAddE.setPresent();//sysj\SystemCoordinator.sysj line: 58, column: 32
               currsigs.addElement(capAddE);
@@ -80,7 +80,7 @@ public class SystemCoordinator extends ClockDomain{
               tdone[5]=1;
             }
             else {
-              S340=1;
+              S2200=1;
               active[5]=1;
               ends[5]=1;
               tdone[5]=1;
@@ -93,8 +93,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread452(int [] tdone, int [] ends){
-        switch(S335){
+  public void thread2312(int [] tdone, int [] ends){
+        switch(S2195){
       case 0 : 
         active[4]=0;
         ends[4]=0;
@@ -102,10 +102,10 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S313){
+        switch(S2173){
           case 0 : 
             if(largeSize.getprestatus()){//sysj\SystemCoordinator.sysj line: 47, column: 10
-              S313=1;
+              S2173=1;
               largeSizeE.setPresent();//sysj\SystemCoordinator.sysj line: 51, column: 5
               currsigs.addElement(largeSizeE);
               active[4]=1;
@@ -121,7 +121,7 @@ public class SystemCoordinator extends ClockDomain{
           
           case 1 : 
             if(!largeSize.getprestatus()){//sysj\SystemCoordinator.sysj line: 48, column: 10
-              S313=0;
+              S2173=0;
               active[4]=1;
               ends[4]=1;
               tdone[4]=1;
@@ -141,8 +141,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread451(int [] tdone, int [] ends){
-        switch(S303){
+  public void thread2311(int [] tdone, int [] ends){
+        switch(S2163){
       case 0 : 
         active[3]=0;
         ends[3]=0;
@@ -168,8 +168,8 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread450(int [] tdone, int [] ends){
-        switch(S295){
+  public void thread2310(int [] tdone, int [] ends){
+        switch(S2155){
       case 0 : 
         active[2]=0;
         ends[2]=0;
@@ -177,10 +177,10 @@ public class SystemCoordinator extends ClockDomain{
         break;
       
       case 1 : 
-        switch(S273){
+        switch(S2133){
           case 0 : 
             if(enable.getprestatus()){//sysj\SystemCoordinator.sysj line: 28, column: 10
-              S273=1;
+              S2133=1;
               systemEnable.setPresent();//sysj\SystemCoordinator.sysj line: 30, column: 4
               currsigs.addElement(systemEnable);
               active[2]=1;
@@ -196,7 +196,7 @@ public class SystemCoordinator extends ClockDomain{
           
           case 1 : 
             if(stop.getprestatus()){//sysj\SystemCoordinator.sysj line: 29, column: 10
-              S273=0;
+              S2133=0;
               active[2]=1;
               ends[2]=1;
               tdone[2]=1;
@@ -216,9 +216,9 @@ public class SystemCoordinator extends ClockDomain{
     }
   }
 
-  public void thread448(int [] tdone, int [] ends){
-        S352=1;
-    S340=0;
+  public void thread2308(int [] tdone, int [] ends){
+        S2212=1;
+    S2200=0;
     if(capAdd.getprestatus()){//sysj\SystemCoordinator.sysj line: 58, column: 24
       capAddE.setPresent();//sysj\SystemCoordinator.sysj line: 58, column: 32
       currsigs.addElement(capAddE);
@@ -227,31 +227,31 @@ public class SystemCoordinator extends ClockDomain{
       tdone[5]=1;
     }
     else {
-      S340=1;
+      S2200=1;
       active[5]=1;
       ends[5]=1;
       tdone[5]=1;
     }
   }
 
-  public void thread447(int [] tdone, int [] ends){
-        S335=1;
-    S313=0;
+  public void thread2307(int [] tdone, int [] ends){
+        S2195=1;
+    S2173=0;
     active[4]=1;
     ends[4]=1;
     tdone[4]=1;
   }
 
-  public void thread446(int [] tdone, int [] ends){
-        S303=1;
+  public void thread2306(int [] tdone, int [] ends){
+        S2163=1;
     active[3]=1;
     ends[3]=1;
     tdone[3]=1;
   }
 
-  public void thread445(int [] tdone, int [] ends){
-        S295=1;
-    S273=0;
+  public void thread2305(int [] tdone, int [] ends){
+        S2155=1;
+    S2133=0;
     active[2]=1;
     ends[2]=1;
     tdone[2]=1;
@@ -264,67 +264,67 @@ public class SystemCoordinator extends ClockDomain{
     }
     
     RUN: while(true){
-      switch(S443){
+      switch(S2303){
         case 0 : 
-          S443=0;
+          S2303=0;
           break RUN;
         
         case 1 : 
-          S443=2;
-          S443=2;
+          S2303=2;
+          S2303=2;
           new Thread(new GUI()).start();//sysj\SystemCoordinator.sysj line: 24, column: 2
-          thread445(tdone,ends);
-          thread446(tdone,ends);
-          thread447(tdone,ends);
-          thread448(tdone,ends);
-          int biggest449 = 0;
-          if(ends[2]>=biggest449){
-            biggest449=ends[2];
+          thread2305(tdone,ends);
+          thread2306(tdone,ends);
+          thread2307(tdone,ends);
+          thread2308(tdone,ends);
+          int biggest2309 = 0;
+          if(ends[2]>=biggest2309){
+            biggest2309=ends[2];
           }
-          if(ends[3]>=biggest449){
-            biggest449=ends[3];
+          if(ends[3]>=biggest2309){
+            biggest2309=ends[3];
           }
-          if(ends[4]>=biggest449){
-            biggest449=ends[4];
+          if(ends[4]>=biggest2309){
+            biggest2309=ends[4];
           }
-          if(ends[5]>=biggest449){
-            biggest449=ends[5];
+          if(ends[5]>=biggest2309){
+            biggest2309=ends[5];
           }
-          if(biggest449 == 1){
+          if(biggest2309 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
         
         case 2 : 
-          thread450(tdone,ends);
-          thread451(tdone,ends);
-          thread452(tdone,ends);
-          thread453(tdone,ends);
-          int biggest454 = 0;
-          if(ends[2]>=biggest454){
-            biggest454=ends[2];
+          thread2310(tdone,ends);
+          thread2311(tdone,ends);
+          thread2312(tdone,ends);
+          thread2313(tdone,ends);
+          int biggest2314 = 0;
+          if(ends[2]>=biggest2314){
+            biggest2314=ends[2];
           }
-          if(ends[3]>=biggest454){
-            biggest454=ends[3];
+          if(ends[3]>=biggest2314){
+            biggest2314=ends[3];
           }
-          if(ends[4]>=biggest454){
-            biggest454=ends[4];
+          if(ends[4]>=biggest2314){
+            biggest2314=ends[4];
           }
-          if(ends[5]>=biggest454){
-            biggest454=ends[5];
+          if(ends[5]>=biggest2314){
+            biggest2314=ends[5];
           }
-          if(biggest454 == 1){
+          if(biggest2314 == 1){
             active[1]=1;
             ends[1]=1;
             break RUN;
           }
           //FINXME code
-          if(biggest454 == 0){
-            S443=0;
+          if(biggest2314 == 0){
+            S2303=0;
             active[1]=0;
             ends[1]=0;
-            S443=0;
+            S2303=0;
             break RUN;
           }
         

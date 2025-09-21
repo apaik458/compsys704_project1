@@ -3,3 +3,8 @@
 /Controller.class
 /Plant.class
 /SystemCoordinator.class
+/Caploader.class
+/Capper.class
+/Conveyor.class
+/LiquidFiller.class
+/RotaryTable.class

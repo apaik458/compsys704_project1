@@ -72,9 +72,6 @@ LiquidFiller(
 				 abort(dosUnitFilled){ 
 						{sustain dosUnitValveRetract;} || {sustain valveInjectorOnOff;}
 				 }
-				 //System.out.println("FillerController: Canister at top. Turned off valve injector.");
-				 
-				 //System.out.println("FillerController: Turning on valve inlet & forcing bottle down.");
 				 abort(dosUnitEvac){
 					 {sustain valveInletOnOff;}||{sustain dosUnitValveExtend;} //Turn on valve inlet and bring bottle to bottom.
 				 }

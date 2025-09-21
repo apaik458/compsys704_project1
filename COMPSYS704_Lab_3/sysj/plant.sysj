@@ -1,11 +1,11 @@
 
 Plant(	
 		// Global ////////////////////////////////////////////////////////
-		input signal  systemEnabl; 
+		input signal  systemEnable; 
 		
 		// Conveyor/////////////////////////////////////////////////////// 
 		input signal motConveyorOnOff;
-		output signal bottleAtPos1, bottleAtPos5, RTbottleAtPos1, bottleLeftPos5;
+		output signal bottleAtPos1, bottleAtPos5, bottleLeftPos5;
 		
 		// Filler
 		input signal valveInjectorOnOff,valveInletOnOff,dosUnitValveRetract,dosUnitValveExtend; //to plant
