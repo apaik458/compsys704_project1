@@ -11,7 +11,8 @@ SystemCoordinator(
 		input signal stop;
 		output signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,empty;
 		output signal pusherRetractedE,pusherExtendedE,WPgrippedE,armAtSourceE,armAtDestE,emptyE;
-		
+
+
 		output signal systemEnable;
 		output signal largeSizeE;
 		
@@ -56,5 +57,6 @@ SystemCoordinator(
 	//to viz
 	{// To viz
 		{while(true){present(capAdd){sustain capAddE;} pause;}}
+		
 	}
 }
