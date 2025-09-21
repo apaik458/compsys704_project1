@@ -2,29 +2,31 @@
 Conveyor(
 		input signal bottleAtPos1, bottleLeftPos5, bottleAtPos5;	
 		input signal systemEnable;
-		output signal motConveyorOnOff;
+		output signal motConveyorOnOff, motorPos1On, motorPos5On;
+	
 		
 		)
 ->{
 
 	while(true) {
-		await(systemEnable);
+		
+		sustain motConveyorOnOff; 
 		//bottle has entered from left side.
 			//"ConveyorController: Request received from orch."
 			present(bottleAtPos5){
 				//"ConveyorController: Moving bottle 5..."
 				abort(bottleLeftPos5){ // run until bottle has left position5
-					{sustain motConveyorOnOff;}
+					{sustain motConveyorOnOff;} || {sustain motorPos5On;}
 				}
 				//"ConveyorController: Moved bottle 5."
 			}	
 			
 			// abort when bottle is at position 1, otherwise turn on motor
-			present(!bottleAtPos1 && !bottleAtPos5 && !bottleLeftPos5){
+			present(!bottleAtPos1 && !bottleAtPos5 && !bottleLeftPos5){	
 				//"ConveyorController: No bottle at pos 1 or pos 5."
 				abort(bottleAtPos1) {
 					//"ConveyorController: Motor is on" 
-					{sustain motConveyorOnOff;}
+					{sustain motConveyorOnOff;} || {sustain motorPos1On;}
 				}
 			}
 			//"ConveyorController: Motor is off"	
@@ -40,7 +42,7 @@ RotaryTable(
         )
 ->{
     while(true) {
-    	await(systemEnable); 
+    	//await(systemEnable); 
         // wait until it receives an OK from orchestrator
         	//await(RTbottleAtPos1);
         	await(!capOnBottleAtPos1);
@@ -64,7 +66,7 @@ LiquidFiller(
 ->{
 	
 	while(true) {
-		await(systemEnable);
+		//await(systemEnable);
 		// bottle IS at position 2 then do filler work
 		present(bottleAtPos2){
 			//"FillerController: - Bottle detected at position 2."			
@@ -105,7 +107,7 @@ Capper(
 ->{
 	signal releaseCap, raiseGripper, unclampBottle; 
 	while(true) {
-		await(systemEnable);
+		//await(systemEnable);
 		
 			present(bottleAtPos4) { //Check if a bottle is at position 4, if not, wait until it arrives.
 				{ 
@@ -158,7 +160,7 @@ Caploader(
 ->{
 	signal vacOff;
 	while(true) {	
-		await(systemEnable);
+		//await(systemEnable);
 				present (bottleAtPos3){
 					await(pusherRetracted);
 					abort(pusherExtended) { 

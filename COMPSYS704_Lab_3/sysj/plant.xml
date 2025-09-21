@@ -6,6 +6,8 @@
 			<iSignal Name="systemEnable"    Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 			<!-- Conveyor-->
 			<iSignal Name="motConveyorOnOff" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10001" />
+			<iSignal Name="motorPos1On" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10001" />
+			<iSignal Name="motorPos5On" Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10001" />
 			<oSignal Name="bottleAtPos1" To="ConveyorCD.bottleAtPos1" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10000"/>
 			<oSignal Name="bottleLeftPos5" To="ConveyorCD.bottleLeftPos5" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10000"/>
 			<oSignal Name="bottleAtPos5" To="ConveyorCD.bottleAtPos5" Class="com.systemj.ipc.SimpleClient" IP="127.0.01" Port="10000"/>
@@ -69,6 +71,8 @@
 			<oSignal Name="bottleAtPos3E" To="UI.bottleAtPos3E" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="bottleAtPos4E" To="UI.bottleAtPos4E" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
 			<oSignal Name="bottleAtPos5E" To="UI.bottleAtPos5E" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			<oSignal Name="bottleLeftPos5E" To="UI.bottleAtPos5E" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="20000" />
+			
 			
 		</ClockDomain>
 	</SubSystem>
