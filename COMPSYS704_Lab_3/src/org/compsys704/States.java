@@ -11,6 +11,9 @@ public class States {
 	
 	public static volatile boolean CAP_READY = false;
 	
+	public static volatile boolean BOTTLE_AT_POS1 = false;
+	public static volatile boolean BOTTLE_AT_POS5 = false;
+	public static volatile boolean CONVEYOR_MOVE = false;
 	//storage
 	public static volatile boolean LARGE_SIZE = false;
 	// conveyor

@@ -16,7 +16,7 @@ public class Canvas extends JPanel {
 	BufferedImage p2;
 	BufferedImage loader;
 	BufferedImage cap;
-	
+	BufferedImage capper;
 	// storage
 	BufferedImage s100ml;
 	BufferedImage s200ml;
@@ -48,6 +48,7 @@ public class Canvas extends JPanel {
 			p1 = bi.getSubimage(0, 0, 238, 68);
 			p2 = bi.getSubimage(238, 0, 172, 68);
 			cap = ImageIO.read(new File("res/cap.png"));
+			capper = ImageIO.read(new File("res/Capper.png"));
 			rotaryTable = ImageIO.read(new File("res/empty.png"));
 			rotaryTable1 = ImageIO.read(new File("res/EmptyPosition1.png"));
 			rotaryTable2 = ImageIO.read(new File("res/FilledPosition2.png"));
@@ -74,7 +75,8 @@ public class Canvas extends JPanel {
 		g.drawImage(rotaryTable, 600, 100, null);
 		g.drawImage(conveyor2, 1480, 550, null);
 		g.drawImage(loader, 1000, 0, null);
-		g.drawImage(filler, 760, 220, null);
+		g.drawImage(filler, 760, 250, null);
+		g.drawImage(capper, 1340, 250, null);
 		
 		if (States.LARGE_SIZE){
 			g.drawImage(s200ml, 200, 0, null);

@@ -1,4 +1,5 @@
-
+import run.GUI;
+ 
 Plant(	
 		// Global ////////////////////////////////////////////////////////
 		input signal  systemEnable; 
@@ -281,6 +282,7 @@ Plant(
 		pause;}}
 	||
 	{// To viz
+<<<<<<< HEAD
 		{while(true){present(bottleAtPos1){sustain bottleAtPos1E;} pause;}}
 		||
 		{while(true){present(bottleAtPos2){sustain bottleAtPos2E;} pause;}}
@@ -290,6 +292,19 @@ Plant(
 		{while(true){present(bottleAtPos4){sustain bottleAtPos4E;} pause;}}
 		||
 		{while(true){present(bottleAtPos5){sustain bottleAtPos5E;} pause;}}
+=======
+		{while(true){present(pusherRetracted){emit pusherRetractedE;} pause;}}
+		||
+		{while(true){present(pusherExtended){emit pusherExtendedE;} pause;}}
+		||
+		{while(true){present(WPgripped){emit WPgrippedE;} pause;}}
+		||
+		{while(true){present(armAtSource){emit armAtSourceE;} pause;}}
+		||
+		{while(true){present(armAtDest){emit armAtDestE;} pause;}}
+		||
+		{while(true){present(empty){emit emptyE;} pause;}}
+>>>>>>> c214799972727dbaa52af8294a2de7df0643b1b9
 	}
 
 }
