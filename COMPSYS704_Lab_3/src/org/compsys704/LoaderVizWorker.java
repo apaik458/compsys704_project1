@@ -32,6 +32,9 @@ public class LoaderVizWorker extends Worker{
 		case "capAddE":
 			States.CAP_ADD = status;
 			break;
+		case "largeSizeE":
+			States.LARGE_SIZE = status;
+			break;
 		default: 
 			System.err.println("Wrong sig name : "+signame);
 			System.exit(1);
@@ -39,7 +42,8 @@ public class LoaderVizWorker extends Worker{
 	}
 	
 	
-	static final List<String> signames = Arrays.asList("pusherRetractedE","pusherExtendedE","WPgrippedE","armAtSourceE","armAtDestE","emptyE","capAddE");
+	static final List<String> signames = Arrays.asList("pusherRetractedE","pusherExtendedE","WPgrippedE",
+			"armAtSourceE","armAtDestE","emptyE","capAddE","largeSizeE");
 	
 	@Override
 	public boolean hasSignal(String sn) {

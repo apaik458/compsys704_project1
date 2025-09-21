@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -14,6 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.JRadioButton;
+
+import com.systemj.netapi.SimpleClient;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CapLoader extends JFrame {
     private JPanel panel;
@@ -107,37 +113,60 @@ public class CapLoader extends JFrame {
         liquidPanel.add(l2Panel);
 
         // ---- Second row: Bottle size + Amount ----
-        JPanel optionsPanel = new JPanel(new GridLayout(1, 3, 5, 5));
-        JCheckBox smallBottle = new JCheckBox("Small Bottle");
-        
+        JPanel optionsPanel = new JPanel(new GridLayout(1, 2, 5, 5));
+
+        // One checkbox for bottle size (unchecked = small, checked = large)
         JCheckBox largeBottle = new JCheckBox("Large Bottle");
+        largeBottle.addItemListener(new SignalCheckBoxClient(Ports.PORT_ABS_UI, Ports.SIZE_SIGNAL));
         JLabel amountLabel = new JLabel("Amount");
         JTextField amountField = new JTextField("1", 5);
 
-        optionsPanel.add(smallBottle);
         optionsPanel.add(largeBottle);
         JPanel amountPanel = new JPanel(new GridLayout(1, 2));
         amountPanel.add(amountLabel);
         amountPanel.add(amountField);
         optionsPanel.add(amountPanel);
 
-        // ---- Third row: Start button ----
-        JButton startPOS = new JButton("Start POS");
-        startPOS.addActionListener(new SignalClient(Ports.PORT_ABS_UI, Ports.ENABLE_SIGNAL));
-//        (e -> {
-//            SignalClient sc = new SignalClient(Ports.PORT_ABS_UI, Ports.ENABLE_SIGNAL);
-//            new Thread(() -> {
-//                for (int i = 0; i < 5; i++) { // emit for ~100ms
-//                    sc.actionPerformed(null);
-//                    try { Thread.sleep(20); } catch (InterruptedException ex) {}
-//                }
-//            }).start();
-//        });
+        // ---- Third row: Start + Enable buttons ----
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 5, 5));
+        JButton setL1 = new JButton("set Liquid1");
+        JButton setL2 = new JButton("set Liquid2");
+        JButton setAMT = new JButton("set Amount");
+        JButton enable = new JButton("Enable");
+        enable.addActionListener(new SignalClient(Ports.PORT_ABS_UI, Ports.ENABLE_SIGNAL));
+        SignalRadioClient src1 = new SignalRadioClient(Ports.PORT_ABS_UI, Ports.SIGNAL_LIQUID1);
+        SignalRadioClient src2 = new SignalRadioClient(Ports.PORT_ABS_UI, Ports.SIGNAL_LIQUID2);
+        SignalRadioClient src3 = new SignalRadioClient(Ports.PORT_ABS_UI, Ports.SIGNAL_BOTTLEAMT);
+        setL1.addActionListener(e -> {
+            String v1 = liquid1Field.getText().trim();
+            setL1.setActionCommand(v1);      // dynamically set action command
+            src1.actionPerformed(
+                new ActionEvent(e.getSource(), e.getID(), v1)
+            );
+        });
+        setL2.addActionListener(e -> {
+            String v2 = liquid2Field.getText().trim();
+            setL2.setActionCommand(v2);
+            src2.actionPerformed(
+                new ActionEvent(e.getSource(), e.getID(), v2)
+            );
+        });
+        setAMT.addActionListener(e -> {
+            String amt = amountField.getText().trim();
+            setAMT.setActionCommand(amt);
+            src3.actionPerformed(
+                new ActionEvent(e.getSource(), e.getID(), amt)
+            );
+        });
+        buttonPanel.add(setL1);
+        buttonPanel.add(setL2);
+        buttonPanel.add(setAMT);
+        buttonPanel.add(enable);
 
         // Add everything to posPanel
         posPanel.add(liquidPanel);
         posPanel.add(optionsPanel);
-        posPanel.add(startPOS);
+        posPanel.add(buttonPanel);
 
         c.gridy = 1;
         c.weighty = 0;

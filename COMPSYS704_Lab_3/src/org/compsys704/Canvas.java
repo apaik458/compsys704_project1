@@ -17,12 +17,18 @@ public class Canvas extends JPanel {
 	BufferedImage loader;
 	BufferedImage cap;
 	
+	// storage
+	BufferedImage s100ml;
+	BufferedImage s200ml;
+	
 	// rotary turntable
 	BufferedImage rotaryTable;
 	
 	//conveyor
 	BufferedImage conveyor1;
 	BufferedImage conveyor2;
+	BufferedImage conveyor1_load;
+	BufferedImage conveyor2_load;
 	
 	//filler
 	BufferedImage filler;
@@ -40,7 +46,11 @@ public class Canvas extends JPanel {
 			rotaryTable = ImageIO.read(new File("res/empty.png"));
 			conveyor1 = ImageIO.read(new File("res/Conveyor_empty.png"));
 			conveyor2 = ImageIO.read(new File("res/Conveyor_empty.png"));
+			conveyor1_load = ImageIO.read(new File("res/Conveyor_in.png"));
+			conveyor2_load = ImageIO.read(new File("res/Conveyor_out.png"));
 			filler = ImageIO.read(new File("res/filler.png"));
+			s100ml = ImageIO.read(new File("res/100mlDest.png"));
+			s200ml = ImageIO.read(new File("res/200mlDest.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(1);;
@@ -52,10 +62,22 @@ public class Canvas extends JPanel {
 		super.paintComponent(g);
 		//default lookings
 		g.drawImage(rotaryTable, 600, 100, null);
-		g.drawImage(conveyor1, 240, 550, null);
 		g.drawImage(conveyor2, 1480, 550, null);
 		g.drawImage(loader, 1000, 0, null);
 		g.drawImage(filler, 760, 220, null);
+		
+		if (States.LARGE_SIZE){
+			g.drawImage(s200ml, 200, 0, null);
+		}else{
+			g.drawImage(s100ml, 200, 0, null);
+		}
+		
+		if (States.Conveyor1){
+			g.drawImage(conveyor1_load, 240, 550, null);
+		}else{
+			g.drawImage(conveyor1, 240, 550, null);
+		}
+			
 		
 		if(States.CAP_ADD){g.drawImage(rotaryTable, 0, 0, null);}
 	}

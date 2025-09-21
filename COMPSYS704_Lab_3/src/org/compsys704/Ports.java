@@ -2,6 +2,7 @@ package org.compsys704;
 
 public class Ports {
 	public static final String ENABLE_SIGNAL = "ABSCD.enable";
+	public static final String SIZE_SIGNAL = "ABSCD.largeSize";
 	public static final int PORT_LOADER_PLANT = 10001;
 	public static final int PORT_LOADER_CONTROLLER = 10000;
 	public static final int PORT_LOADER_VIZ = 20000;
@@ -14,4 +15,9 @@ public class Ports {
 	public static final String SIGNAL_ARM_SOURCE      = "ControllerCD.armSourceM";
 	public static final String SIGNAL_ARM_DEST        = "ControllerCD.armDestM";
 	public static final String SIGNAL_Mode            = "ControllerCD.mode";
+	
+	// integer signals
+	public static final String SIGNAL_LIQUID1     = "ABSCD.liquid1Val";
+	public static final String SIGNAL_LIQUID2     = "ABSCD.liquid2Val";
+	public static final String SIGNAL_BOTTLEAMT   = "ABSCD.bottleAmount";
 }

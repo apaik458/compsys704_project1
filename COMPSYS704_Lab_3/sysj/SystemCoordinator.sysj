@@ -3,45 +3,57 @@ import run.GUI;
 SystemCoordinator(
 		input signal pusherExtend,vacOn,armSource,armDest;
 		input signal enable,refill;
+		// input integers
+		input Integer signal liquid1Val, liquid2Val, bottleAmount;
 		//input signal amount;
+		input signal largeSize;
+		// input for shut down
+		input signal stop;
 		output signal pusherRetracted,pusherExtended,WPgripped,armAtSource,armAtDest,empty;
-		output signal capAdd;
 		output signal pusherRetractedE,pusherExtendedE,WPgrippedE,armAtSourceE,armAtDestE,emptyE;
+		
+		output signal systemEnable;
+		output signal largeSizeE;
+		
+		//cap loader
+		output signal capAdd;
 		output signal capAddE;
 		)
 ->
 {	
-	signal tester;
 	new Thread(new GUI()).start();
 
 	{
 		while(true){
-			abort(enable){
-			System.out.println("It works");	
-			sustain armAtSource;
+			await(enable);
+			System.out.println("It works again");
+			sustain capAdd;
+		}
+	}
+	||
+	{
+		loop{
+			await(enable);
+			System.out.println(#liquid1Val);
+			System.out.println(#liquid2Val);
+			System.out.println(#bottleAmount);
+		}
+	}
+	||
+	{
+		// set for different storage palce
+		while(true){
+			await(largeSize);
+			abort(!largeSize){
+				// test code
+				//System.out.println("It works for size");
+				sustain largeSizeE;
 			}
-			await(!enable);
-			abort(enable){
-				sustain capAdd;
-			}
-			System.out.println("It works again");	
 		}
 	}
 	||
 	//to viz
 	{// To viz
-		{while(true){present(pusherRetracted){emit pusherRetractedE;} pause;}}
-		||
-		{while(true){present(pusherExtended){emit pusherExtendedE;} pause;}}
-		||
-		{while(true){present(WPgripped){emit WPgrippedE;} pause;}}
-		||
-		{while(true){present(armAtSource){emit armAtSourceE;} pause;}}
-		||
-		{while(true){present(armAtDest){emit armAtDestE;} pause;}}
-		||
-		{while(true){present(empty){emit emptyE;} pause;}}
-		||
 		{while(true){present(capAdd){sustain capAddE;} pause;}}
 	}
 }

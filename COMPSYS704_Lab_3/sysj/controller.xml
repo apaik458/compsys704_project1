@@ -8,6 +8,7 @@
 			<iSignal Name="armAtDest"       Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 			<iSignal Name="empty"           Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 			<iSignal Name="request"         Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
+			<iSignal Name="systemEnable"    Class="com.systemj.ipc.SimpleServer" IP="127.0.0.1" Port="10000" />
 
 			<oSignal Name="pusherExtend" To="PlantCD.pusherExtend" Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />
 			<oSignal Name="vacOn"        To="PlantCD.vacOn"        Class="com.systemj.ipc.SimpleClient" IP="127.0.0.1" Port="10001" />

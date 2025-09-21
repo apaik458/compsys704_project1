@@ -11,5 +11,11 @@ public class States {
 	
 	public static volatile boolean CAP_READY = false;
 	
+	//storage
+	public static volatile boolean LARGE_SIZE = false;
+	// conveyor
+	public static volatile boolean Conveyor1 = false;
+	public static volatile boolean Conveyor2 = false;
+	// cap loader
 	public static volatile boolean CAP_ADD = false;
 }
