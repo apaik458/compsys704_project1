@@ -18,4 +18,10 @@ public class States {
 	public static volatile boolean Conveyor2 = false;
 	// cap loader
 	public static volatile boolean CAP_ADD = false;
+	
+	public static volatile boolean bPos1 = false;
+	public static volatile boolean bPos2 = false;
+	public static volatile boolean bPos3 = false;
+	public static volatile boolean bPos4 = false;
+	public static volatile boolean bPos5 = false;
 }

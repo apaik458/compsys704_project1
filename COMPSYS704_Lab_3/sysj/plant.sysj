@@ -37,6 +37,9 @@ Plant(
 		input signal rotaryTableTrigger;
 		output signal tableAlignedWithSensor, capOnBottleAtPos1, bottleAtPos2, bottleAtPos3; //bottleAtPos1; dupe
 		output signal moveToPos5, moveToPos4, moveToPos3, moveToPos2;
+		
+		// To viz
+		output signal bottleAtPos1E, bottleAtPos2E, bottleAtPos3E, bottleAtPos4E, bottleAtPos5E;
 
 		
 		)
@@ -276,5 +279,17 @@ Plant(
 			}
 		}
 		pause;}}
+	||
+	{// To viz
+		{while(true){present(bottleAtPos1){sustain bottleAtPos1E;} pause;}}
+		||
+		{while(true){present(bottleAtPos2){sustain bottleAtPos2E;} pause;}}
+		||
+		{while(true){present(bottleAtPos3){sustain bottleAtPos3E;} pause;}}
+		||
+		{while(true){present(bottleAtPos4){sustain bottleAtPos4E;} pause;}}
+		||
+		{while(true){present(bottleAtPos5){sustain bottleAtPos5E;} pause;}}
+	}
 
 }
